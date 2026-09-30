@@ -61,11 +61,46 @@ A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragil
 
 ---
 ## 5. REQUISITOS FUNCIONAIS (RF)
-*(A preencher pelo grupo)*
+
+| Identificador | Descrição |
+| :--- | :--- |
+| **RF01** | Os funcionários devem conseguir visualizar, gerenciar e atender aos pedidos e solicitações dos clientes no sistema; |
+| **RF02** | O sistema deve conter diferentes formas de pagamento (pix / cartão / dinheiro); |
+| **RF03** | Os clientes devem conseguir escolher a quantidade de itens (hambúrgueres, bebidas, acompanhamentos) a ser comprada; |
+| **RF04** | Os funcionários devem conseguir realizar o cadastro e controle de insumos/produtos para o estoque; |
+| **RF05** | O sistema deve gerar relatórios semanais de desempenho para que a equipe analise a produtividade e o volume de vendas; |
+| **RF06** | Os líderes/gerentes devem possuir um dashboard com a análise de desempenho da hamburgueria (faturamento, pratos mais vendidos, tempo médio de preparo); |
+| **RF07** | Os clientes devem ser capazes de identificar as mesas disponíveis para atendimento do local; |
+| **RF08** | Os clientes devem saber o tempo estimado de preparo do pedido; |
+| **RF09** | Os clientes devem possuir acesso às especificações do produto (ingredientes / peso do hambúrguer); |
+| **RF10** | Os clientes devem ter acesso a um canal/módulo de avaliação e reclamações sobre o pedido; |
+| **RF11** | Os clientes devem poder escolher o método de entrega do seu pedido (delivery ou retirada no balcão/local). |
+
+---
 ## 6. REQUISITOS NÃO FUNCIONAIS (RNF)
-*(A preencher pelo grupo)*
+
+| Identificador | Descrição |
+| :--- | :--- |
+| **RNF01** | O backup dos dados do cliente deve ser realizado diariamente; |
+| **RNF02** | Os favoritos devem estar listados conforme a data, do mais recente ao mais antigo item salvo; |
+| **RNF03** | O tempo de resposta para o lançamento de pedidos e impressão/envio para a cozinha não deve exceder 2 segundos em pico operacional; |
+| **RNF04** | O sistema deve gerar o comprovante do pedido em no máximo 5 segundos, após a confirmação do pagamento; |
+| **RNF05** | O carrinho deve listar os itens de acordo com a ordem do pedido; |
+| **RNF06** | O módulo de contato deve manter uma disponibilidade de no mínimo 99% do tempo. |
+
+---
 ## 7. REGRAS DE NEGÓCIO (RDN)
-*(A preencher pelo grupo)*
+
+| Identificador | Descrição |
+| :--- | :--- |
+| **RDN01** | O pedido só pode entrar em produção após a confirmação do pagamento, salvo em situações de consumo no estabelecimento; |
+| **RDN02** | A reserva das mesas só podem ser feitas de forma presencial de acordo com a disponibilidade; |
+| **RDN03** | A limpeza das mesas só podem ser realizadas após a utilização; |
+| **RDN04** | O produto só pode ser vendido mediante sua disponibilidade; |
+| **RDN05** | Em caso de insatisfação, pode ser realizada a troca do produto ou o cancelamento do mesmo; |
+| **RDN06** | Produtos de montagem especial não podem ser enviados via delivery; |
+| **RDN07** | Cada produto deve ser embalado individualmente com identificações em suas determinadas embalagens; |
+| **RDN08** | A retirada dos pedidos para delivery deve ser feita na porta do estabelecimento. |
 ---
 ## 8. RESTRIÇÕES E POLÍTICAS ORGANIZACIONAIS
 Assim como todas as empresas, o Mont Ararat possui suas regras e políticas internas a serem cumpridas:
