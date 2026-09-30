@@ -76,6 +76,11 @@ Assim como todas as empresas, o Mont Ararat possui suas regras e políticas inte
 * **Venda do Produto:** Para que não haja desentendimentos, é imprescindível que o estoque seja previamente checado antes da comercialização de um produto.
 * **Prioridade dos pedidos:** Pedidos feitos no estabelecimento devem, em todas as circunstâncias, ter prioridade de produção, permitindo um atendimento rápido para os consumidores no local.
 ---
+## 9. FLUXOGRAMA
+Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, construído com o Lucidchart, uma ferramenta muito útil para produção de fluxogramas:
+
+
+---
 ## 10. DICIONÁRIO DE DADOS (MODELO CONCEITUAL)
 ### ENTIDADE: PESSOA
 
