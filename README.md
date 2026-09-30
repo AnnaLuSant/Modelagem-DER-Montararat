@@ -78,7 +78,7 @@ Assim como todas as empresas, o Mont Ararat possui suas regras e políticas inte
 ---
 ## 9. FLUXOGRAMA
 Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, construído com o Lucidchart, uma ferramenta muito útil para produção de fluxogramas:
-
+![Fluxograma de Processos - Mont Ararat](imagens/fluxograma_montararat.png)
 
 ---
 ## 10. DICIONÁRIO DE DADOS (MODELO CONCEITUAL)
