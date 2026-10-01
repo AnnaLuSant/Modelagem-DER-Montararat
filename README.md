@@ -239,6 +239,8 @@ Abaixo, segue a modelagem do digrama entidades produzido
 | **id_insumo (PK)** | Identificador do Insumo. | Identificação única. |
 | **unidade_medida** | Forma como é medido no estoque. | Identificador (ex: KG, G, L, ML, UN, CX). |
 | **nome** | Nome do insumo. | Campo obrigatório. |
+| **data_validade** | Data de validade do insumo. | Formato completo (DD/MM/AAAA). |
+
 
 ### ENTIDADE: Fornecedor
 
