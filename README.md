@@ -31,7 +31,7 @@ A empresa selecionada pelo grupo foi o **Montararat**, uma hamburgueria localiza
 ---
 ## 2. CONTEXTUALIZAÇÃO E MOTIVAÇÃO
 A escolha da hamburgueria Mont Ararat como objeto desse estudo se dá por ser uma empresa próxima da região, somada a um alto volume de vendas e um gerenciamento pouco organizado, gerando um conjunto de motivos favoráveis para a agregação de um ERP ao sistema da empresa.
-![Evidência](imagens/faturamento_diario.jpeg)
+![Evidência](imagens/faturamento.jpeg)
 *(Evidência 1) - Relatório impresso de fechamento de caixa, em um dia moderadamente movimentado, operado no terminal de delivery.*
 ---
 ## 3. PROCESSOS DE NEGÓCIO
