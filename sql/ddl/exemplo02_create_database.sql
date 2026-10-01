@@ -1,0 +1,1 @@
+-- CREATE TABLE com PK, FK, NOT NULL, UNIQUE, CHECK, DEFAULT (justificar cada constraint)
