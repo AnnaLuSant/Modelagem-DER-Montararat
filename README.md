@@ -31,6 +31,7 @@ A empresa selecionada pelo grupo foi o **Montararat**, uma hamburgueria localiza
 ---
 ## 2. CONTEXTUALIZAÇÃO E MOTIVAÇÃO
 A escolha da hamburgueria Mont Ararat como objeto desse estudo se dá por ser uma empresa próxima da região, somada a um alto volume de vendas e um gerenciamento pouco organizado, gerando um conjunto de motivos favoráveis para a agregação de um ERP ao sistema da empresa.
+![Evidência](imagens/faturamento_diario.jpeg)
 *(Evidência 1) - Relatório impresso de fechamento de caixa, em um dia moderadamente movimentado, operado no terminal de delivery.*
 ---
 ## 3. PROCESSOS DE NEGÓCIO
@@ -45,11 +46,15 @@ Em geral, o processo operacional padrão que engloba o funcionamento da empresa 
 * **Pagamento:** Realização e validação da transação financeira (PIX, Cartão ou Dinheiro). No fluxo DELIVERY, essa etapa antecede a produção; no fluxo PRESENCIAL, ela ocorre após o consumo.
 * **Produção:** Recebimento da comanda pela cozinha, preparo dos hambúrgueres e acompanhamentos na chapa, montagem e embalagem.
 * **Entrega e Consumo:** No fluxo DELIVERY, o pedido já embalado é repassado ao entregador (motoboy) para realização da entrega no endereço solicitado pelo cliente. No fluxo PRESENCIAL, o pedido é entregue na mesa do cliente, servido para ser consumido no local.
+![Evidência2](imagens/cardapio.jpeg)
+![Evidência2.1](imagens/cardapio2.jpeg)
 *(Evidência 2) - Foto do cardápio da hamburgueria, com imagens dos hambúrgueres, bebidas, descrições e preços.*
+![Evidência3](imagens/diluviu.jpeg)
 *(Evidência 3) – Dois Dilúvios, lanche especial da casa, servidos em uma mesa, acompanhados de uma porção de coxinhas crocantes.*
 ---
 ## 4. PROBLEMAS E NECESSIDADES
 A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragilidade operacional se encontra na gestão e controle de estoque/suprimentos, que atualmente carece de organização e estruturação em Banco de Dados.
+![Evidência 4](imagens/lista_compra.jpeg)
 *(Evidência 4) – Lista de compras, contendo o estoque, onde os produtos são separados por categorias, marcas e necessidades.*
 
 | Problema Identificado | Consequência para o Negócio |
@@ -113,9 +118,13 @@ Assim como todas as empresas, o Mont Ararat possui suas regras e políticas inte
 ---
 ## 9. FLUXOGRAMA
 Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, construído com o Lucidchart, uma ferramenta muito útil para produção de fluxogramas:
-![Fluxograma de Processos - Mont Ararat](imagens/fluxograma_montararat.png)
+![Fluxograma de Processos - Mont Ararat](imagens/fluxograma.png)
 
 ---
+## 10. DER (DIAGRAMA DE ENTIDADE - RELACIONAMENTO)
+Abaixo, segue a modelagem do digrama entidades produzido
+![Diagrama de Entidades](imagens/der.png)
+
 ## 11. DICIONÁRIO DE DADOS (MODELO CONCEITUAL)
 ### ENTIDADE: Pessoa
 
@@ -293,6 +302,10 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
   * **Descrição:** Fornecedor e insumo possuem uma relação N:N (Muitos para Muitos), já que um fornecedor pode entregar vários insumos e um insumo pode ser fornecido por diversos fornecedores.
   * **Entidade Associativa:** O relacionamento `FORNECE` transforma-se na entidade associativa **`FORNECIMENTO`**.
 
-## 13. CONSIDERAÇÕES FINAIS
+
+## 13. DECISÕES IMPORTANTES
+### Durante o nosso projeto, houve diversas mudanças de planejamento da modelagem, uma das decisões mais importantes tomada pelo grupo, foi concentrar a variedade de combos em uma só entidade, visto que, se fossemos dedicar uma entidade para cada variável de combo, resultaria em um banco de dados desnecessariamente grande e complexo, dificultando a modelagem e o gerenciamento dos dados. Outra decisão que foi de extrema importância para a modelagem, foi a criação da entidade Fornecimento, que engloba o controle da entrada de insumos para o estabelecimento.
+
+## 14. CONSIDERAÇÕES FINAIS
 
 ### Com a confecção do projeto, a equipe estudou e praticou as principais habilidades necessárias para a modelagem de Banco de Dados, utilizando o Lucidchart como plataforma principal para a modelagem do fluxograma e construção do DER, além de rascunhos em cadernos. O processo do desenvolvimento foi fundamental para o desenvolvimento do raciocínio lógico e modelagem, foi possível compreender a complexidade que um Banco de Dados possui, devido suas Entidades, Verbos, Substantivos, Atributos, Entidades Associativas, etc. Essa modelagem serviu como preparação para a confecção do modelo lógico do projeto, agregando conhecimento através dos fundamentos básicos da Modelagem de Banco de Dados.  
