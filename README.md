@@ -191,7 +191,7 @@ Abaixo, segue a modelagem do digrama entidades produzido
 | **id_pedido (PK/FK)** | Identificador do Pedido. | Identificação única. |
 | **id_produto (PK/FK)** | Identificador do Produto. | Identificação única. |
 | **quantidade** | Quantidade de itens do pedido. | Deve ser número inteiro ou decimal >= 0. |
-| **valor** | Valor total do pedido. | Deve ser valor monetário não negativo. |
+| **preco_unitario** | Valor total do pedido. | Deve ser valor monetário não negativo. |
 | **subtotal** | Subtotal do valor final do pedido. | Deve ser valor monetário não negativo. |
 | **observacao** | Observações feitas pelo cliente. | Deve conter a sigla "OBS" antes do texto. |
 
@@ -202,7 +202,7 @@ Abaixo, segue a modelagem do digrama entidades produzido
 | **id_produto (PK)** | Identificador do Produto. | Identificação única. |
 | **nome** | Nome do produto. | Identificação única. |
 | **descricao** | Informações básicas sobre o produto. | O texto deve ser breve e resumido. |
-| **valor** | Valor do produto. | Deve ser valor monetário não negativo. |
+| **preco_unitario** | Valor do produto. | Deve ser valor monetário não negativo. |
 | **categoria** | Categoria do produto. | Domínio fixo (Lanche/Bebida/Porção/Sobremesa). |
 
 ### ENTIDADE: ItemCombo
@@ -212,6 +212,16 @@ Abaixo, segue a modelagem do digrama entidades produzido
 | **id_combo (PK/FK)** | Identificador do Combo. | Identificação única. |
 | **id_produto (PK/FK)** | Identificador do Produto. | Identificação única. |
 | **quantidade** | Quantidade de itens do combo. | Deve ser número inteiro ou decimal >= 0. |
+
+### ENTIDADE: ItemComboPedido
+
+| Atributo | Descrição | Regra / Observação |
+| :--- | :--- | :--- |
+| **id_pedido(PK/FK)** | Identificador do Pedido. | Identificação única. |
+| **id_produto(PK/FK)** | Identificador do Produto. | Identificação única. |
+| **quantidade** | Quantidade de itens dentro do pedido. | Deve ser um número real >= 0. |
+| **preco_unitario** | Valor individual de cada item dentro do pedido. | Deve ser valor monetário não negativo. |
+| **subtotal** | Subtotal do valor à ser pago. | Deve ser valor monetário não negativo. |
 
 ### ENTIDADE: Entrega
 
@@ -255,11 +265,11 @@ Abaixo, segue a modelagem do digrama entidades produzido
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
-| **id_fornecedor (PK/FK)** | Identificador do Fornecedor. | Identificação única. |
-| **id_fornecimento (PK/FK)** | Identificador do Fornecimento. | Identificação única.
-| **cnpj** | CNPJ que identifica o fornecedor. | Campo obrigatório. |
-| **nome** | Nome que identifica o fornecedor. | Campo obrigatório. |
-| **telefone** | Telefone/Celular para contato. | Conter apenas números. Formato com DDD. |
+| **id_insumo (PK/FK)** | Identificador do Insumo. | Identificação única. |
+| **id_fornecimento (PK/FK)** | Identificador do Fornecimento. | Identificação única. |
+| **quantidade** | Especifica a quantidade fornecida. | Deve ser um valor real >= 0. |
+| **data_compra** | Data da aquisição do fornecimento. | Formato completo (DD/MM/AAAA). |
+| **valor_compra** | Valor total da compra. | Deve ser um valor real >= 0. | 
 
 ### ENTIDADE: Estoque
 
