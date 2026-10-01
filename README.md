@@ -116,8 +116,8 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 ![Fluxograma de Processos - Mont Ararat](imagens/fluxograma_montararat.png)
 
 ---
-## 10. DICIONÁRIO DE DADOS (MODELO CONCEITUAL)
-### ENTIDADE: PESSOA
+## 11. DICIONÁRIO DE DADOS (MODELO CONCEITUAL)
+### ENTIDADE: Pessoa
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -127,7 +127,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **email** | Endereço de e-mail para contato. | Deve ser válido (ex: usuario@gmail.com). |
 | **endereco** | Local de residência da pessoa. | Endereço completo (rua, número e CEP). |
 
-### ENTIDADE: FUNCIONÁRIO
+### ENTIDADE: Funcionario
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -139,7 +139,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **setor** | Setor do funcionário dentro da empresa. | Não precisa ser único. |
 | **data_admissao** | Data de admissão pela empresa. | Formato completo (DD/MM/AAAA). |
 
-### ENTIDADE: PEDIDO
+### ENTIDADE: Pedido
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -148,7 +148,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **status_pedido** | Mostra o status do pedido. | Deve representar o estado no atendimento. |
 | **cpf (FK)** | Identificador de Pessoa. | Deve identificar quem fez o pedido. |
 
-### ENTIDADE: PAGAMENTO
+### ENTIDADE: Pagamento
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -158,14 +158,14 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **data** | Data em que o pedido foi efetuado. | Formato completo (DD/MM/AAAA). |
 | **status** | Atualizações sobre o pagamento. | Informar todas as etapas. |
 
-### ENTIDADE: MESA
+### ENTIDADE: Mesa
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
 | **id_mesa (PK)** | Identificador da Mesa. | Deve ser único para cada mesa. |
 | **capacidade** | Capacidade de pessoas que a mesa acomoda. | Especificar o limite (ex: "Até 10 pessoas"). |
 
-### ENTIDADE: AVALIAÇÃO
+### ENTIDADE: Avaliacao
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -175,7 +175,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **data** | Data da avaliação. | Formato completo (DD/MM/AAAA). |
 | **id_pedido (FK)** | Identificador do Pedido. | Deve ser único para cada pedido. |
 
-### ENTIDADE: ITEMPEDIDO
+### ENTIDADE: ItemPedido
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -186,7 +186,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **subtotal** | Subtotal do valor final do pedido. | Deve ser valor monetário não negativo. |
 | **observacao** | Observações feitas pelo cliente. | Deve conter a sigla "OBS" antes do texto. |
 
-### ENTIDADE: PRODUTO
+### ENTIDADE: Produto
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -196,7 +196,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **valor** | Valor do produto. | Deve ser valor monetário não negativo. |
 | **categoria** | Categoria do produto. | Domínio fixo (Lanche/Bebida/Porção/Sobremesa). |
 
-### ENTIDADE: ITEMCOMBO
+### ENTIDADE: ItemCombo
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -204,7 +204,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **id_produto (PK/FK)** | Identificador do Produto. | Identificação única. |
 | **quantidade** | Quantidade de itens do combo. | Deve ser número inteiro ou decimal >= 0. |
 
-### ENTIDADE: ENTREGA
+### ENTIDADE: Entrega
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -215,7 +215,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **data_saida** | Momento de saída do entregador. | Data e horário (ex: DD/MM/AAAA - 19h28). |
 | **id_pedido (FK)** | Identificador do Pedido. | Identificação única. |
 
-### ENTIDADE: FICHATÉCNICA
+### ENTIDADE: FichaTecnica
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -223,7 +223,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **id_insumo (PK/FK)** | Identifica o insumo utilizado na produção. | PK/FK para Insumo. |
 | **quantidade** | Quantidade de insumo utilizada. | Deve ser número inteiro ou decimal >= 0. |
 
-### ENTIDADE: INSUMO
+### ENTIDADE: Insumo
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -231,7 +231,7 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **unidade_medida** | Forma como é medido no estoque. | Identificador (ex: KG, G, L, ML, UN, CX). |
 | **nome** | Nome do insumo. | Campo obrigatório. |
 
-### ENTIDADE: FORNECEDOR
+### ENTIDADE: Fornecedor
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -240,7 +240,17 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **nome** | Nome que identifica o fornecedor. | Campo obrigatório. |
 | **telefone** | Telefone/Celular para contato. | Conter apenas números. Formato com DDD. |
 
-### ENTIDADE: ESTOQUE
+### ENTIDADE: Fornecimento
+
+| Atributo | Descrição | Regra / Observação |
+| :--- | :--- | :--- |
+| **id_fornecedor (PK/FK)** | Identificador do Fornecedor. | Identificação única. |
+| **id_fornecimento (PK/FK)** | Identificador do Fornecimento. | Identificação única.
+| **cnpj** | CNPJ que identifica o fornecedor. | Campo obrigatório. |
+| **nome** | Nome que identifica o fornecedor. | Campo obrigatório. |
+| **telefone** | Telefone/Celular para contato. | Conter apenas números. Formato com DDD. |
+
+### ENTIDADE: Estoque
 
 | Atributo | Descrição | Regra / Observação |
 | :--- | :--- | :--- |
@@ -249,3 +259,40 @@ Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, constr
 | **quantidade_minima** | Limite mínimo em estoque. | Deve ser número inteiro ou decimal >= 0. |
 | **data_ultima_entrada** | Data da reposição mais recente. | Formato completo (DD/MM/AAAA). |
 | **id_insumo (FK)** | Identificador do Insumo. | Identificação única. |
+
+---
+
+## 12. ENTIDADES ASSOCIATIVAS
+### Mapeamento de Relacionamentos N:N e Entidades Associativas
+
+* **PEDIDO (1,N) ———— CONTÉM ———— (0,N) PRODUTO**
+  * **Descrição:** Pedido e produto possuem uma relação N:N (Muitos para Muitos). pois um pedido pode conter diversos produtos, assim como um produto pode estar em diversos pedidos.
+  * **Entidade Associativa:** O relacionamento `CONTÉM` transforma-se na entidade associativa **`ITEM_PEDIDO`**.
+
+---
+
+* **PRODUTO (0,N) ———— POSSUI ———— (0,N) INSUMO**
+  * **Descrição:** Produto e insumo possuem uma relação N:N (Muitos para Muitos), um produto possui diversos insumos, e um insumo pode estar em diversos produtos.
+  * **Entidade Associativa:** O relacionamento `POSSUI` transforma-se na entidade associativa **`FICHA_TECNICA`**.
+
+---
+
+* **COMBO (1,N) ———— TER ———— (0,N) PRODUTO**
+  * **Descrição:** Combo e produto possuem um relacionamento N:N (Muitos para Muitos), já que um combo pode conter diversos produtos e um mesmo produto pode estar em diversos combos.
+  * **Entidade Associativa:** O relacionamento `TER` transforma-se na entidade associativa **`ITEM_COMBO`**.
+
+---
+
+* **COMBO (0,N) ———— DETÉM ———— (0,N) PEDIDO**
+  * **Descrição:** Combo e pedido possuem uma relação N:N (Muitos para Muitos), pois um combo pode estar presente em vários pedidos e um mesmo pedido pode conter vários combos.
+  * **Entidade Associativa:** O relacionamento `DETÉM` transforma-se na entidade associativa **`ITEM_COMBO_PEDIDO`**.
+
+---
+
+* **FORNECEDOR (0,N) ———— FORNECE ———— (0,N) INSUMO**
+  * **Descrição:** Fornecedor e insumo possuem uma relação N:N (Muitos para Muitos), já que um fornecedor pode entregar vários insumos e um insumo pode ser fornecido por diversos fornecedores.
+  * **Entidade Associativa:** O relacionamento `FORNECE` transforma-se na entidade associativa **`FORNECIMENTO`**.
+
+## 13. CONSIDERAÇÕES FINAIS
+
+### Com a confecção do projeto, a equipe estudou e praticou as principais habilidades necessárias para a modelagem de Banco de Dados, utilizando o Lucidchart como plataforma principal para a modelagem do fluxograma e construção do DER, além de rascunhos em cadernos. O processo do desenvolvimento foi fundamental para o desenvolvimento do raciocínio lógico e modelagem, foi possível compreender a complexidade que um Banco de Dados possui, devido suas Entidades, Verbos, Substantivos, Atributos, Entidades Associativas, etc. Essa modelagem serviu como preparação para a confecção do modelo lógico do projeto, agregando conhecimento através dos fundamentos básicos da Modelagem de Banco de Dados.  
