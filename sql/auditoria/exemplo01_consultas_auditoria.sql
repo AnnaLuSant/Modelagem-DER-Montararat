@@ -1,0 +1,2 @@
+-- Formato: o que a consulta verifica + SQL
+-- Ex.: pedidos sem itens; pagamentos sem pedido; insumos vencidos em estoque
