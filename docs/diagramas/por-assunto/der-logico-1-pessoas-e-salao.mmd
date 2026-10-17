@@ -1,0 +1,61 @@
+erDiagram
+    setor ||--o{ cargo : "id_setor"
+    pessoa ||--o{ endereco : "id_pessoa"
+    pessoa ||--o| funcionario : "id_pessoa"
+    cargo ||--o{ funcionario : "id_cargo"
+    mesa ||--o{ reserva : "id_mesa"
+    pessoa |o--o{ reserva : "id_pessoa"
+    funcionario ||--o{ reserva : "id_funcionario"
+    setor {
+        int id_setor PK
+        varchar nome UK
+    }
+    cargo {
+        int id_cargo PK
+        varchar nome UK
+        int id_setor FK
+        tinyint pode_comprar
+        tinyint pode_autorizar
+    }
+    pessoa {
+        int id_pessoa PK
+        char cpf UK
+        varchar nome
+        varchar telefone
+        varchar email
+        date data_nascimento
+    }
+    endereco {
+        int id_endereco PK
+        int id_pessoa FK
+        varchar logradouro
+        varchar numero
+        varchar complemento
+        varchar bairro
+        varchar cidade
+        char uf
+        char cep
+    }
+    funcionario {
+        int id_funcionario PK
+        int id_pessoa FK
+        int id_cargo FK
+        decimal salario_bruto
+        date data_admissao
+        date data_desligamento
+    }
+    mesa {
+        int id_mesa PK
+        tinyint capacidade
+        varchar status_mesa
+    }
+    reserva {
+        int id_reserva PK
+        int id_mesa FK
+        int id_pessoa FK
+        varchar nome_contato
+        int id_funcionario FK
+        datetime data_hora_inicio
+        datetime data_hora_fim
+        varchar status_reserva
+    }

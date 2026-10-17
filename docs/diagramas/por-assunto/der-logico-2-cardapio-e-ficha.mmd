@@ -1,0 +1,68 @@
+erDiagram
+    categoria_produto ||--o{ produto : "id_categoria_produto"
+    combo ||--o{ item_combo : "id_combo"
+    produto ||--o{ item_combo : "id_produto"
+    pessoa ||--o{ favorito : "id_pessoa"
+    produto ||--o{ favorito : "id_produto"
+    categoria_insumo ||--o{ insumo : "id_categoria_insumo"
+    produto ||--o{ ficha_tecnica : "id_produto"
+    insumo ||--o{ ficha_tecnica : "id_insumo"
+    categoria_produto {
+        int id_categoria_produto PK
+        varchar nome UK
+    }
+    produto {
+        int id_produto PK
+        varchar nome UK
+        varchar descricao
+        int id_categoria_produto FK
+        decimal preco_venda
+        int peso_g
+        smallint tempo_preparo_min
+        tinyint disponivel
+        tinyint montagem_especial
+    }
+    combo {
+        int id_combo PK
+        varchar nome UK
+        varchar descricao
+        decimal preco_venda
+        tinyint ativo
+    }
+    item_combo {
+        int id_combo PK
+        int id_produto PK
+        smallint quantidade
+    }
+    favorito {
+        int id_pessoa PK
+        int id_produto PK
+        datetime data_hora_salvo
+    }
+    categoria_insumo {
+        int id_categoria_insumo PK
+        varchar nome UK
+    }
+    insumo {
+        int id_insumo PK
+        varchar nome UK
+        varchar marca UK
+        int id_categoria_insumo FK
+        varchar unidade_medida
+        varchar unidade_compra
+        decimal fator_conversao
+        decimal estoque_minimo
+    }
+    ficha_tecnica {
+        int id_produto PK
+        int id_insumo PK
+        decimal quantidade
+    }
+    pessoa {
+        int id_pessoa PK
+        char cpf UK
+        varchar nome
+        varchar telefone
+        varchar email
+        date data_nascimento
+    }

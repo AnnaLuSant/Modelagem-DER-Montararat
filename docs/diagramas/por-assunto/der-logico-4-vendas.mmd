@@ -1,0 +1,93 @@
+erDiagram
+    pessoa ||--o| funcionario : "id_pessoa"
+    pessoa |o--o{ pedido : "id_pessoa"
+    funcionario ||--o{ pedido : "id_funcionario"
+    mesa |o--o{ pedido : "id_mesa"
+    promocao |o--o{ pedido : "id_promocao"
+    funcionario |o--o{ pedido : "id_funcionario_autorizador"
+    pedido ||--o{ item_pedido : "id_pedido"
+    produto ||--o{ item_pedido : "id_produto"
+    pedido ||--o{ item_combo_pedido : "id_pedido"
+    combo ||--o{ item_combo_pedido : "id_combo"
+    pedido {
+        int id_pedido PK
+        int id_pessoa FK
+        int id_funcionario FK
+        int id_mesa FK
+        int id_promocao FK
+        int id_funcionario_autorizador FK
+        varchar canal
+        varchar modalidade
+        varchar status_pedido
+        datetime data_hora_pedido
+        datetime data_hora_inicio_preparo
+        datetime data_hora_pronto
+        datetime data_hora_encerramento
+        decimal valor_desconto
+        decimal valor_servico
+        tinyint documento_conferido
+    }
+    item_pedido {
+        int id_pedido PK
+        smallint numero_item PK
+        int id_produto FK
+        smallint quantidade
+        decimal preco_unitario
+        varchar observacao
+        tinyint cancelado
+    }
+    item_combo_pedido {
+        int id_pedido PK
+        smallint numero_item PK
+        int id_combo FK
+        smallint quantidade
+        decimal preco_unitario
+        varchar observacao
+    }
+    promocao {
+        int id_promocao PK
+        varchar nome UK
+        varchar tipo_promocao
+        decimal percentual_desconto
+        tinyint exige_documento
+        tinyint ativa
+    }
+    pessoa {
+        int id_pessoa PK
+        char cpf UK
+        varchar nome
+        varchar telefone
+        varchar email
+        date data_nascimento
+    }
+    mesa {
+        int id_mesa PK
+        tinyint capacidade
+        varchar status_mesa
+    }
+    funcionario {
+        int id_funcionario PK
+        int id_pessoa FK
+        int id_cargo FK
+        decimal salario_bruto
+        date data_admissao
+        date data_desligamento
+    }
+    produto {
+        int id_produto PK
+        varchar nome UK
+        varchar descricao
+        int id_categoria_produto FK
+        decimal preco_venda
+        int peso_g
+        smallint tempo_preparo_min
+        tinyint disponivel
+        tinyint montagem_especial
+    }
+    combo {
+        int id_combo PK
+        varchar nome UK
+        varchar descricao
+        decimal preco_venda
+        tinyint ativo
+    }

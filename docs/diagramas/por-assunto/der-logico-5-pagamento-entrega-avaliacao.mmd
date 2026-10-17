@@ -1,0 +1,114 @@
+erDiagram
+    funcionario ||--o{ caixa : "id_funcionario_abertura"
+    funcionario |o--o{ caixa : "id_funcionario_fechamento"
+    funcionario ||--o{ pedido : "id_funcionario"
+    funcionario |o--o{ pedido : "id_funcionario_autorizador"
+    pedido ||--o{ pagamento : "id_pedido"
+    forma_pagamento ||--o{ pagamento : "id_forma_pagamento"
+    caixa ||--o{ pagamento : "id_caixa"
+    pedido ||--o{ ocorrencia : "id_pedido"
+    funcionario ||--o{ ocorrencia : "id_funcionario_autorizador"
+    pedido ||--o| entrega : "id_pedido"
+    endereco ||--o{ entrega : "id_endereco"
+    entregador |o--o{ entrega : "id_entregador"
+    pedido ||--o| avaliacao : "id_pedido"
+    funcionario |o--o{ avaliacao : "id_funcionario_responsavel"
+    pagamento {
+        int id_pagamento PK
+        int id_pedido FK
+        int id_forma_pagamento FK
+        int id_caixa FK
+        decimal valor
+        datetime data_hora_pagamento
+        varchar status_pagamento
+    }
+    forma_pagamento {
+        int id_forma_pagamento PK
+        varchar nome UK
+        decimal taxa_percentual
+        varchar grupo_fechamento
+    }
+    caixa {
+        int id_caixa PK
+        varchar terminal
+        int id_funcionario_abertura FK
+        int id_funcionario_fechamento FK
+        datetime data_hora_abertura
+        datetime data_hora_fechamento
+        decimal valor_abertura
+        decimal valor_fechamento
+    }
+    entregador {
+        int id_entregador PK
+        varchar nome
+        varchar telefone
+        varchar vinculo
+    }
+    entrega {
+        int id_entrega PK
+        int id_pedido FK
+        int id_endereco FK
+        int id_entregador FK
+        decimal taxa_entrega
+        varchar status_entrega
+        datetime data_hora_saida
+        datetime data_hora_entrega
+    }
+    ocorrencia {
+        int id_ocorrencia PK
+        int id_pedido FK
+        int id_funcionario_autorizador FK
+        varchar tipo_ocorrencia
+        varchar causa
+        tinyint houve_consumo
+        decimal valor_reembolso
+        varchar descricao
+        datetime data_hora_ocorrencia
+    }
+    avaliacao {
+        int id_avaliacao PK
+        int id_pedido FK
+        varchar tipo_avaliacao
+        tinyint nota
+        varchar comentario
+        datetime data_hora_avaliacao
+        varchar status_tratamento
+        int id_funcionario_responsavel FK
+    }
+    pedido {
+        int id_pedido PK
+        int id_pessoa FK
+        int id_funcionario FK
+        int id_mesa FK
+        int id_promocao FK
+        int id_funcionario_autorizador FK
+        varchar canal
+        varchar modalidade
+        varchar status_pedido
+        datetime data_hora_pedido
+        datetime data_hora_inicio_preparo
+        datetime data_hora_pronto
+        datetime data_hora_encerramento
+        decimal valor_desconto
+        decimal valor_servico
+        tinyint documento_conferido
+    }
+    endereco {
+        int id_endereco PK
+        int id_pessoa FK
+        varchar logradouro
+        varchar numero
+        varchar complemento
+        varchar bairro
+        varchar cidade
+        char uf
+        char cep
+    }
+    funcionario {
+        int id_funcionario PK
+        int id_pessoa FK
+        int id_cargo FK
+        decimal salario_bruto
+        date data_admissao
+        date data_desligamento
+    }

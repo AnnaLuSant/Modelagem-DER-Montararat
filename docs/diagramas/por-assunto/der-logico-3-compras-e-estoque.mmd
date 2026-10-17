@@ -1,0 +1,116 @@
+erDiagram
+    fornecedor ||--o{ fornecedor_insumo : "id_fornecedor"
+    insumo ||--o{ fornecedor_insumo : "id_insumo"
+    fornecedor ||--o{ compra : "id_fornecedor"
+    funcionario ||--o{ compra : "id_funcionario"
+    compra ||--o{ item_compra : "id_compra"
+    insumo ||--o{ item_compra : "id_insumo"
+    compra ||--o{ recebimento : "id_compra"
+    funcionario ||--o{ recebimento : "id_funcionario"
+    recebimento ||--o{ lote : "id_recebimento"
+    insumo ||--o{ lote : "id_insumo"
+    funcionario ||--o{ pedido : "id_funcionario"
+    funcionario |o--o{ pedido : "id_funcionario_autorizador"
+    insumo ||--o{ movimentacao_estoque : "id_insumo"
+    lote |o--o{ movimentacao_estoque : "id_lote"
+    pedido |o--o{ movimentacao_estoque : "id_pedido"
+    funcionario ||--o{ movimentacao_estoque : "id_funcionario"
+    compra |o--o{ conta_pagar : "id_compra"
+    fornecedor {
+        int id_fornecedor PK
+        char cnpj UK
+        varchar razao_social
+        varchar telefone
+        varchar email
+    }
+    fornecedor_insumo {
+        int id_fornecedor PK
+        int id_insumo PK
+        smallint prazo_entrega_dias
+    }
+    compra {
+        int id_compra PK
+        int id_fornecedor FK
+        int id_funcionario FK
+        datetime data_hora_compra
+        varchar status_compra
+        varchar observacao
+    }
+    item_compra {
+        int id_compra PK
+        int id_insumo PK
+        decimal quantidade
+        decimal valor_total
+    }
+    recebimento {
+        int id_recebimento PK
+        int id_compra FK
+        int id_funcionario FK
+        datetime data_hora_recebimento
+        varchar numero_nota_fiscal
+        varchar observacao
+    }
+    lote {
+        int id_lote PK
+        int id_recebimento FK
+        int id_insumo FK
+        varchar codigo_lote
+        decimal quantidade_recebida
+        date data_validade
+    }
+    movimentacao_estoque {
+        int id_movimentacao PK
+        int id_insumo FK
+        int id_lote FK
+        int id_pedido FK
+        int id_funcionario FK
+        varchar tipo_movimentacao
+        decimal quantidade
+        datetime data_hora_movimentacao
+        varchar motivo
+    }
+    conta_pagar {
+        int id_conta_pagar PK
+        int id_compra FK
+        varchar descricao
+        decimal valor
+        date data_vencimento
+        date data_pagamento
+        varchar status_conta
+    }
+    insumo {
+        int id_insumo PK
+        varchar nome UK
+        varchar marca UK
+        int id_categoria_insumo FK
+        varchar unidade_medida
+        varchar unidade_compra
+        decimal fator_conversao
+        decimal estoque_minimo
+    }
+    funcionario {
+        int id_funcionario PK
+        int id_pessoa FK
+        int id_cargo FK
+        decimal salario_bruto
+        date data_admissao
+        date data_desligamento
+    }
+    pedido {
+        int id_pedido PK
+        int id_pessoa FK
+        int id_funcionario FK
+        int id_mesa FK
+        int id_promocao FK
+        int id_funcionario_autorizador FK
+        varchar canal
+        varchar modalidade
+        varchar status_pedido
+        datetime data_hora_pedido
+        datetime data_hora_inicio_preparo
+        datetime data_hora_pronto
+        datetime data_hora_encerramento
+        decimal valor_desconto
+        decimal valor_servico
+        tinyint documento_conferido
+    }
