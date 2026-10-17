@@ -1,0 +1,1069 @@
+mysql> source executar_tudo.sql
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Database changed
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+Query OK, 39 rows affected (0.01 sec)
+Records: 39  Duplicates: 0  Warnings: 0
+
+Query OK, 22 rows affected (0.00 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+Query OK, 14 rows affected (0.00 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+Query OK, 33 rows affected (0.00 sec)
+Records: 33  Duplicates: 0  Warnings: 0
+
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+Query OK, 18 rows affected (0.00 sec)
+Records: 18  Duplicates: 0  Warnings: 0
+
+Query OK, 37 rows affected (0.00 sec)
+Records: 37  Duplicates: 0  Warnings: 0
+
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+Query OK, 46 rows affected (0.00 sec)
+Records: 46  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 32 rows affected (0.00 sec)
+Records: 32  Duplicates: 0  Warnings: 0
+
+Query OK, 17 rows affected (0.00 sec)
+Records: 17  Duplicates: 0  Warnings: 0
+
+Query OK, 53 rows affected (0.00 sec)
+Records: 53  Duplicates: 0  Warnings: 0
+
+Query OK, 45 rows affected (0.00 sec)
+Records: 45  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 30 rows affected (0.00 sec)
+Records: 30  Duplicates: 0  Warnings: 0
+
+Query OK, 44 rows affected (0.00 sec)
+Records: 44  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 30 rows affected (0.00 sec)
+Records: 30  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+Query OK, 19 rows affected (0.00 sec)
+Records: 19  Duplicates: 0  Warnings: 0
+
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 98 rows affected (0.01 sec)
+Records: 98  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 85 rows affected (0.00 sec)
+Records: 85  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 64 rows affected (0.00 sec)
+Records: 64  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.00 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 25 rows affected (0.00 sec)
+Records: 25  Duplicates: 0  Warnings: 0
+
+Query OK, 44 rows affected (0.00 sec)
+Records: 44  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 22 rows affected (0.00 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 59 rows affected (0.00 sec)
+Records: 59  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 61 rows affected (0.01 sec)
+Records: 61  Duplicates: 0  Warnings: 0
+
+Query OK, 10608 rows affected (0.42 sec)
+Records: 10608  Duplicates: 0  Warnings: 0
+
+Query OK, 49 rows affected (0.01 sec)
+Records: 49  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Database changed
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.03 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+Query OK, 1 row affected (0.03 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+
++-----------+----------------+--------------+----------------+-------------+
+| id_pedido | subtotal_itens | taxa_entrega | valor_desconto | valor_total |
++-----------+----------------+--------------+----------------+-------------+
+|      9100 |          97.00 |         6.00 |           0.00 |      103.00 |
++-----------+----------------+--------------+----------------+-------------+
+1 row in set (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
++-----------+-------------+------------+--------------------+
+| id_pedido | valor_total | valor_pago | situacao_pagamento |
++-----------+-------------+------------+--------------------+
+|      9100 |      103.00 |     103.00 | PAGO               |
++-----------+-------------+------------+--------------------+
+1 row in set (0.01 sec)
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 14 rows affected (0.06 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
++----------------------------+------------+
+| nome                       | quantidade |
++----------------------------+------------+
+| Alface americana           |    -40.000 |
+| Bacon fatiado              |    -60.000 |
+| Batata ondulada congelada  |   -400.000 |
+| Burger bovino 180 g        |     -2.000 |
+| Catupiry                   |    -50.000 |
+| Cebola roxa                |    -40.000 |
+| Maionese da casa           |    -40.000 |
+| Mussarela                  |    -60.000 |
+| Óleo de fritadeira        |    -60.000 |
+| Pão ciabatta              |     -2.000 |
+| Papel acoplado Mont Ararat |     -2.000 |
+| Picles                     |    -30.000 |
+| Potinho de molho           |     -1.000 |
+| Tomate                     |    -60.000 |
++----------------------------+------------+
+14 rows in set (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Database changed
++------------+---------------+-------------+--------------+
+| dia        | pedidos_pagos | faturamento | ticket_medio |
++------------+---------------+-------------+--------------+
+| 2026-09-22 |            21 |     2329.55 |       110.93 |
+| 2026-09-23 |            26 |     3114.30 |       119.78 |
+| 2026-09-24 |            26 |     3258.50 |       125.33 |
+| 2026-09-25 |            42 |     4741.10 |       112.88 |
+| 2026-09-26 |            50 |     5475.15 |       109.50 |
+| 2026-09-27 |            31 |     3482.35 |       112.33 |
+| 2026-09-29 |            21 |     2664.20 |       126.87 |
+| 2026-09-30 |            23 |     2873.80 |       124.95 |
+| 2026-10-01 |            27 |     3673.45 |       136.05 |
+| 2026-10-02 |            42 |     4740.00 |       112.86 |
+| 2026-10-03 |            43 |     4796.10 |       111.54 |
+| 2026-10-04 |            31 |     4304.40 |       138.85 |
+| 2026-10-06 |            21 |     3007.10 |       143.20 |
+| 2026-10-07 |            23 |     2744.80 |       119.34 |
+| 2026-10-08 |            25 |     2857.10 |       114.28 |
+| 2026-10-09 |            36 |     4589.20 |       127.48 |
+| 2026-10-10 |            47 |     5496.70 |       116.95 |
+| 2026-10-11 |            31 |     3723.30 |       120.11 |
+| 2026-10-13 |            11 |     1276.50 |       116.05 |
++------------+---------------+-------------+--------------+
+19 rows in set (0.00 sec)
+
++--------+------------+---------+---------------+-----------------+-----------------+
+| canal  | modalidade | pedidos | receita_bruta | taxas_pagamento | receita_liquida |
++--------+------------+---------+---------------+-----------------+-----------------+
+| SALAO  | LOCAL      |     333 |      45634.80 |          789.85 |        44844.95 |
+| IFOOD  | DELIVERY   |      65 |       6406.00 |          768.72 |         5637.28 |
+| BALCAO | LOCAL      |      48 |       4725.00 |           98.28 |         4626.72 |
+| BALCAO | RETIRADA   |      27 |       2840.00 |           64.40 |         2775.61 |
+| BALCAO | DELIVERY   |      28 |       2731.00 |           49.56 |         2681.44 |
+| IFOOD  | RETIRADA   |      30 |       2794.80 |          335.38 |         2459.42 |
+| 99FOOD | DELIVERY   |      28 |       2765.00 |          331.80 |         2433.20 |
+| 99FOOD | RETIRADA   |      17 |       1251.00 |          150.12 |         1100.88 |
++--------+------------+---------+---------------+-----------------+-----------------+
+8 rows in set (0.00 sec)
+
++-----------------------------------------------------------------------------+-----------+----------+---------------+
+| produto                                                                     | categoria | unidades | receita_itens |
++-----------------------------------------------------------------------------+-----------+----------+---------------+
+| Burger                                                                      | Lanche    |       98 |       3430.00 |
+| Dilúvio                                                                    | Lanche    |       83 |       3337.00 |
+| Costela                                                                     | Lanche    |       91 |       3185.00 |
+| Cheddar                                                                     | Lanche    |       68 |       2312.00 |
+| Refrigerante                                                                | Bebida    |      383 |       2298.00 |
+| Linguiça                                                                   | Lanche    |       64 |       2240.00 |
+| Batata Pulled                                                               | Entrada   |       62 |       2170.00 |
+| Frango                                                                      | Lanche    |       62 |       2170.00 |
+| Batata Simples                                                              | Entrada   |       74 |       1998.00 |
+| Coxinha (6 un.)                                                             | Entrada   |       60 |       1740.00 |
+| Salmão                                                                     | Lanche    |       40 |       1600.00 |
+| Eisenbahn                                                                   | Bebida    |      104 |       1248.00 |
+| Heineken                                                                    | Bebida    |       74 |       1184.00 |
+| Vegetariano                                                                 | Lanche    |       30 |       1170.00 |
+| Coxinha Pulled (6 un.)                                                      | Entrada   |       32 |        928.00 |
+| Suco                                                                        | Bebida    |      138 |        828.00 |
+| Batata Pulled (1/2)                                                         | Entrada   |       29 |        725.00 |
+| Refil Pink Lemonade                                                         | Bebida    |       60 |        660.00 |
+| Nugget (10 un.)                                                             | Entrada   |       35 |        560.00 |
+| Água sem gás                                                              | Bebida    |      127 |        508.00 |
+| Kids                                                                        | Lanche    |       24 |        456.00 |
+| Coxinha (3 un.)                                                             | Entrada   |       27 |        405.00 |
+| Batata Simples (1/2)                                                        | Entrada   |       21 |        357.00 |
+| Extra de entrada (cheddar, bacon, catupiry ou cream cheese)                 | Extra     |       44 |        264.00 |
+| Coxinha Pulled (3 un.)                                                      | Entrada   |       14 |        210.00 |
+| Água com gás                                                              | Bebida    |       48 |        192.00 |
+| Nugget (6 un.)                                                              | Entrada   |       14 |        126.00 |
+| Extra de lanche (bacon, cheddar, mussarela, cream cheese, catupiry, cebola) | Extra     |       16 |        112.00 |
+| Extra burger (bovino, frango ou linguiça)                                  | Extra     |       10 |        100.00 |
+| Extra pulled pork                                                           | Extra     |        9 |         90.00 |
+| Extra pimenta jalapeño e picles                                            | Extra     |       15 |         75.00 |
+| Extra burger de queijo coalho                                               | Extra     |        3 |         42.00 |
+| Extra burger de salmão                                                     | Extra     |        1 |         16.00 |
++-----------------------------------------------------------------------------+-----------+----------+---------------+
+33 rows in set (0.01 sec)
+
++-----------------------------------------------------------------------------+-------------+---------------+--------------+------------+
+| produto                                                                     | preco_venda | custo_teorico | margem_bruta | margem_pct |
++-----------------------------------------------------------------------------+-------------+---------------+--------------+------------+
+| Extra pimenta jalapeño e picles                                            |        5.00 |          0.55 |         4.45 |       89.0 |
+| Extra de lanche (bacon, cheddar, mussarela, cream cheese, catupiry, cebola) |        7.00 |          1.20 |         5.80 |       82.8 |
+| Batata Simples (1/2)                                                        |       17.00 |          3.08 |        13.92 |       81.9 |
+| Extra de entrada (cheddar, bacon, catupiry ou cream cheese)                 |        6.00 |          1.20 |         4.80 |       79.9 |
+| Batata Simples                                                              |       27.00 |          6.09 |        20.91 |       77.4 |
+| Água sem gás                                                              |        4.00 |          0.99 |         3.01 |       75.1 |
+| Coxinha (6 un.)                                                             |       29.00 |          7.82 |        21.18 |       73.0 |
+| Batata Pulled (1/2)                                                         |       25.00 |          6.98 |        18.02 |       72.1 |
+| Coxinha (3 un.)                                                             |       15.00 |          4.23 |        10.77 |       71.8 |
+| Água com gás                                                              |        4.00 |          1.14 |         2.86 |       71.6 |
+| Vegetariano                                                                 |       39.00 |         11.96 |        27.04 |       69.3 |
+| Frango                                                                      |       35.00 |         11.45 |        23.55 |       67.3 |
+| Cheddar                                                                     |       34.00 |         11.21 |        22.79 |       67.0 |
+| Kids                                                                        |       19.00 |          6.38 |        12.62 |       66.4 |
+| Linguiça                                                                   |       35.00 |         11.94 |        23.06 |       65.9 |
+| Salmão                                                                     |       40.00 |         13.72 |        26.28 |       65.7 |
+| Costela                                                                     |       35.00 |         12.05 |        22.95 |       65.6 |
+| Dilúvio                                                                    |       41.00 |         14.72 |        26.28 |       64.1 |
+| Extra pulled pork                                                           |       10.00 |          3.61 |         6.39 |       63.9 |
+| Coxinha Pulled (6 un.)                                                      |       29.00 |         10.52 |        18.48 |       63.7 |
+| Burger                                                                      |       35.00 |         12.92 |        22.08 |       63.1 |
+| Coxinha Pulled (3 un.)                                                      |       15.00 |          5.58 |         9.42 |       62.8 |
+| Refrigerante                                                                |        6.00 |          2.30 |         3.70 |       61.6 |
+| Batata Pulled                                                               |       35.00 |         13.91 |        21.09 |       60.3 |
+| Refil Pink Lemonade                                                         |       11.00 |          4.85 |         6.15 |       55.9 |
+| Suco                                                                        |        6.00 |          2.70 |         3.30 |       55.0 |
+| Nugget (10 un.)                                                             |       16.00 |          7.82 |         8.18 |       51.1 |
+| Eisenbahn                                                                   |       12.00 |          5.95 |         6.05 |       50.4 |
+| Nugget (6 un.)                                                              |        9.00 |          4.72 |         4.28 |       47.5 |
+| Heineken                                                                    |       16.00 |          8.44 |         7.56 |       47.2 |
+| Extra burger de queijo coalho                                               |       14.00 |          7.81 |         6.19 |       44.2 |
+| Extra burger (bovino, frango ou linguiça)                                  |       10.00 |          5.62 |         4.38 |       43.8 |
+| Extra burger de salmão                                                     |       16.00 |          9.53 |         6.47 |       40.4 |
++-----------------------------------------------------------------------------+-------------+---------------+--------------+------------+
+33 rows in set (0.00 sec)
+
++------+---------+
+| hora | pedidos |
++------+---------+
+|   18 |     137 |
+|   19 |     127 |
+|   20 |     126 |
+|   21 |     125 |
+|   22 |      60 |
+|   23 |       4 |
++------+---------+
+6 rows in set (0.00 sec)
+
++------------+---------+------------------+-------------------+----------------------+
+| modalidade | pedidos | espera_media_min | preparo_medio_min | tempo_base_medio_min |
++------------+---------+------------------+-------------------+----------------------+
+| LOCAL      |     383 |             22.5 |              18.9 |                 17.0 |
+| RETIRADA   |      74 |             23.1 |              18.5 |                 16.6 |
+| DELIVERY   |     121 |             22.5 |              17.3 |                 15.2 |
++------------+---------+------------------+-------------------+----------------------+
+3 rows in set (0.01 sec)
+
++----------------------------------+---------+------------------------------+------------------+
+| grupo                            | pedidos | espera_media_ate_iniciar_min | maior_espera_min |
++----------------------------------+---------+------------------------------+------------------+
+| LOCAL (prioridade 1)             |     384 |                          3.6 |               19 |
+| RETIRADA/DELIVERY (prioridade 2) |     195 |                          5.0 |               47 |
++----------------------------------+---------+------------------------------+------------------+
+2 rows in set (0.00 sec)
+
++-----------+-------------------------+-----------+----------------+-------------+----------------+---------------------+
+| id_insumo | nome                    | marca     | unidade_medida | saldo_atual | estoque_minimo | falta_para_o_minimo |
++-----------+-------------------------+-----------+----------------+-------------+----------------+---------------------+
+|        11 | Bacon fatiado           | Frimesa   | G              |    7760.000 |      11700.000 |            3940.000 |
+|        17 | Alface americana        | SEM MARCA | G              |    6040.000 |       9100.000 |            3060.000 |
+|        22 | Rúcula                 | SEM MARCA | G              |     915.000 |       1380.000 |             465.000 |
+|        24 | Cebolinha               | SEM MARCA | G              |     180.000 |        280.000 |             100.000 |
+|         8 | Burger de salmão 150 g | SEM MARCA | UN             |      36.000 |         55.000 |              19.000 |
+|        38 | Heineken                | Heineken  | UN             |      35.000 |         54.000 |              19.000 |
++-----------+-------------------------+-----------+----------------+-------------+----------------+---------------------+
+6 rows in set (0.03 sec)
+
++-------------+------------------------------+---------------+---------------------+
+| codigo_lote | insumo                       | data_validade | quantidade_recebida |
++-------------+------------------------------+---------------+---------------------+
+| L1399       | Maionese da casa             | 2026-10-13    |            1000.000 |
+| L11708      | Burger de salmão 150 g      | 2026-10-13    |              40.000 |
+| L21618      | Tomate                       | 2026-10-13    |            8000.000 |
+| L1125       | Maionese da casa             | 2026-10-13    |            8000.000 |
+| L21710      | Pulled pork                  | 2026-10-15    |            5000.000 |
+| L0909       | Queijo coalho (burger 200 g) | 2026-10-16    |              30.000 |
+| L0112       | Mussarela                    | 2026-10-16    |            9000.000 |
+| L1711       | Bacon fatiado                | 2026-10-18    |           11500.000 |
+| L11619      | Cebola roxa                  | 2026-10-18    |            5000.000 |
+| L11620      | Cebola (para caramelizar)    | 2026-10-18    |            8000.000 |
+| L11707      | Burger de frango 200 g       | 2026-10-18    |              80.000 |
+| L11705      | Burger bovino 120 g          | 2026-10-18    |              40.000 |
+| L11704      | Burger bovino 180 g          | 2026-10-18    |             400.000 |
+| L11706      | Burger de linguiça 180 g    | 2026-10-18    |              80.000 |
+| L2125       | Maionese da casa             | 2026-10-20    |            7000.000 |
+| L21708      | Burger de salmão 150 g      | 2026-10-20    |              40.000 |
+| L0116       | Cream cheese                 | 2026-10-21    |            2000.000 |
+| L0415       | Catupiry                     | 2026-10-21    |            6000.000 |
+| L0513       | Cheddar cremoso              | 2026-10-21    |           15000.000 |
+| L0614       | Cheddar processado           | 2026-10-21    |            6000.000 |
+| L1112       | Mussarela                    | 2026-10-23    |            9000.000 |
+| L1909       | Queijo coalho (burger 200 g) | 2026-10-23    |              50.000 |
+| L2711       | Bacon fatiado                | 2026-10-25    |           10000.000 |
+| L21619      | Cebola roxa                  | 2026-10-25    |            6000.000 |
+| L21620      | Cebola (para caramelizar)    | 2026-10-25    |            8000.000 |
+| L21704      | Burger bovino 180 g          | 2026-10-25    |             420.000 |
+| L21705      | Burger bovino 120 g          | 2026-10-25    |              40.000 |
+| L21706      | Burger de linguiça 180 g    | 2026-10-25    |              80.000 |
+| L21707      | Burger de frango 200 g       | 2026-10-25    |             100.000 |
+| L1116       | Cream cheese                 | 2026-10-28    |            2000.000 |
+| L1415       | Catupiry                     | 2026-10-28    |            6000.000 |
+| L1513       | Cheddar cremoso              | 2026-10-28    |           13000.000 |
+| L1614       | Cheddar processado           | 2026-10-28    |            6000.000 |
+| L2112       | Mussarela                    | 2026-10-30    |            9000.000 |
+| L2909       | Queijo coalho (burger 200 g) | 2026-10-30    |              40.000 |
+| L2116       | Cream cheese                 | 2026-11-04    |            2000.000 |
+| L2415       | Catupiry                     | 2026-11-04    |            6000.000 |
+| L2513       | Cheddar cremoso              | 2026-11-04    |           11000.000 |
+| L2614       | Cheddar processado           | 2026-11-04    |            5000.000 |
++-------------+------------------------------+---------------+---------------------+
+39 rows in set (0.00 sec)
+
++-------------------------------------+---------+--------------+-----------+
+| razao_social                        | compras | total_contas | em_aberto |
++-------------------------------------+---------+--------------+-----------+
+| Frigorífico (fornecedor fictício) |       3 |     11773.93 |   4263.17 |
+| Mercado / Cornershop                |       3 |      8237.96 |   5516.82 |
+| Fornecedor de pães                 |       3 |      3957.42 |   1364.55 |
+| Coca-Cola (distribuidor de bebidas) |       3 |      3170.98 |   2260.90 |
+| Givina                              |       3 |      1645.20 |    535.60 |
+| PMG                                 |       3 |      1480.57 |    501.61 |
+| Frimesa                             |       3 |      1363.20 |    932.00 |
+| MS Alimentos                        |       3 |       937.56 |    321.36 |
+| Catupiry                            |       3 |       650.16 |    650.16 |
+| Polengui                            |       3 |       647.14 |    195.70 |
+| Quiackpan                           |       2 |       360.46 |    118.54 |
+| Arrifana                            |       3 |       300.60 |    220.60 |
+| Intercarta                          |       3 |       240.80 |    240.80 |
+| Galvonatec                          |       3 |       180.60 |    180.60 |
+| R2 Embalagens                       |       3 |       174.58 |    174.58 |
++-------------------------------------+---------+--------------+-----------+
+15 rows in set (0.00 sec)
+
++----------------+-----------+------------+-----------+
+| tipo_avaliacao | registros | nota_media | pendentes |
++----------------+-----------+------------+-----------+
+| AVALIACAO      |       146 |       4.34 |         0 |
+| RECLAMACAO     |        13 |       1.54 |         5 |
++----------------+-----------+------------+-----------+
+2 rows in set (0.00 sec)
+
++------------------------+---------+-----------------+
+| promocao               | pedidos | total_descontos |
++------------------------+---------+-----------------+
+| Aniversariante 15%     |       7 |          148.80 |
+| Cupom Volta Sempre 10% |       6 |           66.90 |
++------------------------+---------+-----------------+
+2 rows in set (0.00 sec)
+
++----------------+--------------+---------------+-------------+--------------+
+| ano_semana_iso | primeiro_dia | pedidos_pagos | faturamento | ticket_medio |
++----------------+--------------+---------------+-------------+--------------+
+|         202639 | 2026-09-22   |           195 |    22400.95 |       114.88 |
+|         202640 | 2026-09-29   |           187 |    23051.95 |       123.27 |
+|         202641 | 2026-10-06   |           183 |    22418.20 |       122.50 |
+|         202642 | 2026-10-13   |            11 |     1276.50 |       116.05 |
++----------------+--------------+---------------+-------------+--------------+
+4 rows in set (0.00 sec)
+
++-------+----------------------+------------+----------------+---------+---------+------------+----------+---------+---------+---------+--------------------+--------------------+----------------+------------------+-----------------+
+| turno | terminal             | dia        | valor_abertura | venda   | servico | registrado | dinheiro | cartao  | outras  | tickets | valor_medio_ticket | cancelamentos_mesa | qtde_canc_mesa | valor_fechamento | diferenca_caixa |
++-------+----------------------+------------+----------------+---------+---------+------------+----------+---------+---------+---------+--------------------+--------------------+----------------+------------------+-----------------+
+|     1 | Mont Ararat Delivery | 2026-09-22 |         150.00 | 2172.35 |  157.20 |    2329.55 |   105.60 | 1583.40 |  640.55 |      21 |             110.93 |              93.00 |              4 |          2479.55 |            0.00 |
+|     2 | Mont Ararat Delivery | 2026-09-23 |         150.00 | 2957.00 |  157.30 |    3114.30 |   344.30 | 1592.30 | 1177.70 |      26 |             119.78 |              50.00 |              3 |          3264.30 |            0.00 |
+|     3 | Mont Ararat Delivery | 2026-09-24 |         150.00 | 3077.20 |  181.30 |    3258.50 |   272.60 | 2193.90 |  792.00 |      26 |             125.33 |               0.00 |              0 |          3396.00 |          -12.50 |
+|     4 | Mont Ararat Delivery | 2026-09-25 |         150.00 | 4479.10 |  262.00 |    4741.10 |   275.00 | 3168.10 | 1298.00 |      42 |             112.88 |              33.00 |              2 |          4891.10 |            0.00 |
+|     5 | Mont Ararat Delivery | 2026-09-26 |         150.00 | 5399.10 |  285.60 |    5684.70 |   318.60 | 3126.20 | 2239.90 |      51 |             111.46 |              24.00 |              2 |          5834.70 |            0.00 |
+|     6 | Mont Ararat Delivery | 2026-09-27 |         150.00 | 3098.00 |  174.80 |    3272.80 |     0.00 | 2578.88 |  693.92 |      29 |             112.86 |               0.00 |              0 |          3422.80 |            0.00 |
+|     7 | Mont Ararat Delivery | 2026-09-29 |         150.00 | 2508.00 |  156.20 |    2664.20 |     0.00 | 1420.18 | 1244.02 |      21 |             126.87 |              26.00 |              3 |          2814.20 |            0.00 |
+|     8 | Mont Ararat Delivery | 2026-09-30 |         150.00 | 2724.00 |  149.80 |    2873.80 |   498.30 | 1224.74 | 1150.76 |      23 |             124.95 |               0.00 |              0 |          3023.80 |            0.00 |
+|     9 | Mont Ararat Delivery | 2026-10-01 |         150.00 | 3419.55 |  253.90 |    3673.45 |   200.75 | 2871.60 |  601.10 |      27 |             136.05 |              72.00 |              3 |          3780.95 |          -42.50 |
+|    10 | Mont Ararat Delivery | 2026-10-02 |         150.00 | 4514.00 |  226.00 |    4740.00 |   163.00 | 3350.10 | 1226.90 |      42 |             112.86 |              88.00 |              4 |          4890.00 |            0.00 |
+|    11 | Mont Ararat Delivery | 2026-10-03 |         150.00 | 4645.00 |  286.40 |    4931.40 |    40.15 | 3292.95 | 1598.30 |      44 |             112.08 |              76.00 |              4 |          5083.90 |            2.50 |
+|    12 | Mont Ararat Delivery | 2026-10-04 |         150.00 | 3987.00 |  182.10 |    4169.10 |   561.30 | 2323.06 | 1284.74 |      30 |             138.97 |              16.00 |              1 |          4319.10 |            0.00 |
+|    13 | Mont Ararat Delivery | 2026-10-06 |         150.00 | 2812.00 |  195.10 |    3007.10 |     0.00 | 1705.94 | 1301.16 |      21 |             143.20 |              41.00 |              2 |          3154.10 |           -3.00 |
+|    14 | Mont Ararat Delivery | 2026-10-07 |         150.00 | 2638.00 |  106.80 |    2744.80 |   341.00 | 1225.80 | 1178.00 |      23 |             119.34 |              40.00 |              1 |          2894.80 |            0.00 |
+|    15 | Mont Ararat Delivery | 2026-10-08 |         150.00 | 2705.00 |  152.10 |    2857.10 |   141.70 | 1775.50 |  939.90 |      25 |             114.28 |              68.00 |              3 |          3007.10 |            0.00 |
+|    16 | Mont Ararat Delivery | 2026-10-09 |         150.00 | 4312.00 |  277.20 |    4589.20 |   381.37 | 2752.35 | 1455.48 |      36 |             127.48 |              32.00 |              4 |          4739.20 |            0.00 |
+|    17 | Mont Ararat Delivery | 2026-10-10 |         150.00 | 5343.00 |  304.40 |    5647.40 |   363.88 | 3307.70 | 1975.82 |      48 |             117.65 |              91.00 |              4 |          5789.40 |           -8.00 |
+|    18 | Mont Ararat Delivery | 2026-10-11 |         150.00 | 3433.00 |  139.60 |    3572.60 |   277.20 | 1931.20 | 1364.20 |      30 |             119.09 |               0.00 |              0 |          3714.60 |           -8.00 |
+|    19 | Mont Ararat Delivery | 2026-10-13 |         150.00 | 1273.00 |    3.50 |    1276.50 |     0.00 |  851.90 |  424.60 |      11 |             116.05 |               0.00 |              0 |             NULL |            NULL |
++-------+----------------------+------------+----------------+---------+---------+------------+----------+---------+---------+---------+--------------------+--------------------+----------------+------------------+-----------------+
+19 rows in set (0.01 sec)
+
+Database changed
++----------------+-----------+------------------+--------------+--------------+
+| id_recebimento | id_compra | insumo           | qtd_comprada | qtd_recebida |
++----------------+-----------+------------------+--------------+--------------+
+|             18 |        18 | Maionese da casa |        0.000 |     1000.000 |
+|             22 |        22 | Bacon fatiado    |    11000.000 |    11500.000 |
+|             35 |        35 | Cheddar cremoso  |    13000.000 |    11000.000 |
++----------------+-----------+------------------+--------------+--------------+
+3 rows in set (0.00 sec)
+
++-----------+---------------------+-----------+----------------+----------------------------+
+| id_pedido | data_hora_pedido    | id_pessoa | valor_desconto | id_funcionario_autorizador |
++-----------+---------------------+-----------+----------------+----------------------------+
+|         1 | 2026-09-22 18:17:36 |        10 |          23.70 |                          2 |
++-----------+---------------------+-----------+----------------+----------------------------+
+1 row in set (0.00 sec)
+
++----------+----------------------+------------+----------+-----------+-----------+
+| id_caixa | terminal             | dia        | esperado | informado | diferenca |
++----------+----------------------+------------+----------+-----------+-----------+
+|        9 | Mont Ararat Delivery | 2026-10-01 |  3823.45 |   3780.95 |    -42.50 |
+|        3 | Mont Ararat Delivery | 2026-09-24 |  3408.50 |   3396.00 |    -12.50 |
+|       17 | Mont Ararat Delivery | 2026-10-10 |  5797.40 |   5789.40 |     -8.00 |
+|       18 | Mont Ararat Delivery | 2026-10-11 |  3722.60 |   3714.60 |     -8.00 |
+|       13 | Mont Ararat Delivery | 2026-10-06 |  3157.10 |   3154.10 |     -3.00 |
+|       11 | Mont Ararat Delivery | 2026-10-03 |  5081.40 |   5083.90 |      2.50 |
++----------+----------------------+------------+----------+-----------+-----------+
+6 rows in set (0.00 sec)
+
++-----------+-----------+---------+---------------------+---------------------+---------------------+
+| reserva_a | reserva_b | id_mesa | inicio_a            | fim_a               | inicio_b            |
++-----------+-----------+---------+---------------------+---------------------+---------------------+
+|         6 |         7 |       8 | 2026-10-10 21:00:00 | 2026-10-10 23:00:00 | 2026-10-10 21:30:00 |
++-----------+-----------+---------+---------------------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
++----------------+-----------------------------------------+---------+-----------------+-------------+
+| id_conta_pagar | descricao                               | valor   | data_vencimento | dias_atraso |
++----------------+-----------------------------------------+---------+-----------------+-------------+
+|             14 | Boleto Mercado / Cornershop (compra 14) | 2714.02 | 2026-09-28      |          15 |
+|              7 | Boleto Frimesa (compra 7)               |  520.00 | 2026-10-05      |           8 |
+|             29 | Boleto Mercado / Cornershop (compra 29) | 2802.80 | 2026-10-05      |           8 |
+|             48 | Gás de cozinha                         |  410.00 | 2026-10-10      |           3 |
+|             33 | Boleto Fornecedor de pães (compra 33)  | 1364.55 | 2026-10-12      |           1 |
++----------------+-----------------------------------------+---------+-----------------+-------------+
+5 rows in set (0.00 sec)
+
+Empty set (0.01 sec)
+
+Empty set (0.01 sec)
+
+Empty set (0.00 sec)
+
+Empty set (5.18 sec)
+
++------------------------------+-------------------+-------------+------------------+
+| insumo                       | tipo_movimentacao | lancamentos | quantidade_total |
++------------------------------+-------------------+-------------+------------------+
+| Alface americana             | PERDA             |          10 |         -680.000 |
+| Rúcula                      | PERDA             |           2 |         -315.000 |
+| Bacon fatiado                | PERDA             |           9 |         -270.000 |
+| Mussarela                    | PERDA             |           7 |         -200.000 |
+| Tomate                       | PERDA             |           6 |         -180.000 |
+| Maionese da casa             | PERDA             |           9 |         -180.000 |
+| Cheddar cremoso              | PERDA             |           2 |         -160.000 |
+| Catupiry                     | PERDA             |           6 |         -150.000 |
+| Cebola roxa                  | PERDA             |           6 |         -120.000 |
+| Maionese da casa             | AJUSTE_INVENTARIO |           1 |         -100.000 |
+| Catupiry                     | AJUSTE_INVENTARIO |           1 |         -100.000 |
+| Cheddar processado           | AJUSTE_INVENTARIO |           1 |         -100.000 |
+| Bacon fatiado                | AJUSTE_INVENTARIO |           1 |         -100.000 |
+| Cebola (para caramelizar)    | PERDA             |           3 |          -90.000 |
+| Cebola empanada congelada    | PERDA             |           3 |          -90.000 |
+| Barbecue                     | PERDA             |           3 |          -75.000 |
+| Picles                       | PERDA             |           3 |          -45.000 |
+| Cheddar processado           | PERDA             |           1 |          -30.000 |
+| Tomate seco                  | PERDA             |           1 |          -25.000 |
+| Pimenta jalapeño            | PERDA             |           2 |          -20.000 |
+| Papel acoplado Mont Ararat   | PERDA             |          11 |          -11.000 |
+| Burger bovino 180 g          | PERDA             |           6 |           -6.000 |
+| Coca-Cola lata               | PERDA             |           5 |           -5.000 |
+| Pão brioche                 | PERDA             |           4 |           -4.000 |
+| Eisenbahn                    | PERDA             |           4 |           -4.000 |
+| Pão australiano             | PERDA             |           4 |           -4.000 |
+| Pão ciabatta                | PERDA             |           3 |           -3.000 |
+| Burger bovino 180 g          | AJUSTE_INVENTARIO |           1 |           -2.000 |
+| Burger de linguiça 180 g    | PERDA             |           2 |           -2.000 |
+| Burger bovino 120 g          | PERDA             |           1 |           -1.000 |
+| Queijo coalho (burger 200 g) | PERDA             |           1 |           -1.000 |
+| Pão australiano             | AJUSTE_INVENTARIO |           1 |           -1.000 |
+| Água com gás               | PERDA             |           1 |           -1.000 |
+| Água sem gás               | PERDA             |           1 |           -1.000 |
+| Burger de frango 200 g       | PERDA             |           1 |           -1.000 |
+| Eisenbahn                    | AJUSTE_INVENTARIO |           1 |           -1.000 |
+| Pimenta jalapeño            | AJUSTE_INVENTARIO |           2 |            0.000 |
+| Burger de salmão 150 g      | AJUSTE_INVENTARIO |           1 |            1.000 |
+| Burger bovino 120 g          | AJUSTE_INVENTARIO |           1 |            2.000 |
+| Burger de linguiça 180 g    | AJUSTE_INVENTARIO |           1 |            2.000 |
+| Papel acoplado Mont Ararat   | AJUSTE_INVENTARIO |           1 |          100.000 |
+| Barbecue                     | AJUSTE_INVENTARIO |           1 |          100.000 |
++------------------------------+-------------------+-------------+------------------+
+42 rows in set (0.01 sec)
+
+Empty set (0.01 sec)
+
+Database changed
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pessoa_cpf' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1062 (23000): Duplicate entry '99900000010' for key 'pessoa.uq_pessoa_cpf'
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pessoa_email' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_produto_preco' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pedido_canal_modalidade' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pedido_canal_modalidade' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pedido_desconto_autorizado' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN11 violada: autorizador sem permissao para autorizar descontos
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pedido_encerramento' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pedido_ordem_pronto' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN12 violada: apenas cargo com permissao de compra pode comprar insumos
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+ERROR 1644 (45000): RDN06 violada: produto de montagem especial nao pode ser enviado por delivery
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.04 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+
+ERROR 1644 (45000): RDN04 violada: produto indisponivel nao pode ser vendido
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.04 sec)
+
+ERROR 1644 (45000): RDN01 violada: pedido de retirada ou delivery exige pagamento confirmado antes da producao
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pagamento_valor' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`montararat_erp`.`item_pedido`, CONSTRAINT `fk_item_pedido_produto` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`))
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1062 (23000): Duplicate entry '1-1' for key 'item_pedido.PRIMARY'
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_ocorrencia_politica' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN10 violada: ocorrencia exige autorizacao de cargo autorizado
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_ocorrencia_reembolso' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN13 violada: a saida deixaria o saldo do insumo negativo
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_reserva_periodo' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`montararat_erp`.`caixa`, CONSTRAINT `fk_caixa_abertura` FOREIGN KEY (`id_funcionario_abertura`) REFERENCES `funcionario` (`id_funcionario`))
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1062 (23000): Duplicate entry '13' for key 'entrega.uq_entrega_pedido'
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_avaliacao_nota' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN02 violada: mesa ja reservada no periodo informado
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN03 violada: mesa ocupada deve passar por limpeza antes de ficar livre
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN03 violada: a limpeza so ocorre apos a utilizacao da mesa
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1644 (45000): RDN11 violada: promocao de aniversario exige documento conferido
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.04 sec)
+
+ERROR 1644 (45000): RDN15 violada: pedido so pode ser concluido com pagamento confirmado integral
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+ERROR 1644 (45000): RDN04 violada: estoque insuficiente para a quantidade pedida (saldo e checado antes da venda)
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 1062 (23000): Duplicate entry '10-3' for key 'favorito.PRIMARY'
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+ERROR 1644 (45000): RDN06 violada: combo com produto de montagem especial nao pode ser enviado por delivery
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_pedido_servico' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+ERROR 3819 (HY000): Check constraint 'ck_caixa_fechamento' is violated.
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee
