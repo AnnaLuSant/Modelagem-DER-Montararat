@@ -287,6 +287,8 @@ Insumos (matéria-prima) controlados em estoque; a validade fica no lote
 | `marca` | VARCHAR(60) | não | 'SEM MARCA' | UQ | Marca do insumo, como na lista de compras |
 | `id_categoria_insumo` | INT | não |  | FK→categoria_insumo | Categoria do insumo |
 | `unidade_medida` | VARCHAR(2) | não |  |  | Unidade base de estoque e de consumo: G, ML ou UN |
+| `unidade_compra` | VARCHAR(20) | não |  |  | Unidade em que o item é pedido ao fornecedor, como na lista de compras (fardo, caixa, pacote, balde...) |
+| `fator_conversao` | DECIMAL(12,3) | não |  |  | Quantos da unidade de medida base há em uma unidade de compra (ex.: 1 fardo = 12 UN) |
 | `estoque_minimo` | DECIMAL(12,3) | não | 0 |  | Saldo mínimo, na unidade de medida, que dispara a reposição |
 
 **Restrições**
@@ -298,6 +300,7 @@ Insumos (matéria-prima) controlados em estoque; a validade fica no lote
 | `fk_insumo_categoria` | FOREIGN KEY | `(id_categoria_insumo) → categoria_insumo(id_categoria_insumo)` | categoria padronizada |
 | `ck_insumo_unidade` | CHECK | `(unidade_medida IN ('G', 'ML', 'UN'))` | unidades de consumo suportadas; compras em kg, L ou caixa são convertidas para a unidade base |
 | `ck_insumo_minimo` | CHECK | `(estoque_minimo >= 0)` | mínimo não negativo |
+| `ck_insumo_fator` | CHECK | `(fator_conversao > 0)` | conversão positiva |
 
 ## ficha_tecnica
 
@@ -477,6 +480,7 @@ Domínio das formas de pagamento e custo de recebimento
 | `id_forma_pagamento` | INT (auto) | não |  | PK | Identificador da forma de pagamento |
 | `nome` | VARCHAR(30) | não |  | UQ | PIX, Cartão de débito, Cartão de crédito, Dinheiro, Online iFood, Online 99food |
 | `taxa_percentual` | DECIMAL(5,2) | não | 0 |  | Taxa percentual cobrada pela operadora ou plataforma sobre o valor recebido |
+| `grupo_fechamento` | VARCHAR(8) | não |  |  | Linha da fita de fechamento em que a forma é somada: DINHEIRO, CARTAO ou OUTRAS |
 
 **Restrições**
 
@@ -485,21 +489,22 @@ Domínio das formas de pagamento e custo de recebimento
 | `pk_forma_pagamento` | PRIMARY KEY | `(id_forma_pagamento)` |  |
 | `uq_forma_pagamento_nome` | UNIQUE | `(nome)` | forma de pagamento com grafia única (substitui o texto livre) |
 | `ck_forma_pagamento_taxa` | CHECK | `(taxa_percentual BETWEEN 0 AND 100)` | percentual válido |
+| `ck_forma_pagamento_grupo` | CHECK | `(grupo_fechamento IN ('DINHEIRO', 'CARTAO', 'OUTRAS'))` | as três linhas de recebimento da fita de fechamento |
 
 ## caixa
 
-Turnos de caixa por terminal (fechamento de caixa)
+Turnos de caixa por terminal (fechamento de turno, como na fita de fechamento)
 
 | Coluna | Tipo | Nulo? | Padrão | Papel | Descrição |
 |---|---|---|---|---|---|
 | `id_caixa` | INT (auto) | não |  | PK | Identificador da sessão de caixa (turno) |
-| `terminal` | VARCHAR(10) | não |  |  | Terminal do caixa: BALCAO ou DELIVERY |
+| `terminal` | VARCHAR(30) | não |  |  | Nome do terminal/PDV que operou o turno (na fita: "Mont Ararat Delivery", que também registra vendas de mesa e balcão) |
 | `id_funcionario_abertura` | INT | não |  | FK→funcionario | Funcionário que abriu o caixa |
 | `id_funcionario_fechamento` | INT | sim |  | FK→funcionario | Funcionário que fechou o caixa |
 | `data_hora_abertura` | DATETIME | não |  |  | Momento da abertura |
 | `data_hora_fechamento` | DATETIME | sim |  |  | Momento do fechamento; NULL enquanto aberto |
 | `valor_abertura` | DECIMAL(10,2) | não | 0 |  | Fundo de troco informado na abertura |
-| `valor_contado_fechamento` | DECIMAL(10,2) | sim |  |  | Dinheiro contado no fechamento |
+| `valor_fechamento` | DECIMAL(10,2) | sim |  |  | Valor de fechamento informado pelo operador (fita: "VALOR DE FECHAMENTO"); esperado = abertura + soma de recebimentos |
 
 **Restrições**
 
@@ -508,9 +513,9 @@ Turnos de caixa por terminal (fechamento de caixa)
 | `pk_caixa` | PRIMARY KEY | `(id_caixa)` |  |
 | `fk_caixa_abertura` | FOREIGN KEY | `(id_funcionario_abertura) → funcionario(id_funcionario)` | quem abriu |
 | `fk_caixa_fechamento` | FOREIGN KEY | `(id_funcionario_fechamento) → funcionario(id_funcionario)` | quem fechou |
-| `ck_caixa_terminal` | CHECK | `(terminal IN ('BALCAO', 'DELIVERY'))` | dois terminais, como na evidência de fechamento de caixa |
+| `ck_caixa_terminal` | CHECK | `(LENGTH(TRIM(terminal)) > 0)` | terminal identificado (o relatório de fechamento traz o nome do terminal) |
 | `ck_caixa_valor_abertura` | CHECK | `(valor_abertura >= 0)` | fundo não negativo |
-| `ck_caixa_fechamento` | CHECK | `((data_hora_fechamento IS NULL AND id_funcionario_fechamento IS NULL AND valor_contado_fechamento IS NULL) OR (data_hora_fechamento IS NOT NULL AND id_funcionario_fechamento IS NOT NULL AND valor_contado_fechamento IS NOT NULL AND data_hora_fechamento >= data_hora_abertura))` | fechamento é tudo ou nada e não precede a abertura |
+| `ck_caixa_fechamento` | CHECK | `((data_hora_fechamento IS NULL AND id_funcionario_fechamento IS NULL AND valor_fechamento IS NULL) OR (data_hora_fechamento IS NOT NULL AND id_funcionario_fechamento IS NOT NULL AND valor_fechamento IS NOT NULL AND data_hora_fechamento >= data_hora_abertura))` | fechamento é tudo ou nada e não precede a abertura |
 
 ## entregador
 
@@ -551,6 +556,7 @@ Pedidos de clientes; totais e situação de pagamento são derivados por view
 | `data_hora_pronto` | DATETIME | sim |  |  | Momento em que o pedido ficou pronto |
 | `data_hora_encerramento` | DATETIME | sim |  |  | Momento em que o pedido foi concluído ou cancelado |
 | `valor_desconto` | DECIMAL(8,2) | não | 0 |  | Desconto total em reais concedido ao pedido |
+| `valor_servico` | DECIMAL(8,2) | não | 0 |  | Taxa de serviço de mesa cobrada em reais (aparece como "Serviço de mesa" na fita de fechamento); 0 fora do salão |
 | `documento_conferido` | TINYINT(1) | não | 0 |  | Indica que o documento pessoal foi conferido (promoção de aniversário) |
 
 **Restrições**
@@ -569,6 +575,7 @@ Pedidos de clientes; totais e situação de pagamento são derivados por view
 | `ck_pedido_canal_modalidade` | CHECK | `((canal <> 'SALAO' OR modalidade = 'LOCAL') AND (canal NOT IN ('IFOOD', '99FOOD') OR modalidade <> 'LOCAL'))` | pedido de salão é local; pedido de aplicativo nunca é consumido no local |
 | `ck_pedido_mesa_local` | CHECK | `(id_mesa IS NULL OR modalidade = 'LOCAL')` | mesa só existe em consumo no local |
 | `ck_pedido_desconto` | CHECK | `(valor_desconto >= 0)` | desconto não negativo |
+| `ck_pedido_servico` | CHECK | `(valor_servico >= 0 AND (valor_servico = 0 OR id_mesa IS NOT NULL))` | taxa de serviço só existe em atendimento de mesa |
 | `ck_pedido_desconto_autorizado` | CHECK | `(valor_desconto = 0 OR id_funcionario_autorizador IS NOT NULL)` | política: desconto exige autorização |
 | `ck_pedido_documento` | CHECK | `(documento_conferido IN (0, 1))` | domínio booleano |
 | `ck_pedido_ordem_inicio` | CHECK | `(data_hora_inicio_preparo IS NULL OR data_hora_inicio_preparo >= data_hora_pedido)` | o preparo não começa antes do pedido |
@@ -589,6 +596,7 @@ Itens avulsos do pedido (associativa N:N pedido x produto); o subtotal é calcul
 | `quantidade` | SMALLINT | não |  |  | Quantidade vendida |
 | `preco_unitario` | DECIMAL(8,2) | não |  |  | Preço unitário praticado na venda (cópia do preço vigente no momento; RDN14: o preço histórico não muda com reajustes) |
 | `observacao` | VARCHAR(200) | sim |  |  | Observação do cliente sobre o item (ex.: sem cebola) |
+| `cancelado` | TINYINT(1) | não | 0 |  | Indica item cancelado antes do preparo: continua registrado, mas não entra no total nem no consumo (fita: "Cancelamentos mesa") |
 
 **Restrições**
 
@@ -599,6 +607,7 @@ Itens avulsos do pedido (associativa N:N pedido x produto); o subtotal é calcul
 | `fk_item_pedido_produto` | FOREIGN KEY | `(id_produto) → produto(id_produto)` | produto existente |
 | `ck_item_pedido_quantidade` | CHECK | `(quantidade > 0)` | RF03: quantidade positiva |
 | `ck_item_pedido_preco` | CHECK | `(preco_unitario > 0)` | preço positivo |
+| `ck_item_pedido_cancelado` | CHECK | `(cancelado IN (0, 1))` | domínio booleano |
 
 ## item_combo_pedido
 

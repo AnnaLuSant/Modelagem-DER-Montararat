@@ -1,5 +1,5 @@
 flowchart TD
-    A([Início do expediente]) --> B[Funcionário abre o caixa do terminal<br/>BALCAO ou DELIVERY<br/>valor de abertura]
+    A([Início do expediente]) --> B[Funcionário abre o turno no terminal<br/>de mesa, balcão e delivery<br/>valor de abertura e fundo de troco]
     B --> C[Pedido pago:<br/>pagamento lançado no caixa aberto<br/>forma + valor + status]
     C --> D{Pagamento dividido?}
     D -- Sim --> E[Vários pagamentos<br/>somam o total do pedido]
@@ -11,8 +11,8 @@ flowchart TD
     H --> J
     I --> J{Fim do expediente?}
     J -- Não --> C
-    J -- Sim --> K[Funcionário conta o dinheiro<br/>e fecha o caixa]
-    K --> L{Contado = abertura + dinheiro<br/>confirmado?}
+    J -- Sim --> K[Funcionário informa o valor de fechamento<br/>e fecha o turno]
+    K --> L{Fechamento = abertura<br/>+ soma de recebimentos?}
     L -- Sim --> M([Caixa conferido])
     L -- Não --> N[Diferença aparece em AUD03<br/>gerente investiga]
     N --> M

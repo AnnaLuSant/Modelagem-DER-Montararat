@@ -23,3 +23,5 @@ Cada linha da devolutiva do professor foi mapeada para a correção e para a **e
 | 17 | Parte C: documentação consolidada | Repositório único com README, docs, SQL, evidências, apresentação | este repositório |
 | 18 | Sequência Problema→...→Dicionário | Documentos seguem essa ordem (README seções 3 a 8) | `README.md` |
 | 19 | (Extra, não pedido) Pessoa com PK cpf; avaliação 0-5; observação com "OBS"; comentário sem símbolos | PK substituta; nota 1-5; regras de apresentação removidas do banco | `normalizacao.md` N12; decisão D07 |
+| 20 | (Extra) Adequação aos dados reais do estabelecimento | Cardápio e preços reais; insumos e fornecedores da lista de compras (`unidade_compra`, `fator_conversao`); caixa conforme a fita (terminal único, `valor_fechamento`, `grupo_fechamento`, `valor_servico`, `item_pedido.cancelado`); RDN06 estendida a combos; consultas G14 e AUD11 | `sql/ddl`; G14, AUD03, AUD11; testes T40-T43; decisões D09, D13, D16-D23 |
+

@@ -145,6 +145,8 @@ erDiagram
         varchar marca UK
         int id_categoria_insumo FK
         varchar unidade_medida
+        varchar unidade_compra
+        decimal fator_conversao
         decimal estoque_minimo
     }
     ficha_tecnica {
@@ -206,6 +208,7 @@ erDiagram
         int id_forma_pagamento PK
         varchar nome UK
         decimal taxa_percentual
+        varchar grupo_fechamento
     }
     caixa {
         int id_caixa PK
@@ -215,7 +218,7 @@ erDiagram
         datetime data_hora_abertura
         datetime data_hora_fechamento
         decimal valor_abertura
-        decimal valor_contado_fechamento
+        decimal valor_fechamento
     }
     entregador {
         int id_entregador PK
@@ -238,6 +241,7 @@ erDiagram
         datetime data_hora_pronto
         datetime data_hora_encerramento
         decimal valor_desconto
+        decimal valor_servico
         tinyint documento_conferido
     }
     item_pedido {
@@ -247,6 +251,7 @@ erDiagram
         smallint quantidade
         decimal preco_unitario
         varchar observacao
+        tinyint cancelado
     }
     item_combo_pedido {
         int id_pedido PK

@@ -9,7 +9,7 @@ A revisão crítica da 1ª entrega e a primeira versão dos artefatos desta past
 | Etapa | Produto | Validação feita |
 |---|---|---|
 | Análise crítica da 1ª entrega | Relatório de falhas contra a devolutiva | Conferido linha a linha com a devolutiva (`docs/historico-alteracoes.md`) |
-| DDL, views, triggers | `sql/ddl/*` | Executados em SQLite com adaptador (34 tabelas, 10 views); 39 testes de restrição com controles positivos |
+| DDL, views, triggers | `sql/ddl/*` | Executados em SQLite com adaptador (34 tabelas, 10 views); 43 testes de restrição com controles positivos |
 | Massa de dados | `sql/ferramentas/gerar_massa.py` → `sql/dados` | 15 invariantes (FKs, estoque, pagamentos, consumo = ficha técnica, etc.) |
 | Consultas | `sql/consultas`, `sql/auditoria` | Executadas; auditorias encontram exatamente as anomalias plantadas |
 | Documentação técnica | dicionário, modelo lógico, rastreabilidade | **Gerados do DDL por script** (não digitados), para não divergirem |
