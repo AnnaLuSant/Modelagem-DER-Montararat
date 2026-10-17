@@ -1,0 +1,323 @@
+erDiagram
+    setor ||--o{ cargo : "id_setor"
+    pessoa ||--o{ endereco : "id_pessoa"
+    pessoa ||--o| funcionario : "id_pessoa"
+    cargo ||--o{ funcionario : "id_cargo"
+    mesa ||--o{ reserva : "id_mesa"
+    pessoa |o--o{ reserva : "id_pessoa"
+    funcionario ||--o{ reserva : "id_funcionario"
+    categoria_produto ||--o{ produto : "id_categoria_produto"
+    combo ||--o{ item_combo : "id_combo"
+    produto ||--o{ item_combo : "id_produto"
+    pessoa ||--o{ favorito : "id_pessoa"
+    produto ||--o{ favorito : "id_produto"
+    categoria_insumo ||--o{ insumo : "id_categoria_insumo"
+    produto ||--o{ ficha_tecnica : "id_produto"
+    insumo ||--o{ ficha_tecnica : "id_insumo"
+    fornecedor ||--o{ fornecedor_insumo : "id_fornecedor"
+    insumo ||--o{ fornecedor_insumo : "id_insumo"
+    fornecedor ||--o{ compra : "id_fornecedor"
+    funcionario ||--o{ compra : "id_funcionario"
+    compra ||--o{ item_compra : "id_compra"
+    insumo ||--o{ item_compra : "id_insumo"
+    compra ||--o{ recebimento : "id_compra"
+    funcionario ||--o{ recebimento : "id_funcionario"
+    recebimento ||--o{ lote : "id_recebimento"
+    insumo ||--o{ lote : "id_insumo"
+    funcionario ||--o{ caixa : "id_funcionario_abertura"
+    funcionario |o--o{ caixa : "id_funcionario_fechamento"
+    pessoa |o--o{ pedido : "id_pessoa"
+    funcionario ||--o{ pedido : "id_funcionario"
+    mesa |o--o{ pedido : "id_mesa"
+    promocao |o--o{ pedido : "id_promocao"
+    funcionario |o--o{ pedido : "id_funcionario_autorizador"
+    pedido ||--o{ item_pedido : "id_pedido"
+    produto ||--o{ item_pedido : "id_produto"
+    pedido ||--o{ item_combo_pedido : "id_pedido"
+    combo ||--o{ item_combo_pedido : "id_combo"
+    pedido ||--o{ pagamento : "id_pedido"
+    forma_pagamento ||--o{ pagamento : "id_forma_pagamento"
+    caixa ||--o{ pagamento : "id_caixa"
+    pedido ||--o{ ocorrencia : "id_pedido"
+    funcionario ||--o{ ocorrencia : "id_funcionario_autorizador"
+    pedido ||--o| entrega : "id_pedido"
+    endereco ||--o{ entrega : "id_endereco"
+    entregador |o--o{ entrega : "id_entregador"
+    pedido ||--o| avaliacao : "id_pedido"
+    funcionario |o--o{ avaliacao : "id_funcionario_responsavel"
+    insumo ||--o{ movimentacao_estoque : "id_insumo"
+    lote |o--o{ movimentacao_estoque : "id_lote"
+    pedido |o--o{ movimentacao_estoque : "id_pedido"
+    funcionario ||--o{ movimentacao_estoque : "id_funcionario"
+    compra |o--o{ conta_pagar : "id_compra"
+    setor {
+        int id_setor PK
+        varchar nome UK
+    }
+    cargo {
+        int id_cargo PK
+        varchar nome UK
+        int id_setor FK
+        tinyint pode_comprar
+        tinyint pode_autorizar
+    }
+    pessoa {
+        int id_pessoa PK
+        char cpf UK
+        varchar nome
+        varchar telefone
+        varchar email
+        date data_nascimento
+    }
+    endereco {
+        int id_endereco PK
+        int id_pessoa FK
+        varchar logradouro
+        varchar numero
+        varchar complemento
+        varchar bairro
+        varchar cidade
+        char uf
+        char cep
+    }
+    funcionario {
+        int id_funcionario PK
+        int id_pessoa FK
+        int id_cargo FK
+        decimal salario_bruto
+        date data_admissao
+        date data_desligamento
+    }
+    mesa {
+        int id_mesa PK
+        tinyint capacidade
+        varchar status_mesa
+    }
+    reserva {
+        int id_reserva PK
+        int id_mesa FK
+        int id_pessoa FK
+        varchar nome_contato
+        int id_funcionario FK
+        datetime data_hora_inicio
+        datetime data_hora_fim
+        varchar status_reserva
+    }
+    categoria_produto {
+        int id_categoria_produto PK
+        varchar nome UK
+    }
+    produto {
+        int id_produto PK
+        varchar nome UK
+        varchar descricao
+        int id_categoria_produto FK
+        decimal preco_venda
+        int peso_g
+        smallint tempo_preparo_min
+        tinyint disponivel
+        tinyint montagem_especial
+    }
+    combo {
+        int id_combo PK
+        varchar nome UK
+        varchar descricao
+        decimal preco_venda
+        tinyint ativo
+    }
+    item_combo {
+        int id_combo PK
+        int id_produto PK
+        smallint quantidade
+    }
+    favorito {
+        int id_pessoa PK
+        int id_produto PK
+        datetime data_hora_salvo
+    }
+    categoria_insumo {
+        int id_categoria_insumo PK
+        varchar nome UK
+    }
+    insumo {
+        int id_insumo PK
+        varchar nome UK
+        varchar marca UK
+        int id_categoria_insumo FK
+        varchar unidade_medida
+        varchar unidade_compra
+        decimal fator_conversao
+        decimal estoque_minimo
+    }
+    ficha_tecnica {
+        int id_produto PK
+        int id_insumo PK
+        decimal quantidade
+    }
+    fornecedor {
+        int id_fornecedor PK
+        char cnpj UK
+        varchar razao_social
+        varchar telefone
+        varchar email
+    }
+    fornecedor_insumo {
+        int id_fornecedor PK
+        int id_insumo PK
+        smallint prazo_entrega_dias
+    }
+    compra {
+        int id_compra PK
+        int id_fornecedor FK
+        int id_funcionario FK
+        datetime data_hora_compra
+        varchar status_compra
+        varchar observacao
+    }
+    item_compra {
+        int id_compra PK
+        int id_insumo PK
+        decimal quantidade
+        decimal valor_total
+    }
+    recebimento {
+        int id_recebimento PK
+        int id_compra FK
+        int id_funcionario FK
+        datetime data_hora_recebimento
+        varchar numero_nota_fiscal
+        varchar observacao
+    }
+    lote {
+        int id_lote PK
+        int id_recebimento FK
+        int id_insumo FK
+        varchar codigo_lote
+        decimal quantidade_recebida
+        date data_validade
+    }
+    promocao {
+        int id_promocao PK
+        varchar nome UK
+        varchar tipo_promocao
+        decimal percentual_desconto
+        tinyint exige_documento
+        tinyint ativa
+    }
+    forma_pagamento {
+        int id_forma_pagamento PK
+        varchar nome UK
+        decimal taxa_percentual
+        varchar grupo_fechamento
+    }
+    caixa {
+        int id_caixa PK
+        varchar terminal
+        int id_funcionario_abertura FK
+        int id_funcionario_fechamento FK
+        datetime data_hora_abertura
+        datetime data_hora_fechamento
+        decimal valor_abertura
+        decimal valor_fechamento
+    }
+    entregador {
+        int id_entregador PK
+        varchar nome
+        varchar telefone
+        varchar vinculo
+    }
+    pedido {
+        int id_pedido PK
+        int id_pessoa FK
+        int id_funcionario FK
+        int id_mesa FK
+        int id_promocao FK
+        int id_funcionario_autorizador FK
+        varchar canal
+        varchar modalidade
+        varchar status_pedido
+        datetime data_hora_pedido
+        datetime data_hora_inicio_preparo
+        datetime data_hora_pronto
+        datetime data_hora_encerramento
+        decimal valor_desconto
+        decimal valor_servico
+        tinyint documento_conferido
+    }
+    item_pedido {
+        int id_pedido PK
+        smallint numero_item PK
+        int id_produto FK
+        smallint quantidade
+        decimal preco_unitario
+        varchar observacao
+        tinyint cancelado
+    }
+    item_combo_pedido {
+        int id_pedido PK
+        smallint numero_item PK
+        int id_combo FK
+        smallint quantidade
+        decimal preco_unitario
+        varchar observacao
+    }
+    pagamento {
+        int id_pagamento PK
+        int id_pedido FK
+        int id_forma_pagamento FK
+        int id_caixa FK
+        decimal valor
+        datetime data_hora_pagamento
+        varchar status_pagamento
+    }
+    ocorrencia {
+        int id_ocorrencia PK
+        int id_pedido FK
+        int id_funcionario_autorizador FK
+        varchar tipo_ocorrencia
+        varchar causa
+        tinyint houve_consumo
+        decimal valor_reembolso
+        varchar descricao
+        datetime data_hora_ocorrencia
+    }
+    entrega {
+        int id_entrega PK
+        int id_pedido FK
+        int id_endereco FK
+        int id_entregador FK
+        decimal taxa_entrega
+        varchar status_entrega
+        datetime data_hora_saida
+        datetime data_hora_entrega
+    }
+    avaliacao {
+        int id_avaliacao PK
+        int id_pedido FK
+        varchar tipo_avaliacao
+        tinyint nota
+        varchar comentario
+        datetime data_hora_avaliacao
+        varchar status_tratamento
+        int id_funcionario_responsavel FK
+    }
+    movimentacao_estoque {
+        int id_movimentacao PK
+        int id_insumo FK
+        int id_lote FK
+        int id_pedido FK
+        int id_funcionario FK
+        varchar tipo_movimentacao
+        decimal quantidade
+        datetime data_hora_movimentacao
+        varchar motivo
+    }
+    conta_pagar {
+        int id_conta_pagar PK
+        int id_compra FK
+        varchar descricao
+        decimal valor
+        date data_vencimento
+        date data_pagamento
+        varchar status_conta
+    }

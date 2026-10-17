@@ -1,0 +1,39 @@
+flowchart TD
+    A([Cliente chega ou abre o app]) --> B[Atendente registra o pedido<br/>canal: SALAO, BALCAO, IFOOD, 99FOOD]
+    B --> C{Todos os produtos estão<br/>disponíveis e há estoque?<br/>RDN04}
+    C -- Não --> D{O que o cliente decide?}
+    D -- Substituir produto --> B
+    D -- Alterar quantidade/pedido --> B
+    D -- Desistir --> X1([Pedido não é criado<br/>nenhum dado a estornar])
+    C -- Sim --> E[Pedido criado: status ABERTO<br/>preço copiado do cardápio RDN14]
+    E --> F{Modalidade?}
+    F -- LOCAL consumo no salão --> G[Prioridade 1 na fila RDN09]
+    F -- RETIRADA ou DELIVERY --> H[Prioridade 2 na fila]
+    H --> I{Pagamento confirmado?<br/>RDN01}
+    I -- Não, cliente desiste --> J[Cancelamento autorizado<br/>ocorrência CANCELAMENTO<br/>RDN10]
+    J --> Z2([Status CANCELADO<br/>pagamento ESTORNADO se houve])
+    I -- Sim --> K
+    G --> K[Cozinha inicia o preparo<br/>status EM_PRODUCAO]
+    K --> L[Baixa automática de insumos<br/>itens x ficha técnica<br/>RDN13]
+    L --> M[Preparo concluído<br/>status PRONTO]
+    M --> N{Modalidade?}
+    N -- LOCAL --> O[Entrega na mesa<br/>status ENTREGUE]
+    O --> P[Cliente consome]
+    P --> Q{Houve insatisfação?}
+    Q -- Sim --> R{Cliente já consumiu?<br/>RDN05}
+    R -- Não --> S[Troca ou reembolso<br/>autorizado por gerente]
+    R -- Sim e erro da casa --> S2[Troca autorizada<br/>exceção a confirmar]
+    R -- Sim e outra causa --> T[Sem troca nem reembolso]
+    Q -- Não --> U[Pagamento no caixa<br/>após o consumo RDN01]
+    S --> U
+    S2 --> U
+    T --> U
+    N -- RETIRADA --> V[Cliente retira no balcão]
+    N -- DELIVERY --> W[Entregador retira na porta RDN08<br/>entrega EM_ROTA]
+    V --> Y
+    W --> Y[Entrega confirmada]
+    U --> Y2{Pagamento integral<br/>confirmado? RDN15}
+    Y --> Y2
+    Y2 -- Sim --> Z([Status CONCLUIDO<br/>pedido pago, entregue e encerrado])
+    Y2 -- Não --> U
+    J -.-> Z2

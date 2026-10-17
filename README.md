@@ -1,8 +1,5 @@
-# Modelagem-DER-Montararat
-Este repositório tem como objetivo apresentar e documentar a modelagem do banco de dados desenvolvido para a Hamburgueria MontArarat.
-
 # MONTARARAT – BANCO DE DADOS
-### Documentação de requisitos e modelo conceitual (primeira entrega)
+### Entrega final: modelagem conceitual, modelo lógico e banco de dados MySQL
 ---
 **Integrantes do Grupo (Nomes e RGMs):**
 * **Anna Luiza Ferreira Costa** | RGM: 48186198
@@ -50,7 +47,7 @@ Em geral, o processo operacional padrão que engloba o funcionamento da empresa 
 ![Evidência2.1](imagens/cardapio2.jpeg)
 *(Evidência 2) - Foto do cardápio da hamburgueria, com imagens dos hambúrgueres, bebidas, descrições e preços.*
 ![Evidência3](imagens/diluviu.jpeg)
-*(Evidência 3) – Dois Dilúvios, lanche especial da casa, servidos em uma mesa, acompanhados de uma porção de coxinhas crocantes.*
+*(Evidência 3) – Dois lanches Dilúvio, especial da casa, servidos em uma mesa, acompanhados de uma porção de coxinhas crocantes.*
 ---
 ## 4. PROBLEMAS E NECESSIDADES
 A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragilidade operacional se encontra na gestão e controle de estoque/suprimentos, que atualmente carece de organização e estruturação em Banco de Dados.
@@ -65,259 +62,62 @@ A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragil
 | **Controle de estoque manual/informal** | Divergência de saldos, perdas e erros no levantamento de quantidades. |
 
 ---
-## 5. REQUISITOS FUNCIONAIS (RF)
+## 5. REQUISITOS, REGRAS DE NEGÓCIO E POLÍTICAS (revisados)
 
-| Identificador | Descrição |
-| :--- | :--- |
-| **RF01** | Os funcionários devem conseguir visualizar, gerenciar e atender aos pedidos e solicitações dos clientes no sistema; |
-| **RF02** | O sistema deve conter diferentes formas de pagamento (pix / cartão / dinheiro); |
-| **RF03** | Os clientes devem conseguir escolher a quantidade de itens (hambúrgueres, bebidas, acompanhamentos) a ser comprada; |
-| **RF04** | Os funcionários devem conseguir realizar o cadastro e controle de insumos/produtos para o estoque; |
-| **RF05** | O sistema deve gerar relatórios semanais de desempenho para que a equipe analise a produtividade e o volume de vendas; |
-| **RF06** | Os líderes/gerentes devem possuir um dashboard com a análise de desempenho da hamburgueria (faturamento, pratos mais vendidos, tempo médio de preparo); |
-| **RF07** | Os clientes devem ser capazes de identificar as mesas disponíveis para atendimento do local; |
-| **RF08** | Os clientes devem saber o tempo estimado de preparo do pedido; |
-| **RF09** | Os clientes devem possuir acesso às especificações do produto (ingredientes / peso do hambúrguer); |
-| **RF10** | Os clientes devem ter acesso a um canal/módulo de avaliação e reclamações sobre o pedido; |
-| **RF11** | Os clientes devem poder escolher o método de entrega do seu pedido (delivery ou retirada no balcão/local). |
+Catálogo completo, com origem de cada mudança e forma de verificação: [`docs/requisitos/requisitos.md`](docs/requisitos/requisitos.md) (e `.xlsx`).
+Resumo: **19 RF** (RF01-RF11 mantidos; RF12-RF17 novos para compras, financeiro, caixa, promoções, ocorrências e fila; RF18/RF19 vêm do antigo RNF02/RNF05, reclassificados), **6 RNF** (RNF01, RNF03, RNF04, RNF06 mantidos; RNF07 e RNF08 novos) e **15 RDN** (RDN01-RDN08 mantidos e tornados verificáveis; RDN09-RDN15 novos). A política organizacional da seção 8 original (cozinha, compras, aniversário, cancelamento, venda, prioridade) está formalizada nas regras RDN05, RDN09-RDN13.
+Rastreabilidade requisito → tabela/view/trigger/consulta/teste: [`docs/requisitos/rastreabilidade.md`](docs/requisitos/rastreabilidade.md).
 
----
-## 6. REQUISITOS NÃO FUNCIONAIS (RNF)
+## 6. FLUXOGRAMAS (corrigidos)
 
-| Identificador | Descrição |
-| :--- | :--- |
-| **RNF01** | O backup dos dados do cliente deve ser realizado diariamente; |
-| **RNF02** | Os favoritos devem estar listados conforme a data, do mais recente ao mais antigo item salvo; |
-| **RNF03** | O tempo de resposta para o lançamento de pedidos e impressão/envio para a cozinha não deve exceder 2 segundos em pico operacional; |
-| **RNF04** | O sistema deve gerar o comprovante do pedido em no máximo 5 segundos, após a confirmação do pagamento; |
-| **RNF05** | O carrinho deve listar os itens de acordo com a ordem do pedido; |
-| **RNF06** | O módulo de contato deve manter uma disponibilidade de no mínimo 99% do tempo. |
+| Processo | Diagrama |
+|---|---|
+| Pedido, pagamento, produção, entrega, encerramento, trocas | [`fluxograma-pedido.png`](docs/diagramas/fluxograma-pedido.png) |
+| Compras, recebimento, conferência, reposição, perdas, inventário | [`fluxograma-compras-estoque.png`](docs/diagramas/fluxograma-compras-estoque.png) |
+| Caixa e conferência financeira | [`fluxograma-caixa.png`](docs/diagramas/fluxograma-caixa.png) |
 
----
-## 7. REGRAS DE NEGÓCIO (RDN)
+Fontes em Mermaid (`.mmd`) na mesma pasta. O fluxograma original em Lucidchart (`imagens/fluxograma.png`) permanece como histórico.
 
-| Identificador | Descrição |
-| :--- | :--- |
-| **RDN01** | O pedido só pode entrar em produção após a confirmação do pagamento, salvo em situações de consumo no estabelecimento; |
-| **RDN02** | A reserva das mesas só podem ser feitas de forma presencial de acordo com a disponibilidade; |
-| **RDN03** | A limpeza das mesas só podem ser realizadas após a utilização; |
-| **RDN04** | O produto só pode ser vendido mediante sua disponibilidade; |
-| **RDN05** | Em caso de insatisfação, pode ser realizada a troca do produto ou o cancelamento do mesmo; |
-| **RDN06** | Produtos de montagem especial não podem ser enviados via delivery; |
-| **RDN07** | Cada produto deve ser embalado individualmente com identificações em suas determinadas embalagens; |
-| **RDN08** | A retirada dos pedidos para delivery deve ser feita na porta do estabelecimento. |
----
-## 8. RESTRIÇÕES E POLÍTICAS ORGANIZACIONAIS
-Assim como todas as empresas, o Mont Ararat possui suas regras e políticas internas a serem cumpridas:
-* **Cozinha:** Somente funcionários e pessoas autorizadas podem entrar na cozinha do estabelecimento, garantindo a privacidade e segurança dos clientes e funcionários.
-* **Compra / Reposição:** O(a) gerente é a única pessoa (exceto o proprietário) que pode realizar a compra de insumos com os fornecedores para o estoque da hamburgueria.
-* **Promoções de Aniversário:** O cliente só pode usufruir da promoção de aniversário mediante apresentação de um documento pessoal que comprove a data de nascimento (RG, CNH, etc.).
-* **Cancelamento / Troca:** Em caso de insatisfação, o cliente tem direito à solicitação de troca/reembolso do seu pedido apenas se não houve consumo.
-* **Venda do Produto:** Para que não haja desentendimentos, é imprescindível que o estoque seja previamente checado antes da comercialização de um produto.
-* **Prioridade dos pedidos:** Pedidos feitos no estabelecimento devem, em todas as circunstâncias, ter prioridade de produção, permitindo um atendimento rápido para os consumidores no local.
----
-## 9. FLUXOGRAMA
-Abaixo, um fluxograma do funcionamento do banco de dados da hamburgueria, construído com o Lucidchart, uma ferramenta muito útil para produção de fluxogramas:
-![Fluxograma de Processos - Mont Ararat](imagens/fluxograma.png)
+## 7. MODELAGEM
 
----
-## 10. DER (DIAGRAMA DE ENTIDADE - RELACIONAMENTO)
-Abaixo, segue a modelagem do digrama entidades produzido
-![Diagrama de Entidades](imagens/der.png)
+- **DER conceitual** (entidades, verbos, cardinalidades): [`docs/diagramas/der-conceitual.png`](docs/diagramas/der-conceitual.png)
+- **Modelo lógico** relacional, 34 tabelas e 51 chaves estrangeiras: [`docs/modelo-logico.md`](docs/modelo-logico.md) e DER lógico [`der-logico.png`](docs/diagramas/der-logico.png) (derivados do DDL)
+- **Normalização** (14 problemas da 1ª entrega, verificação de dependências, desnormalizações intencionais): [`docs/normalizacao/normalizacao.md`](docs/normalizacao/normalizacao.md)
+- **Dicionário de dados** (gerado do DDL; cada restrição com sua justificativa): [`docs/dicionario-dados/dicionario-de-dados.md`](docs/dicionario-dados/dicionario-de-dados.md)
 
-## 11. DICIONÁRIO DE DADOS (MODELO CONCEITUAL)
-### ENTIDADE: Pessoa
+## 8. BANCO DE DADOS (MySQL 8.0.16+ / MariaDB 10.5+)
 
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **cpf (PK)** | Número do CPF que identifica a Pessoa. | Deve ser único para cada pessoa. |
-| **nome** | Nome completo da pessoa. | Preenchimento obrigatório. Não precisa ser único. |
-| **telefone** | Número de telefone/celular para contato. | Conter apenas números. Formato com DDD. |
-| **email** | Endereço de e-mail para contato. | Deve ser válido (ex: usuario@gmail.com). |
-| **endereco** | Local de residência da pessoa. | Endereço completo (rua, número e CEP). |
+```
+sql/
+  ddl/        01_create_database, 02_create_tables (34), 03_views (10), 04_triggers (9)
+  dados/      01_massa_dados.sql  (cardápio, preços, fornecedores e formato do caixa reais; vendas e pessoas simuladas)
+  dml/        01_dml_demonstracao.sql  (INSERT/UPDATE/DELETE de um pedido, termina em ROLLBACK)
+  consultas/  operacionais.sql (O01-O07), gerenciais.sql (G01-G14)
+  auditoria/  auditoria.sql (AUD01-AUD11)
+  testes/     02_testes_restricoes.sql (T01-T43, com controles positivos)
+  executar_tudo.sql
+```
 
-### ENTIDADE: Funcionario
+**Como executar (MySQL):** na pasta `sql/`, `mysql -u root -p --force < executar_tudo.sql > ../evidencias/saida_mysql.txt 2>&1`. (Os testes de restrição geram erros esperados; `--force` continua.) No Workbench, rode os arquivos na ordem de `executar_tudo.sql`.
 
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_funcionario (PK)** | Identificador do Funcionário. | Deve ser único para cada funcionário. |
-| **cpf (FK)** | Número do CPF que identifica o funcionário. | Deve ser único para cada funcionário. |
-| **nome** | Nome completo do funcionário. | Preenchimento obrigatório. |
-| **cargo** | Cargo do funcionário dentro da empresa. | Não precisa ser único. |
-| **salario** | Remuneração mensal do funcionário. | Deve conter o valor bruto. |
-| **setor** | Setor do funcionário dentro da empresa. | Não precisa ser único. |
-| **data_admissao** | Data de admissão pela empresa. | Formato completo (DD/MM/AAAA). |
+**Ordem de execução:** `ddl/01` → `ddl/02` → `ddl/03` → `dados/01` → `ddl/04` (os triggers entram depois da carga, porque a massa contém anomalias intencionais para a auditoria) → `dml`, `consultas`, `auditoria` e `testes`. O script `executar_tudo.sql` já segue essa ordem. A saída da execução no MySQL fica em [`evidencias/`](evidencias/).
 
-### ENTIDADE: Pedido
+Destaques técnicos: estoque como livro de movimentações (saldo por view); baixa automática pela ficha técnica; totais derivados em views; regras de negócio em CHECK e triggers; massa com 598 pedidos em 3 semanas, reajuste de preço, cancelamentos, estornos, pagamentos divididos, lotes e perdas; **seis anomalias plantadas** que as consultas de auditoria encontram (A-F, descritas no cabeçalho de `dados/01_massa_dados.sql`).
 
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_pedido (PK)** | Identificador do Pedido. | Identificação única. |
-| **data** | Data que o pedido foi efetivado. | Deve corresponder à data de realização do pedido. |
-| **status_pedido** | Mostra o status do pedido. | Deve representar o estado no atendimento. |
-| **cpf (FK)** | Identificador de Pessoa. | Deve identificar quem fez o pedido. |
+## 9. HISTÓRICO DE ALTERAÇÕES E DECISÕES
 
-### ENTIDADE: Pagamento
+- [`docs/historico-alteracoes.md`](docs/historico-alteracoes.md): cada item da devolutiva (nota 5,25) → correção → evidência.
+- [`docs/decisoes-a-confirmar.md`](docs/decisoes-a-confirmar.md): 23 interpretações assumidas e a separação entre dados reais (fotos) e simulados.
+- [`docs/limitacoes.md`](docs/limitacoes.md): o que não foi feito ou testado.
 
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_pagamento (PK)** | Identificador do Pagamento. | Deve ser único para cada pagamento. |
-| **valor** | Valor total do pagamento. | Deve ser um valor monetário não negativo. |
-| **forma_pagamento** | Forma de pagamento do pedido. | Não precisa ser único. |
-| **data** | Data em que o pedido foi efetuado. | Formato completo (DD/MM/AAAA). |
-| **status** | Atualizações sobre o pagamento. | Informar todas as etapas. |
+## 10. BI E IA
 
-### ENTIDADE: Mesa
+[`docs/bi-ia.md`](docs/bi-ia.md) (indicadores já respondidos por SQL; ideias de IA marcadas como proposta) e [`docs/ia/uso-de-ia.md`](docs/ia/uso-de-ia.md) (registro de uso e validação).
 
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_mesa (PK)** | Identificador da Mesa. | Deve ser único para cada mesa. |
-| **capacidade** | Capacidade de pessoas que a mesa acomoda. | Especificar o limite (ex: "Até 10 pessoas"). |
+## 11. EQUIPE E PARTICIPAÇÃO
 
-### ENTIDADE: Avaliacao
+[`docs/divisao-trabalho.md`](docs/divisao-trabalho.md) (preencher) e roteiro de defesa em [`apresentacao/roteiro-defesa.md`](apresentacao/roteiro-defesa.md).
 
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_avaliacao (PK)** | Identificador da Avaliação. | Deve ser único para cada avaliação. |
-| **nota** | Nota do cliente para o restaurante. | Avaliação em estrelas (0-5). |
-| **comentario** | Descrição da nota dada ao restaurante. | Não deve conter símbolos (ex: @!#$%). |
-| **data** | Data da avaliação. | Formato completo (DD/MM/AAAA). |
-| **id_pedido (FK)** | Identificador do Pedido. | Deve ser único para cada pedido. |
+## 12. CONSIDERAÇÕES FINAIS
 
-### ENTIDADE: ItemPedido
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_pedido (PK/FK)** | Identificador do Pedido. | Identificação única. |
-| **id_produto (PK/FK)** | Identificador do Produto. | Identificação única. |
-| **quantidade** | Quantidade de itens do pedido. | Deve ser número inteiro ou decimal >= 0. |
-| **preco_unitario** | Valor total do pedido. | Deve ser valor monetário não negativo. |
-| **subtotal** | Subtotal do valor final do pedido. | Deve ser valor monetário não negativo. |
-| **observacao** | Observações feitas pelo cliente. | Deve conter a sigla "OBS" antes do texto. |
-
-### ENTIDADE: Produto
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_produto (PK)** | Identificador do Produto. | Identificação única. |
-| **nome** | Nome do produto. | Identificação única. |
-| **descricao** | Informações básicas sobre o produto. | O texto deve ser breve e resumido. |
-| **preco_unitario** | Valor do produto. | Deve ser valor monetário não negativo. |
-| **categoria** | Categoria do produto. | Domínio fixo (Lanche/Bebida/Porção/Sobremesa). |
-
-### ENTIDADE: ItemCombo
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_combo (PK/FK)** | Identificador do Combo. | Identificação única. |
-| **id_produto (PK/FK)** | Identificador do Produto. | Identificação única. |
-| **quantidade** | Quantidade de itens do combo. | Deve ser número inteiro ou decimal >= 0. |
-
-### ENTIDADE: ItemComboPedido
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_pedido(PK/FK)** | Identificador do Pedido. | Identificação única. |
-| **id_produto(PK/FK)** | Identificador do Produto. | Identificação única. |
-| **quantidade** | Quantidade de itens dentro do pedido. | Deve ser um número real >= 0. |
-| **preco_unitario** | Valor individual de cada item dentro do pedido. | Deve ser valor monetário não negativo. |
-| **subtotal** | Subtotal do valor à ser pago. | Deve ser valor monetário não negativo. |
-
-### ENTIDADE: Entrega
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_entrega (PK)** | Identificador da Entrega. | Identificação única. |
-| **tipo** | Tipo da entrega (retirada / delivery). | Apenas em pedidos via aplicativos. |
-| **endereco** | Endereço de destino da entrega. | Endereço completo (rua, número e CEP). |
-| **status** | Atualizações sobre a entrega. | Informar todas as etapas do processo. |
-| **data_saida** | Momento de saída do entregador. | Data e horário (ex: DD/MM/AAAA - 19h28). |
-| **id_pedido (FK)** | Identificador do Pedido. | Identificação única. |
-
-### ENTIDADE: FichaTecnica
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_produto (PK/FK)** | Identifica o produto que tem ficha técnica. | PK/FK para Produto. |
-| **id_insumo (PK/FK)** | Identifica o insumo utilizado na produção. | PK/FK para Insumo. |
-| **quantidade** | Quantidade de insumo utilizada. | Deve ser número inteiro ou decimal >= 0. |
-
-### ENTIDADE: Insumo
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_insumo (PK)** | Identificador do Insumo. | Identificação única. |
-| **unidade_medida** | Forma como é medido no estoque. | Identificador (ex: KG, G, L, ML, UN, CX). |
-| **nome** | Nome do insumo. | Campo obrigatório. |
-| **data_validade** | Data de validade do insumo. | Formato completo (DD/MM/AAAA). |
-
-
-### ENTIDADE: Fornecedor
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_fornecedor (PK)** | Identificador do Fornecedor. | Identificação única. |
-| **cnpj** | CNPJ que identifica o fornecedor. | Campo obrigatório. |
-| **nome** | Nome que identifica o fornecedor. | Campo obrigatório. |
-| **telefone** | Telefone/Celular para contato. | Conter apenas números. Formato com DDD. |
-
-### ENTIDADE: Fornecimento
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_insumo (PK/FK)** | Identificador do Insumo. | Identificação única. |
-| **id_fornecimento (PK/FK)** | Identificador do Fornecimento. | Identificação única. |
-| **quantidade** | Especifica a quantidade fornecida. | Deve ser um valor real >= 0. |
-| **data_compra** | Data da aquisição do fornecimento. | Formato completo (DD/MM/AAAA). |
-| **valor_compra** | Valor total da compra. | Deve ser um valor real >= 0. | 
-
-### ENTIDADE: Estoque
-
-| Atributo | Descrição | Regra / Observação |
-| :--- | :--- | :--- |
-| **id_estoque (PK)** | Identificador do Estoque. | Identificação única. |
-| **quantidade_atual** | Quantidade de insumos atual no estoque. | Deve ser número inteiro ou decimal >= 0. |
-| **quantidade_minima** | Limite mínimo em estoque. | Deve ser número inteiro ou decimal >= 0. |
-| **data_ultima_entrada** | Data da reposição mais recente. | Formato completo (DD/MM/AAAA). |
-| **id_insumo (FK)** | Identificador do Insumo. | Identificação única. |
-
----
-
-## 12. ENTIDADES ASSOCIATIVAS
-### Mapeamento de Relacionamentos N:N e Entidades Associativas
-
-* **PEDIDO (1,N) ———— CONTÉM ———— (0,N) PRODUTO**
-  * **Descrição:** Pedido e produto possuem uma relação N:N (Muitos para Muitos). pois um pedido pode conter diversos produtos, assim como um produto pode estar em diversos pedidos.
-  * **Entidade Associativa:** O relacionamento `CONTÉM` transforma-se na entidade associativa **`ITEM_PEDIDO`**.
-
----
-
-* **PRODUTO (0,N) ———— POSSUI ———— (0,N) INSUMO**
-  * **Descrição:** Produto e insumo possuem uma relação N:N (Muitos para Muitos), um produto possui diversos insumos, e um insumo pode estar em diversos produtos.
-  * **Entidade Associativa:** O relacionamento `POSSUI` transforma-se na entidade associativa **`FICHA_TECNICA`**.
-
----
-
-* **COMBO (1,N) ———— TER ———— (0,N) PRODUTO**
-  * **Descrição:** Combo e produto possuem um relacionamento N:N (Muitos para Muitos), já que um combo pode conter diversos produtos e um mesmo produto pode estar em diversos combos.
-  * **Entidade Associativa:** O relacionamento `TER` transforma-se na entidade associativa **`ITEM_COMBO`**.
-
----
-
-* **COMBO (0,N) ———— DETÉM ———— (0,N) PEDIDO**
-  * **Descrição:** Combo e pedido possuem uma relação N:N (Muitos para Muitos), pois um combo pode estar presente em vários pedidos e um mesmo pedido pode conter vários combos.
-  * **Entidade Associativa:** O relacionamento `DETÉM` transforma-se na entidade associativa **`ITEM_COMBO_PEDIDO`**.
-
----
-
-* **FORNECEDOR (0,N) ———— FORNECE ———— (0,N) INSUMO**
-  * **Descrição:** Fornecedor e insumo possuem uma relação N:N (Muitos para Muitos), já que um fornecedor pode entregar vários insumos e um insumo pode ser fornecido por diversos fornecedores.
-  * **Entidade Associativa:** O relacionamento `FORNECE` transforma-se na entidade associativa **`FORNECIMENTO`**.
-
-
-## 13. DECISÕES IMPORTANTES
-### Durante o nosso projeto, houve diversas mudanças de planejamento da modelagem, uma das decisões mais importantes tomada pelo grupo, foi concentrar a variedade de combos em uma só entidade, visto que, se fossemos dedicar uma entidade para cada variável de combo, resultaria em um banco de dados desnecessariamente grande e complexo, dificultando a modelagem e o gerenciamento dos dados. Outra decisão que foi de extrema importância para a modelagem, foi a criação da entidade Fornecimento, que engloba o controle da entrada de insumos para o estabelecimento.
-
-## 14. CONSIDERAÇÕES FINAIS
-
-### Com a confecção do projeto, a equipe estudou e praticou as principais habilidades necessárias para a modelagem de Banco de Dados, utilizando o Lucidchart como plataforma principal para a modelagem do fluxograma e construção do DER, além de rascunhos em cadernos. O processo do desenvolvimento foi fundamental para o desenvolvimento do raciocínio lógico e modelagem, foi possível compreender a complexidade que um Banco de Dados possui, devido suas Entidades, Verbos, Substantivos, Atributos, Entidades Associativas, etc. Essa modelagem serviu como preparação para a confecção do modelo lógico do projeto, agregando conhecimento através dos fundamentos básicos da Modelagem de Banco de Dados.  
+### Foram realizadas as correções apontadas no feedback da Entrega 1, buscando atender a todas as observações e notas do professor, como os ajustes nas tabelas de RF, RNF e RDN, o acréscimo de tabelas e entidades no DER e a inclusão da tabela de Normalização. Conforme orientado em sala de aula, o objetivo principal nesta Entrega 2 foi eliminar ambiguidades e detalhar cada decisão tomada, evitando explicações superficiais ou inconsistentes. A revisão seguiu a sequência recomendada: Problema → Processo → Requisito → Regra de Negócio → Entidade → Relacionamento → Cardinalidade → DER → Dicionário de Dados, e só então o modelo lógico e o SQL. A principal correção foi deslocar o foco do atendimento para o problema real da empresa, o controle de estoque e de compras, sem perder a integração financeira. ###
