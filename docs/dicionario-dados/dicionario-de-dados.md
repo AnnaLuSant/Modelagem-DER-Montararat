@@ -1,6 +1,6 @@
 # Dicionário de dados (modelo lógico, MySQL 8)
 
-> **Gerado automaticamente** por `sql/ferramentas/gerar_docs.py` a partir de `sql/ddl/02_create_tables.sql`. Não edite à mão: altere o DDL e gere de novo. Assim o dicionário nunca contradiz o banco.
+> Derivado de `sql/ddl/02_create_tables.sql` (cada coluna e restrição vem do comentário e da justificativa escritos no DDL). Se o DDL mudar, atualize este dicionário.
 
 Total: **34 tabelas**. Papel: PK = chave primária, FK = chave estrangeira, UQ = única. Dados monetários são DECIMAL; domínios fechados usam CHECK ... IN (...).
 

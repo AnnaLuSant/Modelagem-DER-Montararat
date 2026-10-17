@@ -47,7 +47,7 @@ Em geral, o processo operacional padrão que engloba o funcionamento da empresa 
 ![Evidência2.1](imagens/cardapio2.jpeg)
 *(Evidência 2) - Foto do cardápio da hamburgueria, com imagens dos hambúrgueres, bebidas, descrições e preços.*
 ![Evidência3](imagens/diluviu.jpeg)
-*(Evidência 3) – Dois Dilúvios, lanche especial da casa, servidos em uma mesa, acompanhados de uma porção de coxinhas crocantes.*
+*(Evidência 3) – Dois lanches Dilúvio, especial da casa, servidos em uma mesa, acompanhados de uma porção de coxinhas crocantes.*
 ---
 ## 4. PROBLEMAS E NECESSIDADES
 A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragilidade operacional se encontra na gestão e controle de estoque/suprimentos, que atualmente carece de organização e estruturação em Banco de Dados.
@@ -81,7 +81,7 @@ Fontes em Mermaid (`.mmd`) na mesma pasta. O fluxograma original em Lucidchart (
 ## 7. MODELAGEM
 
 - **DER conceitual** (entidades, verbos, cardinalidades): [`docs/diagramas/der-conceitual.png`](docs/diagramas/der-conceitual.png)
-- **Modelo lógico** relacional, 34 tabelas e 51 chaves estrangeiras: [`docs/modelo-logico.md`](docs/modelo-logico.md) e DER lógico [`der-logico.png`](docs/diagramas/der-logico.png) (ambos gerados do DDL)
+- **Modelo lógico** relacional, 34 tabelas e 51 chaves estrangeiras: [`docs/modelo-logico.md`](docs/modelo-logico.md) e DER lógico [`der-logico.png`](docs/diagramas/der-logico.png) (derivados do DDL)
 - **Normalização** (14 problemas da 1ª entrega, verificação de dependências, desnormalizações intencionais): [`docs/normalizacao/normalizacao.md`](docs/normalizacao/normalizacao.md)
 - **Dicionário de dados** (gerado do DDL; cada restrição com sua justificativa): [`docs/dicionario-dados/dicionario-de-dados.md`](docs/dicionario-dados/dicionario-de-dados.md)
 
@@ -90,20 +90,19 @@ Fontes em Mermaid (`.mmd`) na mesma pasta. O fluxograma original em Lucidchart (
 ```
 sql/
   ddl/        01_create_database, 02_create_tables (34), 03_views (10), 04_triggers (9)
-  dados/      01_massa_dados.sql  (gerada por ferramentas/gerar_massa.py; DADOS FICTÍCIOS)
+  dados/      01_massa_dados.sql  (cardápio, preços, fornecedores e formato do caixa reais; vendas e pessoas simuladas)
   dml/        01_dml_demonstracao.sql  (INSERT/UPDATE/DELETE de um pedido, termina em ROLLBACK)
   consultas/  operacionais.sql (O01-O07), gerenciais.sql (G01-G14)
   auditoria/  auditoria.sql (AUD01-AUD11)
-  testes/     02_testes_restricoes.sql (T01-T39, com controles positivos)
-  ferramentas/ gerar_massa.py, gerar_docs.py, testar_tudo.py, catalogo.py, harness_sqlite.py
+  testes/     02_testes_restricoes.sql (T01-T43, com controles positivos)
   executar_tudo.sql
 ```
 
 **Como executar (MySQL):** na pasta `sql/`, `mysql -u root -p --force < executar_tudo.sql > ../evidencias/saida_mysql.txt 2>&1`. (Os testes de restrição geram erros esperados; `--force` continua.) No Workbench, rode os arquivos na ordem de `executar_tudo.sql`.
 
-**Como regenerar documentos e verificar** (Python 3, só biblioteca padrão e openpyxl): `python3 sql/ferramentas/gerar_massa.py`, `gerar_docs.py` e `testar_tudo.py`. O resultado da última verificação está em [`evidencias/log_verificacao.txt`](evidencias/log_verificacao.txt).
+**Ordem de execução:** `ddl/01` → `ddl/02` → `ddl/03` → `dados/01` → `ddl/04` (os triggers entram depois da carga, porque a massa contém anomalias intencionais para a auditoria) → `dml`, `consultas`, `auditoria` e `testes`. O script `executar_tudo.sql` já segue essa ordem. A saída da execução no MySQL fica em [`evidencias/`](evidencias/).
 
-Destaques técnicos: estoque como livro de movimentações (saldo por view); baixa automática pela ficha técnica; totais derivados em views; regras de negócio em CHECK e triggers; massa com 598 pedidos em 3 semanas, reajuste de preço, cancelamentos, estornos, pagamentos divididos, lotes e perdas; **seis anomalias plantadas** que as consultas de auditoria encontram (A-F, descritas no cabeçalho da massa).
+Destaques técnicos: estoque como livro de movimentações (saldo por view); baixa automática pela ficha técnica; totais derivados em views; regras de negócio em CHECK e triggers; massa com 598 pedidos em 3 semanas, reajuste de preço, cancelamentos, estornos, pagamentos divididos, lotes e perdas; **seis anomalias plantadas** que as consultas de auditoria encontram (A-F, descritas no cabeçalho de `dados/01_massa_dados.sql`).
 
 ## 9. HISTÓRICO DE ALTERAÇÕES E DECISÕES
 
@@ -121,4 +120,4 @@ Destaques técnicos: estoque como livro de movimentações (saldo por view); bai
 
 ## 12. CONSIDERAÇÕES FINAIS
 
-A revisão seguiu a sequência recomendada: Problema → Processo → Requisito → Regra de Negócio → Entidade → Relacionamento → Cardinalidade → DER → Dicionário de Dados, e só então o modelo lógico e o SQL. A principal correção foi deslocar o foco do atendimento para o problema real da empresa, o controle de estoque e de compras, sem perder a integração financeira.
+### Foram realizadas as correções apontadas no feedback da Entrega 1, buscando atender a todas as observações e notas do professor, como os ajustes nas tabelas de RF, RNF e RDN, o acréscimo de tabelas e entidades no DER e a inclusão da tabela de Normalização. Conforme orientado em sala de aula, o objetivo principal nesta Entrega 2 foi eliminar ambiguidades e detalhar cada decisão tomada, evitando explicações superficiais ou inconsistentes. A revisão seguiu a sequência recomendada: Problema → Processo → Requisito → Regra de Negócio → Entidade → Relacionamento → Cardinalidade → DER → Dicionário de Dados, e só então o modelo lógico e o SQL. A principal correção foi deslocar o foco do atendimento para o problema real da empresa, o controle de estoque e de compras, sem perder a integração financeira. ###
