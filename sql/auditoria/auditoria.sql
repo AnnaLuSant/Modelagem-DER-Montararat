@@ -5,7 +5,7 @@
 -- =====================================================================
 USE montararat_erp;
 
--- AUD01 | Recebimento com quantidade diferente da comprada ou item não comprado (anomalias A e B) | Atende RF12
+-- AUD01 | Recebimento com quantidade diferente da comprada, item não comprado ou recebimento parcial (anomalias A e B + 1 recebimento parcial de cheddar cremoso) | Atende RF12
 SELECT r.id_recebimento, c.id_compra, i.nome AS insumo,
        COALESCE(ic.quantidade, 0) AS qtd_comprada,
        SUM(l.quantidade_recebida) AS qtd_recebida
@@ -24,21 +24,17 @@ FROM pedido p
 JOIN promocao pr ON pr.id_promocao = p.id_promocao
 WHERE pr.exige_documento = 1 AND p.documento_conferido = 0;
 
--- AUD03 | Fechamento de caixa com diferença entre o contado e o esperado (anomalia D; também pequenas diferenças) | Atende RF14
+-- AUD03 | Fechamento de caixa com diferença: valor de fechamento informado x (abertura + soma de recebimentos), fórmula da fita (anomalia D; também pequenas diferenças) | Atende RF14
 SELECT cx.id_caixa, cx.terminal, DATE(cx.data_hora_abertura) AS dia,
-       cx.valor_abertura + COALESCE(SUM(CASE WHEN fp.nome = 'Dinheiro' AND pg.status_pagamento = 'CONFIRMADO' THEN pg.valor END), 0) AS esperado,
-       cx.valor_contado_fechamento AS contado,
-       cx.valor_contado_fechamento
-         - (cx.valor_abertura + COALESCE(SUM(CASE WHEN fp.nome = 'Dinheiro' AND pg.status_pagamento = 'CONFIRMADO' THEN pg.valor END), 0)) AS diferenca
+       cx.valor_abertura + COALESCE(SUM(pg.valor), 0) AS esperado,
+       cx.valor_fechamento AS informado,
+       cx.valor_fechamento - (cx.valor_abertura + COALESCE(SUM(pg.valor), 0)) AS diferenca
 FROM caixa cx
-LEFT JOIN pagamento pg       ON pg.id_caixa = cx.id_caixa
-LEFT JOIN forma_pagamento fp ON fp.id_forma_pagamento = pg.id_forma_pagamento
-WHERE cx.valor_contado_fechamento IS NOT NULL
-GROUP BY cx.id_caixa, cx.terminal, cx.data_hora_abertura, cx.valor_abertura, cx.valor_contado_fechamento
-HAVING cx.valor_contado_fechamento
-       <> cx.valor_abertura + COALESCE(SUM(CASE WHEN fp.nome = 'Dinheiro' AND pg.status_pagamento = 'CONFIRMADO' THEN pg.valor END), 0)
-ORDER BY ABS(cx.valor_contado_fechamento
-       - (cx.valor_abertura + COALESCE(SUM(CASE WHEN fp.nome = 'Dinheiro' AND pg.status_pagamento = 'CONFIRMADO' THEN pg.valor END), 0))) DESC;
+LEFT JOIN pagamento pg ON pg.id_caixa = cx.id_caixa AND pg.status_pagamento = 'CONFIRMADO'
+WHERE cx.valor_fechamento IS NOT NULL
+GROUP BY cx.id_caixa, cx.terminal, cx.data_hora_abertura, cx.valor_abertura, cx.valor_fechamento
+HAVING cx.valor_fechamento <> cx.valor_abertura + COALESCE(SUM(pg.valor), 0)
+ORDER BY ABS(cx.valor_fechamento - (cx.valor_abertura + COALESCE(SUM(pg.valor), 0))) DESC;
 
 -- AUD04 | Reservas sobrepostas na mesma mesa, ignorando canceladas (anomalia E) | Atende RDN02
 SELECT a.id_reserva AS reserva_a, b.id_reserva AS reserva_b, a.id_mesa,
@@ -97,3 +93,14 @@ JOIN insumo i ON i.id_insumo = m.id_insumo
 WHERE m.tipo_movimentacao IN ('PERDA', 'AJUSTE_INVENTARIO')
 GROUP BY i.id_insumo, i.nome, m.tipo_movimentacao
 ORDER BY quantidade_total;
+
+-- AUD11 | Caixa em que venda + serviço dos pedidos pagos difere da soma de recebimentos (a fita exige REGISTRADO = SOMA DE RECEBIMENTOS) - esperado: 0 linhas | Atende RF14
+SELECT cx.id_caixa, DATE(cx.data_hora_abertura) AS dia, x.registrado, r.soma_recebimentos
+FROM caixa cx
+JOIN (SELECT pp.id_caixa, SUM(t.valor_total) AS registrado
+      FROM (SELECT DISTINCT id_pedido, id_caixa FROM pagamento WHERE status_pagamento = 'CONFIRMADO') pp
+      JOIN v_total_pedido t ON t.id_pedido = pp.id_pedido
+      GROUP BY pp.id_caixa) x ON x.id_caixa = cx.id_caixa
+JOIN (SELECT id_caixa, SUM(valor) AS soma_recebimentos
+      FROM pagamento WHERE status_pagamento = 'CONFIRMADO' GROUP BY id_caixa) r ON r.id_caixa = cx.id_caixa
+WHERE ROUND(x.registrado, 2) <> ROUND(r.soma_recebimentos, 2);

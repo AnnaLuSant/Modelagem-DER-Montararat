@@ -81,29 +81,29 @@ ROLLBACK;
 START TRANSACTION;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'DELIVERY', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 5, 1, 49.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 4, 1, 41.00);
 ROLLBACK;
 
 -- TESTE T14 | esperado: OK | montagem especial é aceita no salão/balcão local (controle positivo do T13)
 START TRANSACTION;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'LOCAL', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 5, 1, 49.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 4, 1, 41.00);
 ROLLBACK;
 
 -- TESTE T15 | esperado: ERRO | RDN04 trg_item_pedido_bi (produto indisponível não pode ser vendido)
 START TRANSACTION;
-UPDATE produto SET disponivel = 0 WHERE id_produto = 14;
+UPDATE produto SET disponivel = 0 WHERE id_produto = 9;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'LOCAL', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 14, 1, 12.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 9, 1, 19.00);
 ROLLBACK;
 
 -- TESTE T16 | esperado: ERRO | RDN01 trg_pedido_bu (retirada/delivery só entra em produção após pagamento)
 START TRANSACTION;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'RETIRADA', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 2, 1, 28.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 1, 1, 35.00);
 UPDATE pedido SET status_pedido = 'EM_PRODUCAO', data_hora_inicio_preparo = '2026-10-13 20:02:00' WHERE id_pedido = 9001;
 ROLLBACK;
 
@@ -111,9 +111,9 @@ ROLLBACK;
 START TRANSACTION;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'RETIRADA', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 2, 1, 28.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 1, 1, 35.00);
 INSERT INTO pagamento (id_pagamento, id_pedido, id_forma_pagamento, id_caixa, valor, data_hora_pagamento, status_pagamento)
-VALUES (9001, 9001, 1, 1, 28.90, '2026-10-13 20:01:00', 'CONFIRMADO');
+VALUES (9001, 9001, 1, 1, 35.00, '2026-10-13 20:01:00', 'CONFIRMADO');
 UPDATE pedido SET status_pedido = 'EM_PRODUCAO', data_hora_inicio_preparo = '2026-10-13 20:02:00' WHERE id_pedido = 9001;
 ROLLBACK;
 
@@ -130,7 +130,7 @@ ROLLBACK;
 
 -- TESTE T20 | esperado: ERRO | pk_item_pedido (item repetido no mesmo pedido)
 START TRANSACTION;
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (1, 1, 2, 1, 28.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (1, 1, 2, 1, 35.00);
 ROLLBACK;
 
 -- TESTE T21 | esperado: ERRO | ck_ocorrencia_politica RDN10 (troca após consumo só por erro da casa)
@@ -200,18 +200,18 @@ ROLLBACK;
 
 -- TESTE T32 | esperado: ERRO | RDN03 trg_mesa_bu (mesa ocupada não vira livre sem limpeza)
 START TRANSACTION;
-UPDATE mesa SET status_mesa = 'LIVRE' WHERE id_mesa = 1;
+UPDATE mesa SET status_mesa = 'LIVRE' WHERE id_mesa = (SELECT MIN(id_mesa) FROM pedido WHERE id_mesa IS NOT NULL AND status_pedido NOT IN ('CONCLUIDO', 'CANCELADO'));
 ROLLBACK;
 
 -- TESTE T33 | esperado: OK | mesa ocupada -> em limpeza -> livre (controle positivo do T32)
 START TRANSACTION;
-UPDATE mesa SET status_mesa = 'EM_LIMPEZA' WHERE id_mesa = 1;
-UPDATE mesa SET status_mesa = 'LIVRE' WHERE id_mesa = 1;
+UPDATE mesa SET status_mesa = 'EM_LIMPEZA' WHERE id_mesa = (SELECT MIN(id_mesa) FROM pedido WHERE id_mesa IS NOT NULL AND status_pedido NOT IN ('CONCLUIDO', 'CANCELADO'));
+UPDATE mesa SET status_mesa = 'LIVRE' WHERE id_mesa = (SELECT MIN(id_mesa) FROM pedido WHERE id_mesa IS NOT NULL AND status_pedido NOT IN ('CONCLUIDO', 'CANCELADO'));
 ROLLBACK;
 
 -- TESTE T34 | esperado: ERRO | RDN03 trg_mesa_bu (limpar mesa que nem foi usada)
 START TRANSACTION;
-UPDATE mesa SET status_mesa = 'EM_LIMPEZA' WHERE id_mesa = 2;
+UPDATE mesa SET status_mesa = 'EM_LIMPEZA' WHERE id_mesa = (SELECT m.id_mesa FROM (SELECT MIN(id_mesa) AS id_mesa FROM mesa WHERE status_mesa = 'LIVRE') m);
 ROLLBACK;
 
 -- TESTE T35 | esperado: ERRO | RDN11 trg_pedido_bi (aniversário sem documento conferido)
@@ -230,7 +230,7 @@ ROLLBACK;
 START TRANSACTION;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, data_hora_inicio_preparo, data_hora_pronto, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'LOCAL', 'PRONTO', '2026-10-13 20:00:00', '2026-10-13 20:01:00', '2026-10-13 20:10:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 2, 1, 28.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 1, 1, 35.00);
 UPDATE pedido SET status_pedido = 'CONCLUIDO', data_hora_encerramento = '2026-10-13 20:30:00' WHERE id_pedido = 9001;
 ROLLBACK;
 
@@ -238,11 +238,37 @@ ROLLBACK;
 START TRANSACTION;
 INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
 VALUES (9001, 6, 'BALCAO', 'LOCAL', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
-INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 2, 9999, 28.90);
+INSERT INTO item_pedido (id_pedido, numero_item, id_produto, quantidade, preco_unitario) VALUES (9001, 1, 1, 9999, 35.00);
 ROLLBACK;
 
 -- TESTE T39 | esperado: ERRO | pk_favorito (favorito repetido do mesmo cliente)
 START TRANSACTION;
 INSERT INTO favorito (id_pessoa, id_produto, data_hora_salvo)
 SELECT id_pessoa, id_produto, '2026-10-13 20:00:00' FROM favorito WHERE id_pessoa = 10 AND id_produto = (SELECT MIN(id_produto) FROM favorito WHERE id_pessoa = 10);
+ROLLBACK;
+
+-- TESTE T40 | esperado: ERRO | RDN06 trg_item_combo_pedido_bi (combo com produto de montagem especial não vai por delivery)
+START TRANSACTION;
+INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
+VALUES (9001, 6, 'BALCAO', 'DELIVERY', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
+INSERT INTO item_combo_pedido (id_pedido, numero_item, id_combo, quantidade, preco_unitario) VALUES (9001, 1, 4, 1, 49.00);
+ROLLBACK;
+
+-- TESTE T41 | esperado: OK | combo sem montagem especial vai por delivery (controle positivo do T40)
+START TRANSACTION;
+INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, documento_conferido)
+VALUES (9001, 6, 'BALCAO', 'DELIVERY', 'ABERTO', '2026-10-13 20:00:00', 0, 0);
+INSERT INTO item_combo_pedido (id_pedido, numero_item, id_combo, quantidade, preco_unitario) VALUES (9001, 1, 1, 1, 43.00);
+ROLLBACK;
+
+-- TESTE T42 | esperado: ERRO | ck_pedido_servico (taxa de serviço de mesa em pedido sem mesa)
+START TRANSACTION;
+INSERT INTO pedido (id_pedido, id_funcionario, canal, modalidade, status_pedido, data_hora_pedido, valor_desconto, valor_servico, documento_conferido)
+VALUES (9001, 6, 'BALCAO', 'LOCAL', 'ABERTO', '2026-10-13 20:00:00', 0, 3.50, 0);
+ROLLBACK;
+
+-- TESTE T43 | esperado: ERRO | ck_caixa_fechamento (fechamento sem valor informado)
+START TRANSACTION;
+INSERT INTO caixa (id_caixa, terminal, id_funcionario_abertura, id_funcionario_fechamento, data_hora_abertura, data_hora_fechamento, valor_abertura, valor_fechamento)
+VALUES (9001, 'Mont Ararat Delivery', 6, 6, '2026-10-13 17:30:00', '2026-10-13 23:00:00', 150.00, NULL);
 ROLLBACK;

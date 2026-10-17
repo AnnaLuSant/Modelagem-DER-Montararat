@@ -124,3 +124,43 @@ FROM pagamento pg
 WHERE pg.status_pagamento = 'CONFIRMADO'
 GROUP BY YEARWEEK(pg.data_hora_pagamento, 1)
 ORDER BY ano_semana_iso;
+
+-- G14 | Pergunta: como foi cada turno de caixa, no formato da fita de fechamento (venda, serviço, recebimentos por grupo, tickets, cancelamentos de mesa, diferença)? | Atende RF14, RF05
+WITH rec AS (
+    SELECT pg.id_caixa,
+           SUM(CASE WHEN fp.grupo_fechamento = 'DINHEIRO' THEN pg.valor ELSE 0 END) AS dinheiro,
+           SUM(CASE WHEN fp.grupo_fechamento = 'CARTAO'   THEN pg.valor ELSE 0 END) AS cartao,
+           SUM(CASE WHEN fp.grupo_fechamento = 'OUTRAS'   THEN pg.valor ELSE 0 END) AS outras,
+           SUM(pg.valor) AS soma_recebimentos
+    FROM pagamento pg
+    JOIN forma_pagamento fp ON fp.id_forma_pagamento = pg.id_forma_pagamento
+    WHERE pg.status_pagamento = 'CONFIRMADO'
+    GROUP BY pg.id_caixa
+), vendas AS (
+    SELECT pp.id_caixa,
+           COUNT(*)                          AS tickets,
+           SUM(t.valor_total - t.valor_servico) AS venda,
+           SUM(t.valor_servico)              AS servico
+    FROM (SELECT DISTINCT id_pedido, id_caixa FROM pagamento WHERE status_pagamento = 'CONFIRMADO') pp
+    JOIN v_total_pedido t ON t.id_pedido = pp.id_pedido
+    GROUP BY pp.id_caixa
+), canc AS (
+    SELECT DATE(p.data_hora_pedido) AS dia, COUNT(*) AS qtde_canc_mesa, SUM(ip.quantidade * ip.preco_unitario) AS cancelamentos_mesa
+    FROM item_pedido ip
+    JOIN pedido p ON p.id_pedido = ip.id_pedido AND p.id_mesa IS NOT NULL
+    WHERE ip.cancelado = 1
+    GROUP BY DATE(p.data_hora_pedido)
+)
+SELECT cx.id_caixa AS turno, cx.terminal, DATE(cx.data_hora_abertura) AS dia, cx.valor_abertura,
+       v.venda, v.servico, r.soma_recebimentos AS registrado,
+       r.dinheiro, r.cartao, r.outras,
+       v.tickets, ROUND(r.soma_recebimentos / v.tickets, 2) AS valor_medio_ticket,
+       COALESCE(c.cancelamentos_mesa, 0) AS cancelamentos_mesa, COALESCE(c.qtde_canc_mesa, 0) AS qtde_canc_mesa,
+       cx.valor_fechamento,
+       cx.valor_fechamento - (cx.valor_abertura + r.soma_recebimentos) AS diferenca_caixa
+FROM caixa cx
+JOIN rec r     ON r.id_caixa = cx.id_caixa
+JOIN vendas v  ON v.id_caixa = cx.id_caixa
+LEFT JOIN canc c ON c.dia = DATE(cx.data_hora_abertura)
+ORDER BY cx.id_caixa;
+

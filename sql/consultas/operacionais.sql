@@ -27,7 +27,7 @@ SELECT pr.nome AS produto, pr.descricao, pr.peso_g, i.nome AS ingrediente, ft.qu
 FROM produto pr
 JOIN ficha_tecnica ft ON ft.id_produto = pr.id_produto
 JOIN insumo i         ON i.id_insumo = ft.id_insumo
-WHERE pr.nome = 'Dois Dilúvios'
+WHERE pr.nome = 'Dilúvio'
 ORDER BY i.nome;
 
 -- O04 | Favoritos de um cliente, do mais recente ao mais antigo | Atende RF18 (antigo RNF02)
