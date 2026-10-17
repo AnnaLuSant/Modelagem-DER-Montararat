@@ -89,11 +89,11 @@ Fontes em Mermaid (`.mmd`) na mesma pasta. O fluxograma original em Lucidchart (
 
 ```
 sql/
-  ddl/        01_create_database, 02_create_tables (34), 03_views (10), 04_triggers (8)
+  ddl/        01_create_database, 02_create_tables (34), 03_views (10), 04_triggers (9)
   dados/      01_massa_dados.sql  (gerada por ferramentas/gerar_massa.py; DADOS FICTÍCIOS)
   dml/        01_dml_demonstracao.sql  (INSERT/UPDATE/DELETE de um pedido, termina em ROLLBACK)
-  consultas/  operacionais.sql (O01-O07), gerenciais.sql (G01-G13)
-  auditoria/  auditoria.sql (AUD01-AUD10)
+  consultas/  operacionais.sql (O01-O07), gerenciais.sql (G01-G14)
+  auditoria/  auditoria.sql (AUD01-AUD11)
   testes/     02_testes_restricoes.sql (T01-T39, com controles positivos)
   ferramentas/ gerar_massa.py, gerar_docs.py, testar_tudo.py, catalogo.py, harness_sqlite.py
   executar_tudo.sql
@@ -103,12 +103,12 @@ sql/
 
 **Como regenerar documentos e verificar** (Python 3, só biblioteca padrão e openpyxl): `python3 sql/ferramentas/gerar_massa.py`, `gerar_docs.py` e `testar_tudo.py`. O resultado da última verificação está em [`evidencias/log_verificacao.txt`](evidencias/log_verificacao.txt).
 
-Destaques técnicos: estoque como livro de movimentações (saldo por view); baixa automática pela ficha técnica; totais derivados em views; regras de negócio em CHECK e triggers; massa com 221 pedidos em 3 semanas, reajuste de preço, cancelamentos, estornos, pagamentos divididos, lotes e perdas; **seis anomalias plantadas** que as consultas de auditoria encontram (A-F, descritas no cabeçalho da massa).
+Destaques técnicos: estoque como livro de movimentações (saldo por view); baixa automática pela ficha técnica; totais derivados em views; regras de negócio em CHECK e triggers; massa com 598 pedidos em 3 semanas, reajuste de preço, cancelamentos, estornos, pagamentos divididos, lotes e perdas; **seis anomalias plantadas** que as consultas de auditoria encontram (A-F, descritas no cabeçalho da massa).
 
 ## 9. HISTÓRICO DE ALTERAÇÕES E DECISÕES
 
 - [`docs/historico-alteracoes.md`](docs/historico-alteracoes.md): cada item da devolutiva (nota 5,25) → correção → evidência.
-- [`docs/decisoes-a-confirmar.md`](docs/decisoes-a-confirmar.md): 15 interpretações assumidas e dados fictícios.
+- [`docs/decisoes-a-confirmar.md`](docs/decisoes-a-confirmar.md): 23 interpretações assumidas e a separação entre dados reais (fotos) e simulados.
 - [`docs/limitacoes.md`](docs/limitacoes.md): o que não foi feito ou testado.
 
 ## 10. BI E IA
