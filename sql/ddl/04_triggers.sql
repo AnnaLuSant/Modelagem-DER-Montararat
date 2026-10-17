@@ -104,6 +104,23 @@ BEGIN
     END IF;
 END$$
 
+-- RDN06 também vale para combos: combo que contém produto de montagem especial não vai por delivery
+CREATE TRIGGER trg_item_combo_pedido_bi BEFORE INSERT ON item_combo_pedido
+FOR EACH ROW
+BEGIN
+    DECLARE v_modalidade VARCHAR(10);
+    SELECT modalidade INTO v_modalidade
+      FROM pedido WHERE id_pedido = NEW.id_pedido;
+    IF v_modalidade = 'DELIVERY' AND EXISTS (SELECT 1
+                                              FROM item_combo ic
+                                              JOIN produto pr ON pr.id_produto = ic.id_produto
+                                             WHERE ic.id_combo = NEW.id_combo
+                                               AND pr.montagem_especial = 1) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'RDN06 violada: combo com produto de montagem especial nao pode ser enviado por delivery';
+    END IF;
+END$$
+
 -- RDN10: troca, cancelamento e reembolso só com autorização de cargo que tenha permissão
 CREATE TRIGGER trg_ocorrencia_bi BEFORE INSERT ON ocorrencia
 FOR EACH ROW

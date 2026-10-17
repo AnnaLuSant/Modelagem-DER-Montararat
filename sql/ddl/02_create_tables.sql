@@ -189,12 +189,15 @@ CREATE TABLE insumo (
     marca VARCHAR(60) NOT NULL DEFAULT 'SEM MARCA' COMMENT 'Marca do insumo, como na lista de compras',
     id_categoria_insumo INT NOT NULL COMMENT 'Categoria do insumo',
     unidade_medida VARCHAR(2) NOT NULL COMMENT 'Unidade base de estoque e de consumo: G, ML ou UN',
+    unidade_compra VARCHAR(20) NOT NULL COMMENT 'Unidade em que o item é pedido ao fornecedor, como na lista de compras (fardo, caixa, pacote, balde...)',
+    fator_conversao DECIMAL(12,3) NOT NULL COMMENT 'Quantos da unidade de medida base há em uma unidade de compra (ex.: 1 fardo = 12 UN)',
     estoque_minimo DECIMAL(12,3) NOT NULL DEFAULT 0 COMMENT 'Saldo mínimo, na unidade de medida, que dispara a reposição',
     CONSTRAINT pk_insumo PRIMARY KEY (id_insumo),
     CONSTRAINT uq_insumo_nome_marca UNIQUE (nome, marca), -- impede cadastro duplicado do mesmo item e marca
     CONSTRAINT fk_insumo_categoria FOREIGN KEY (id_categoria_insumo) REFERENCES categoria_insumo (id_categoria_insumo), -- categoria padronizada
     CONSTRAINT ck_insumo_unidade CHECK (unidade_medida IN ('G', 'ML', 'UN')), -- unidades de consumo suportadas; compras em kg, L ou caixa são convertidas para a unidade base
-    CONSTRAINT ck_insumo_minimo CHECK (estoque_minimo >= 0) -- mínimo não negativo
+    CONSTRAINT ck_insumo_minimo CHECK (estoque_minimo >= 0), -- mínimo não negativo
+    CONSTRAINT ck_insumo_fator CHECK (fator_conversao > 0) -- conversão positiva
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Insumos (matéria-prima) controlados em estoque; a validade fica no lote';
 
 CREATE TABLE ficha_tecnica (
@@ -302,27 +305,29 @@ CREATE TABLE forma_pagamento (
     id_forma_pagamento INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador da forma de pagamento',
     nome VARCHAR(30) NOT NULL COMMENT 'PIX, Cartão de débito, Cartão de crédito, Dinheiro, Online iFood, Online 99food',
     taxa_percentual DECIMAL(5,2) NOT NULL DEFAULT 0 COMMENT 'Taxa percentual cobrada pela operadora ou plataforma sobre o valor recebido',
+    grupo_fechamento VARCHAR(8) NOT NULL COMMENT 'Linha da fita de fechamento em que a forma é somada: DINHEIRO, CARTAO ou OUTRAS',
     CONSTRAINT pk_forma_pagamento PRIMARY KEY (id_forma_pagamento),
     CONSTRAINT uq_forma_pagamento_nome UNIQUE (nome), -- forma de pagamento com grafia única (substitui o texto livre)
-    CONSTRAINT ck_forma_pagamento_taxa CHECK (taxa_percentual BETWEEN 0 AND 100) -- percentual válido
+    CONSTRAINT ck_forma_pagamento_taxa CHECK (taxa_percentual BETWEEN 0 AND 100), -- percentual válido
+    CONSTRAINT ck_forma_pagamento_grupo CHECK (grupo_fechamento IN ('DINHEIRO', 'CARTAO', 'OUTRAS')) -- as três linhas de recebimento da fita de fechamento
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Domínio das formas de pagamento e custo de recebimento';
 
 CREATE TABLE caixa (
     id_caixa INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador da sessão de caixa (turno)',
-    terminal VARCHAR(10) NOT NULL COMMENT 'Terminal do caixa: BALCAO ou DELIVERY',
+    terminal VARCHAR(30) NOT NULL COMMENT 'Nome do terminal/PDV que operou o turno (na fita: "Mont Ararat Delivery", que também registra vendas de mesa e balcão)',
     id_funcionario_abertura INT NOT NULL COMMENT 'Funcionário que abriu o caixa',
     id_funcionario_fechamento INT NULL COMMENT 'Funcionário que fechou o caixa',
     data_hora_abertura DATETIME NOT NULL COMMENT 'Momento da abertura',
     data_hora_fechamento DATETIME NULL COMMENT 'Momento do fechamento; NULL enquanto aberto',
     valor_abertura DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT 'Fundo de troco informado na abertura',
-    valor_contado_fechamento DECIMAL(10,2) NULL COMMENT 'Dinheiro contado no fechamento',
+    valor_fechamento DECIMAL(10,2) NULL COMMENT 'Valor de fechamento informado pelo operador (fita: "VALOR DE FECHAMENTO"); esperado = abertura + soma de recebimentos',
     CONSTRAINT pk_caixa PRIMARY KEY (id_caixa),
     CONSTRAINT fk_caixa_abertura FOREIGN KEY (id_funcionario_abertura) REFERENCES funcionario (id_funcionario), -- quem abriu
     CONSTRAINT fk_caixa_fechamento FOREIGN KEY (id_funcionario_fechamento) REFERENCES funcionario (id_funcionario), -- quem fechou
-    CONSTRAINT ck_caixa_terminal CHECK (terminal IN ('BALCAO', 'DELIVERY')), -- dois terminais, como na evidência de fechamento de caixa
+    CONSTRAINT ck_caixa_terminal CHECK (LENGTH(TRIM(terminal)) > 0), -- terminal identificado (o relatório de fechamento traz o nome do terminal)
     CONSTRAINT ck_caixa_valor_abertura CHECK (valor_abertura >= 0), -- fundo não negativo
-    CONSTRAINT ck_caixa_fechamento CHECK ((data_hora_fechamento IS NULL AND id_funcionario_fechamento IS NULL AND valor_contado_fechamento IS NULL) OR (data_hora_fechamento IS NOT NULL AND id_funcionario_fechamento IS NOT NULL AND valor_contado_fechamento IS NOT NULL AND data_hora_fechamento >= data_hora_abertura)) -- fechamento é tudo ou nada e não precede a abertura
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Turnos de caixa por terminal (fechamento de caixa)';
+    CONSTRAINT ck_caixa_fechamento CHECK ((data_hora_fechamento IS NULL AND id_funcionario_fechamento IS NULL AND valor_fechamento IS NULL) OR (data_hora_fechamento IS NOT NULL AND id_funcionario_fechamento IS NOT NULL AND valor_fechamento IS NOT NULL AND data_hora_fechamento >= data_hora_abertura)) -- fechamento é tudo ou nada e não precede a abertura
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Turnos de caixa por terminal (fechamento de turno, como na fita de fechamento)';
 
 CREATE TABLE entregador (
     id_entregador INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador do entregador (motoboy)',
@@ -349,6 +354,7 @@ CREATE TABLE pedido (
     data_hora_pronto DATETIME NULL COMMENT 'Momento em que o pedido ficou pronto',
     data_hora_encerramento DATETIME NULL COMMENT 'Momento em que o pedido foi concluído ou cancelado',
     valor_desconto DECIMAL(8,2) NOT NULL DEFAULT 0 COMMENT 'Desconto total em reais concedido ao pedido',
+    valor_servico DECIMAL(8,2) NOT NULL DEFAULT 0 COMMENT 'Taxa de serviço de mesa cobrada em reais (aparece como "Serviço de mesa" na fita de fechamento); 0 fora do salão',
     documento_conferido TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Indica que o documento pessoal foi conferido (promoção de aniversário)',
     CONSTRAINT pk_pedido PRIMARY KEY (id_pedido),
     CONSTRAINT fk_pedido_pessoa FOREIGN KEY (id_pessoa) REFERENCES pessoa (id_pessoa), -- cliente opcional: venda de balcão pode ser anônima
@@ -362,6 +368,7 @@ CREATE TABLE pedido (
     CONSTRAINT ck_pedido_canal_modalidade CHECK ((canal <> 'SALAO' OR modalidade = 'LOCAL') AND (canal NOT IN ('IFOOD', '99FOOD') OR modalidade <> 'LOCAL')), -- pedido de salão é local; pedido de aplicativo nunca é consumido no local
     CONSTRAINT ck_pedido_mesa_local CHECK (id_mesa IS NULL OR modalidade = 'LOCAL'), -- mesa só existe em consumo no local
     CONSTRAINT ck_pedido_desconto CHECK (valor_desconto >= 0), -- desconto não negativo
+    CONSTRAINT ck_pedido_servico CHECK (valor_servico >= 0 AND (valor_servico = 0 OR id_mesa IS NOT NULL)), -- taxa de serviço só existe em atendimento de mesa
     CONSTRAINT ck_pedido_desconto_autorizado CHECK (valor_desconto = 0 OR id_funcionario_autorizador IS NOT NULL), -- política: desconto exige autorização
     CONSTRAINT ck_pedido_documento CHECK (documento_conferido IN (0, 1)), -- domínio booleano
     CONSTRAINT ck_pedido_ordem_inicio CHECK (data_hora_inicio_preparo IS NULL OR data_hora_inicio_preparo >= data_hora_pedido), -- o preparo não começa antes do pedido
@@ -378,11 +385,13 @@ CREATE TABLE item_pedido (
     quantidade SMALLINT NOT NULL COMMENT 'Quantidade vendida',
     preco_unitario DECIMAL(8,2) NOT NULL COMMENT 'Preço unitário praticado na venda (cópia do preço vigente no momento; RDN14: o preço histórico não muda com reajustes)',
     observacao VARCHAR(200) NULL COMMENT 'Observação do cliente sobre o item (ex.: sem cebola)',
+    cancelado TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Indica item cancelado antes do preparo: continua registrado, mas não entra no total nem no consumo (fita: "Cancelamentos mesa")',
     CONSTRAINT pk_item_pedido PRIMARY KEY (id_pedido, numero_item), -- chave composta: o mesmo produto pode aparecer em linhas distintas
     CONSTRAINT fk_item_pedido_pedido FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido), -- item de um pedido existente
     CONSTRAINT fk_item_pedido_produto FOREIGN KEY (id_produto) REFERENCES produto (id_produto), -- produto existente
     CONSTRAINT ck_item_pedido_quantidade CHECK (quantidade > 0), -- RF03: quantidade positiva
-    CONSTRAINT ck_item_pedido_preco CHECK (preco_unitario > 0) -- preço positivo
+    CONSTRAINT ck_item_pedido_preco CHECK (preco_unitario > 0), -- preço positivo
+    CONSTRAINT ck_item_pedido_cancelado CHECK (cancelado IN (0, 1)) -- domínio booleano
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Itens avulsos do pedido (associativa N:N pedido x produto); o subtotal é calculado';
 
 CREATE TABLE item_combo_pedido (

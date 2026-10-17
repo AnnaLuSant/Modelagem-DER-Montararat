@@ -7,18 +7,19 @@
 SET NAMES utf8mb4;
 USE montararat_erp;
 
--- Total do pedido = itens + combos + taxa de entrega - desconto
+-- Total do pedido = itens (não cancelados) + combos + serviço de mesa + taxa de entrega - desconto
 CREATE VIEW v_total_pedido AS
 SELECT p.id_pedido,
        COALESCE(i.subtotal_itens, 0)  AS subtotal_itens,
        COALESCE(c.subtotal_combos, 0) AS subtotal_combos,
+       p.valor_servico,
        COALESCE(e.taxa_entrega, 0)    AS taxa_entrega,
        p.valor_desconto,
-       COALESCE(i.subtotal_itens, 0) + COALESCE(c.subtotal_combos, 0)
+       COALESCE(i.subtotal_itens, 0) + COALESCE(c.subtotal_combos, 0) + p.valor_servico
          + COALESCE(e.taxa_entrega, 0) - p.valor_desconto AS valor_total
 FROM pedido p
 LEFT JOIN (SELECT id_pedido, SUM(quantidade * preco_unitario) AS subtotal_itens
-           FROM item_pedido GROUP BY id_pedido) i ON i.id_pedido = p.id_pedido
+           FROM item_pedido WHERE cancelado = 0 GROUP BY id_pedido) i ON i.id_pedido = p.id_pedido
 LEFT JOIN (SELECT id_pedido, SUM(quantidade * preco_unitario) AS subtotal_combos
            FROM item_combo_pedido GROUP BY id_pedido) c ON c.id_pedido = p.id_pedido
 LEFT JOIN entrega e ON e.id_pedido = p.id_pedido;
@@ -38,13 +39,14 @@ LEFT JOIN (SELECT id_pedido, SUM(valor) AS valor_pago
            FROM pagamento WHERE status_pagamento = 'CONFIRMADO'
            GROUP BY id_pedido) pg ON pg.id_pedido = t.id_pedido;
 
--- Consumo teórico de insumos por pedido: item x ficha técnica (e combo x item_combo x ficha técnica)
+-- Consumo teórico de insumos por pedido: item não cancelado x ficha técnica (e combo x item_combo x ficha técnica)
 CREATE VIEW v_consumo_pedido_insumo AS
 SELECT x.id_pedido, x.id_insumo, SUM(x.quantidade) AS quantidade_consumida
 FROM (
     SELECT ip.id_pedido, ft.id_insumo, ip.quantidade * ft.quantidade AS quantidade
     FROM item_pedido ip
     JOIN ficha_tecnica ft ON ft.id_produto = ip.id_produto
+    WHERE ip.cancelado = 0
     UNION ALL
     SELECT icp.id_pedido, ft.id_insumo, icp.quantidade * ic.quantidade * ft.quantidade AS quantidade
     FROM item_combo_pedido icp
@@ -86,6 +88,7 @@ FROM (
     SELECT ip.id_pedido, pr.tempo_preparo_min
     FROM item_pedido ip
     JOIN produto pr ON pr.id_produto = ip.id_produto
+    WHERE ip.cancelado = 0
     UNION ALL
     SELECT icp.id_pedido, pr.tempo_preparo_min
     FROM item_combo_pedido icp
