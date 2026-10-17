@@ -1,0 +1,29 @@
+flowchart TD
+    A([Contagem ou saldo do sistema]) --> B{Saldo do insumo abaixo<br/>do estoque mínimo?}
+    B -- Não --> A
+    B -- Sim --> C[Gerente ou proprietário<br/>emite compra ao fornecedor<br/>RDN12]
+    C --> D[Compra PEDIDA<br/>itens e valores registrados]
+    D --> E{Fornecedor tem o item?}
+    E -- Não --> F[Compra CANCELADA<br/>nenhuma conta a pagar]
+    F --> C
+    E -- Sim --> G[Mercadoria chega<br/>recebimento com nota fiscal]
+    G --> H[Conferência por lote:<br/>quantidade, validade e item]
+    H --> I{Confere com a compra?}
+    I -- Sim --> J[Compra RECEBIDA]
+    I -- Entrega parcial --> K[Compra RECEBIDA_PARCIAL<br/>observação do recebimento]
+    I -- Item ou quantidade<br/>diferente --> L[Divergência registrada na observação<br/>aparece na auditoria AUD01]
+    J --> M
+    K --> M
+    L --> M[Lote criado e<br/>ENTRADA lançada no estoque<br/>RDN13]
+    M --> N[Conta a pagar gerada<br/>com vencimento pelo prazo]
+    N --> O{Venceu e não foi paga?}
+    O -- Sim --> P[Aparece em AUD05]
+    O -- Não --> Q[Pagamento ao fornecedor<br/>conta PAGA]
+    P --> Q
+    M --> R[Dia a dia: preparo dos pedidos<br/>gera CONSUMO pela ficha técnica]
+    R --> S{Perda ou divergência<br/>na contagem física?}
+    S -- Descarte, validade, erro --> T[Lançar PERDA]
+    S -- Contagem difere --> U[Lançar AJUSTE_INVENTARIO]
+    S -- Não --> A
+    T --> A
+    U --> A

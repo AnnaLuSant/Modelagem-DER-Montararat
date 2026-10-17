@@ -1,0 +1,18 @@
+flowchart TD
+    A([Início do expediente]) --> B[Funcionário abre o caixa do terminal<br/>BALCAO ou DELIVERY<br/>valor de abertura]
+    B --> C[Pedido pago:<br/>pagamento lançado no caixa aberto<br/>forma + valor + status]
+    C --> D{Pagamento dividido?}
+    D -- Sim --> E[Vários pagamentos<br/>somam o total do pedido]
+    D -- Não --> F[Um pagamento]
+    E --> G
+    F --> G{Pedido cancelado<br/>após pagamento?}
+    G -- Sim --> H[Pagamento ESTORNADO<br/>ocorrência REEMBOLSO autorizada]
+    G -- Não --> I[Pagamento CONFIRMADO]
+    H --> J
+    I --> J{Fim do expediente?}
+    J -- Não --> C
+    J -- Sim --> K[Funcionário conta o dinheiro<br/>e fecha o caixa]
+    K --> L{Contado = abertura + dinheiro<br/>confirmado?}
+    L -- Sim --> M([Caixa conferido])
+    L -- Não --> N[Diferença aparece em AUD03<br/>gerente investiga]
+    N --> M
