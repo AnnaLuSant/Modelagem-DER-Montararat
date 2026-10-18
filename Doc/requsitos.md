@@ -14,7 +14,7 @@ Os identificadores do grupo foram mantidos. `RNF02` e `RNF05` não existem mais 
 | **RF05** | Relatórios semanais | O sistema fornece, para cada semana ISO, a quantidade de pedidos pagos, o faturamento e o ticket médio, e o volume de vendas por horário (produtividade). | Mantido; 'produtividade' e 'volume' foram ligados a indicadores concretos.|
 | **RF06** | Dashboard gerencial | Os líderes/gerentes devem possuir um dashboard com a análise de desempenho da hamburgueria (faturamento, pratos mais vendidos, tempo médio de preparo); |
 | **RF07** | Disponibilidade de mesas ao longo do tempo | O funcionário vê quais mesas estão disponíveis em um instante: uma mesa está OCUPADA se tem pedido local não encerrado, EM_LIMPEZA enquanto a limpeza não termina, e DISPONIVEL caso contrário. O histórico de ocupação vem de pedido.id_mesa (início e encerramento) e de reserva (início e fim). | Reescrito: a devolutiva apontou que o modelo não mostrava a ocupação ao longo do tempo.|
-
+| **RF08** | Tempo estimado de preparo | O sistema exibe ao cliente a estimativa de preparo calculada a partir de duas informações: (1) o tempo base do pedido, que é o maior tempo_preparo_min entre os produtos do pedido (combos incluídos) e (2) o número de pedidos à frente na fila de produção, respeitando a prioridade (RDN09). A fórmula que combina as duas informações (ex.: capacidade de produção simultânea) é decisão do negócio (ver docs/decisoes-a-confirmar.md). | Reescrito: a devolutiva pedia explicitar as informações usadas.|
 
 
 
