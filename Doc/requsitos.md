@@ -27,6 +27,19 @@ Os identificadores do grupo foram mantidos. `RNF02` e `RNF05` não existem mais 
 | **RF17** | Promoções e descontos | O sistema aplica promoção de aniversário (exige documento conferido) e cupons; todo desconto é autorizado por funcionário com permissão e o valor fica registrado no pedido. | NOVO: formaliza a política organizacional de promoções do README. | 
 | **RF16** | Trocas, cancelamentos e reembolsos | Troca, cancelamento e reembolso são registrados como ocorrência do pedido, com causa, indicação de consumo pelo cliente, autorizador e, no reembolso, o valor devolvido. | NOVO: operacionaliza RDN05 e RDN10. | 
 | **RF17** | Fila de produção com prioridade | O sistema ordena a produção pelo par (prioridade, horário do pedido): prioridade 1 para modalidade LOCAL, prioridade 2 para RETIRADA e DELIVERY (RDN09). | NOVO: demonstra COMO a prioridade é aplicada à fila, como pedido na devolutiva. | 
+| **RF18** | Identificação automatizada de produtos mais vendidos| O sistema utiliza uma análise automatizada, com apoio de inteligência artificial, para identificar os produtos mais vendidos a partir do histórico de pedidos concluídos e atualizar periodicamente uma lista de produtos em destaque. | RECLASSIFICADO de RNF02: descrevia uma funcionalidade, não uma qualidade do sistema; ALTERADO: substitui o cadastro manual de favoritos pelos clientes por uma classificação automatizada baseada nos dados de vendas.|
+
+
+## Requisitos não funcionais (RNF)
+
+| ID | Título | Descrição verificável | Origem / o que mudou | 
+|---|---|---|---|
+| **RNF01** | Backup diário | O backup completo do banco é realizado uma vez por dia  e a restauração é testada mensalmente. | Reescrito: 'dados do cliente' ampliado para o banco todo; acrescentado teste de restauração. | 
+| **RNF03** | Tempo de resposta do lançamento de pedidos | O lançamento de um pedido e o envio à cozinha respondem em até 2 segundos em pico (sexta e sábado, 19h-22h). | Mantido. |
+| **RNF04** | Emissão do comprovante |O sistema deverá gerar e disponibilizar o comprovante do pedido em até 5 segundos após a confirmação da quitação integral, considerando a soma dos pagamentos confirmados vinculados ao pedido.| Mantido. | 
+| **RNF06** | Integridade dos dados garantida pelo SGBD | Domínios, obrigatoriedade, unicidade, referências e as regras RDN01-RDN15 são garantidas pelo próprio banco (PK, FK, UNIQUE e CHECK), não apenas pela aplicação. | NOVO: critério de qualidade do modelo lógico. |
+| **RNF09** | Precisão monetária | Valores monetários usam DECIMAL (nunca ponto flutuante) e totais não são armazenados: são derivados por view, evitando divergência. | | 
+
 
 
 
