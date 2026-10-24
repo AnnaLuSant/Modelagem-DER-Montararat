@@ -40,6 +40,24 @@ Os identificadores do grupo foram mantidos. `RNF02` e `RNF05` não existem mais 
 | **RNF06** | Integridade dos dados garantida pelo SGBD | Domínios, obrigatoriedade, unicidade, referências e as regras RDN01-RDN15 são garantidas pelo próprio banco (PK, FK, UNIQUE e CHECK), não apenas pela aplicação. | NOVO: critério de qualidade do modelo lógico. |
 | **RNF09** | Precisão monetária | Valores monetários usam DECIMAL (nunca ponto flutuante) e totais não são armazenados: são derivados por view, evitando divergência. | | 
 
+## Regras de negócio (RDN)
+
+| ID | Título | Descrição verificável | Origem / o que mudou |
+|---|---|---|---|
+| **RDN01** | Pagamento antes da produção (retirada e delivery) | Pedido RETIRADA ou DELIVERY só entra em produção com pagamento confirmado integral (pedidos iFood/99food são pré-pagos online). Pedido LOCAL é pago depois do consumo. | Reescrito: 'salvo consumo no estabelecimento' passou a ser a modalidade LOCAL. |
+| **RDN02** | Reservas presenciais sem sobreposição | A reserva é feita presencialmente por um funcionário (registrado na reserva), conforme disponibilidade: uma mesa não pode ter duas reservas não canceladas com períodos sobrepostos. | Reescrito: 'de acordo com a disponibilidade' virou a regra de não sobreposição. |
+| **RDN03** | Limpeza da mesa após o uso | A mesa só entra em limpeza depois de ocupada e só volta a ficar livre depois da limpeza. JUSTIFICATIVA de estar no sistema: o estado EM_LIMPEZA altera a disponibilidade mostrada ao cliente (RF07), portanto precisa ser registrado; o ato de limpar é procedimento interno e não é controlado pelo sistema. |
+| **RDN04** | Venda condicionada à disponibilidade e ao estoque | Um produto só é vendido se estiver marcado como disponível e se o saldo de estoque permitir produzir a quantidade pedida (checagem prévia do estoque). | Reescrito: inclui a checagem de estoque exigida na política 'Venda do Produto'. | 
+| **RDN05** | Troca ou cancelamento por insatisfação | Em caso de insatisfação ou erro do pedido a troca, o cancelamento e o reembolso exigem consumo parcial/nulo do produto e a autorização de funcionário com autorização de gerente. O pagamento extornado corresponde apenas ao cancelamento do pedido. | Reescrito: elimina a contradição entre RDN05 e a política organizacional apontada na devolutiva. |
+| **RDN06** | Montagem especial não vai por delivery | Produto marcado como montagem_especial (na massa: Dilúvio, assumido; decisão D13) não pode ser incluído em pedido DELIVERY, nem diretamente nem dentro de um combo. | Mantido; tornado verificável por atributo do produto. |
+| **RDN07** | Embalagem individual identificada | Cada produto é embalado individualmente e identificado. No sistema, a embalagem é um insumo da ficha técnica de cada produto (consumo e estoque controlados); a identificação física da embalagem é procedimento interno. |
+| **RDN08** | Retirada do delivery na porta | O entregador retira o pedido delivery na porta do estabelecimento. É procedimento operacional, não gera dado próprio; o sistema registra apenas a saída (entrega.data_hora_saida). | Justificada como procedimento fora do esquema. | 
+| **RDN09** | Prioridade do consumo no local | Pedidos LOCAL têm prioridade 1 e os demais prioridade 2; a fila de produção é ordenada por (prioridade, horário do pedido). A prioridade não interrompe um preparo já iniciado. | NOVO: transforma a política 'prioridade dos pedidos' em regra aplicável. | 
+| **RDN10** | Descontos autorizados | Todo desconto tem autorizador com permissão. A promoção de aniversário só vale com documento conferido. | NOVO: formaliza a política de promoções e autorizações do README. |
+| **RDN11** | Compras apenas por gerente ou proprietário | Somente funcionário de cargo com permissão de compra (gerente e proprietário) registra compra de insumos. | 
+| **RDN12** | Estoque por movimentações, sem saldo negativo | O estoque é um livro de movimentações (entrada positiva, saída negativa); o consumo é lançado quando o preparo inicia, calculado por (itens x ficha técnica) e (combos x composição x ficha técnica); nenhuma saída pode deixar o saldo negativo. | NOVO: responde ao pedido de demonstrar o cálculo da baixa de estoque. | 
+| **RDN13** | Conclusão do pedido exige pagamento integral | Um pedido só vai a CONCLUIDO com pagamentos CONFIRMADOS somando o valor total; pedido CANCELADO não é venda e seus pagamentos online são ESTORNADOS. | NOVO: distingue entregue, cancelado, pago e concluído. |
+
 
 
 
