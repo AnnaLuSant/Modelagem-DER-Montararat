@@ -86,11 +86,15 @@ O D.E.R. abaixo foi atualizado para a versão definitiva do projeto. Durante o d
 
 caso deseje baixar o pdf do D.E.R, ele esta em [DER - DEFINITIVO.pdf](DER/DER%20-%20DEFINITIVO%20.pdf)
 
-## 8. Normalização
+## 8. Dicionário de Dados
+
+Pode ser acessado na pasta [docs/dicionario-dados/dicionario.md](docs/dicionario-dados/dicionario.md)
+
+## 9. Normalização
 
 A normalização do banco foi feita seguindo o D.E.R. definitivo apresentado na seção anterior. Os arquivos estão reunidos na pasta [`Normalizacao/`](Normalizacao/), em dois formatos:
 
 - **Documento em .md** ([normalizacao.md](Normalizacao/normalizacao.md)): explica a da 1FN, 2FN e 3FN e suas aplicações, as dependências funcionais relevantes e a justificativa de cada decomposição realizada.
 - **Documento em PDF** ([Normalizacao.pdf](Normalizacao/Normalizacao-MontArarat.pdf)): versão para leitura e entrega, com as tabelas já normalizadas.
 
-## 9. MODELAGEM
+## 10. MODELAGEM
