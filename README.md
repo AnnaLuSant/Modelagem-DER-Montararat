@@ -66,19 +66,23 @@ A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragil
 | **Controle de estoque manual/informal** | Divergência de saldos, perdas e erros no levantamento de quantidades. |
 
 ---
-## 5. REQUISITOS, REGRAS DE NEGÓCIO E POLÍTICAS (revisados)
+## 5. Requisitos, regras de negócio e políticas
 
-Catálogo completo, com origem de cada mudança e forma de verificação: [`docs/requisitos/requisitos.md`](docs/requisitos/requisitos.md) (e `.xlsx`).
-Resumo: **19 RF** (RF01-RF11 mantidos; RF12-RF17 novos para compras, financeiro, caixa, promoções, ocorrências e fila; RF18/RF19 vêm do antigo RNF02/RNF05, reclassificados), **6 RNF** (RNF01, RNF03, RNF04, RNF06 mantidos; RNF07 e RNF08 novos) e **15 RDN** (RDN01-RDN08 mantidos e tornados verificáveis; RDN09-RDN15 novos). A política organizacional da seção 8 original (cozinha, compras, aniversário, cancelamento, venda, prioridade) está formalizada nas regras RDN05, RDN09-RDN13.
-Rastreabilidade requisito → tabela/view/trigger/consulta/teste: [`docs/requisitos/rastreabilidade.md`]().
+O catálogo completo, com a descrição verificável de cada item e a origem de cada mudança, está em [docs/requisitos/requisitos.md](docs/requisitos/requisitos.md).
+
+A política organizacional original (cozinha, compras, aniversário, cancelamento, venda e prioridade) está formalizada nas regras RDN05, RDN09, RDN10, RDN11 e RDN12.
+
+[Ler o catálogo completo de requisitos](docs/requsitos/requsitos.md)
 
 ## 6. FLUXOGRAMAS (corrigidos)
 
+## 6. Fluxogramas
+
 | Processo | Diagrama |
 |---|---|
-| Pedido, pagamento, produção, entrega, encerramento, trocas | [`fluxograma-pedido.png`]() |
-| Compras, recebimento, conferência, reposição, perdas, inventário | [`fluxograma-compras-estoque.png`]() |
-| Caixa e conferência financeira | [`fluxograma-caixa.png`]() |
+| Fluxo geral: pedido, pagamento, produção, entrega, encerramento e trocas | [`fluxograma-geral.png`](imagens//fluxograma-geral.png) |
+| Cozinha: fila de produção, preparo e prioridade dos pedidos | [`fluxograma-cozinha.png`](FLUXOGRAMAS/fluxograma-cozinha.png) |
+| Estoque: compras, recebimento, conferência, reposição, perdas e inventário | [`fluxograma-estoque.png`](FLUXOGRAMAS/fluxograma-estoque.png) |
 
 O fluxograma original em Lucidchart (`imagens/fluxograma.png`) permanece como histórico.
 
@@ -86,9 +90,9 @@ O fluxograma original em Lucidchart (`imagens/fluxograma.png`) permanece como hi
 
 O D.E.R. abaixo foi atualizado para a versão definitiva do projeto. Durante o desenvolvimento, o modelo passou por revisões e correções de entidades, atributos e relacionamentos, e a normalização (1FN, 2FN e 3FN), o DDL e a massa de dados foram ajustados para refletir exatamente este diagrama.
 
-![DER Definitivo](Modelagem-DER-Montararat/DER/DER%20-%20DEFINITIVO.png)
+![DER Definitivo](DER/DER%20-%20DEFINITIVO.png)
 
-caso deseje baixar o pdf do D.E.R, ele esta em [DER - DEFINITIVO.pdf](DER/DER%20-%20DEFINITIVO%20.pdf)
+caso deseje baixar o pdf do D.E.R, ele esta em [DER - DEFINITIVO.pdf](DER/DER%20-%20DEFINITIVO.pdf)
 
 ## 8. Dicionário de Dados
 
