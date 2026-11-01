@@ -68,21 +68,19 @@ A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragil
 ---
 ## 5. Requisitos, regras de negócio e políticas
 
-O catálogo completo, com a descrição verificável de cada item e a origem de cada mudança, está em [docs/requisitos/requisitos.md](docs/requisitos/requisitos.md).
+O catálogo completo, com a descrição verificável de cada item e a origem de cada mudança, está em [docs/requsitos/requsitos.md](docs/requsitos/requsitos.md).
 
 A política organizacional original (cozinha, compras, aniversário, cancelamento, venda e prioridade) está formalizada nas regras RDN05, RDN09, RDN10, RDN11 e RDN12.
 
 [Ler o catálogo completo de requisitos](docs/requsitos/requsitos.md)
 
-## 6. FLUXOGRAMAS (corrigidos)
-
 ## 6. Fluxogramas
 
 | Processo | Diagrama |
 |---|---|
-| Fluxo geral: pedido, pagamento, produção, entrega, encerramento e trocas | [`fluxograma-geral.png`](imagens//fluxograma-geral.png) |
-| Cozinha: fila de produção, preparo e prioridade dos pedidos | [`fluxograma-cozinha.png`](FLUXOGRAMAS/fluxograma-cozinha.png) |
-| Estoque: compras, recebimento, conferência, reposição, perdas e inventário | [`fluxograma-estoque.png`](FLUXOGRAMAS/fluxograma-estoque.png) |
+| Fluxo geral: pedido, pagamento, produção, entrega, encerramento e trocas | [fluxograma-geral.png](FLUXOGRAMAS/FLUXOGRAMA%20-%20MONTARARAT.png) |
+| Cozinha: fila de produção, preparo e prioridade dos pedidos | [fluxograma-cozinha.png](FLUXOGRAMAS/FLUXOGRAMA%20%28COZINHA%29%20-%20MONTARARAT.png) |
+| Estoque: compras, recebimento, conferência, reposição, perdas e inventário | [fluxograma-estoque.png](FLUXOGRAMAS/FLUXOGRAMA%20%28ESTOQUE%29%20-%20MONTARARAT.png) |
 
 O fluxograma original em Lucidchart (`imagens/fluxograma.png`) permanece como histórico.
 
@@ -92,7 +90,7 @@ O D.E.R. abaixo foi atualizado para a versão definitiva do projeto. Durante o d
 
 ![DER Definitivo](DER/DER%20-%20DEFINITIVO.png)
 
-caso deseje baixar o pdf do D.E.R, ele esta em [DER - DEFINITIVO.pdf](DER/DER%20-%20DEFINITIVO.pdf)
+Caso deseje baixar o PDF do D.E.R, ele está em [DER - DEFINITIVO.pdf](DER/DER%20-%20DEFINITIVO.pdf).
 
 ## 8. Dicionário de Dados
 
