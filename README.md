@@ -45,15 +45,19 @@ Em geral, o processo operacional padrão que engloba o funcionamento da empresa 
 * **Entrega e Consumo:** No fluxo DELIVERY, o pedido já embalado é repassado ao entregador (motoboy) para realização da entrega no endereço solicitado pelo cliente. No fluxo PRESENCIAL, o pedido é entregue na mesa do cliente, servido para ser consumido no local.
 ![Evidência2](imagens/cardapio.jpeg)
 ![Evidência2.1](imagens/cardapio2.jpeg)
+
 *(Evidência 2) - Foto do cardápio da hamburgueria, com imagens dos hambúrgueres, bebidas, descrições e preços.*
+---
 ![Evidência3](imagens/diluviu.jpeg)
+
 *(Evidência 3) – Dois lanches Dilúvio, especial da casa, servidos em uma mesa, acompanhados de uma porção de coxinhas crocantes.*
 ---
 ## 4. PROBLEMAS E NECESSIDADES
 A partir do estudo de caso do Mont Ararat, identificou-se que a principal fragilidade operacional se encontra na gestão e controle de estoque/suprimentos, que atualmente carece de organização e estruturação em Banco de Dados.
 ![Evidência 4](imagens/lista_compra.jpeg)
-*(Evidência 4) – Lista de compras, contendo o estoque, onde os produtos são separados por categorias, marcas e necessidades.*
 
+*(Evidência 4) – Lista de compras, contendo o estoque, onde os produtos são separados por categorias, marcas e necessidades.*
+---
 | Problema Identificado | Consequência para o Negócio |
 | :--- | :--- |
 | **Itens sem organização em ordem alfabética** | Lentidão e dificuldade na localização rápida de insumos. |
