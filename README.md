@@ -94,13 +94,17 @@ Caso deseje baixar o PDF do D.E.R, ele está em [DER - DEFINITIVO.pdf](DER/DER%2
 
 ## 8. Dicionário de Dados
 
-Pode ser acessado na pasta [docs/dicionario-dados/dicionario.md](docs/dicionario-dados/dicionario.md)
+O dicionário descreve as tabelas e seus atributos, incluindo tipos de dados, chaves, restrições, regras de negócio e justificativas. Consulte o [dicionário de dados](docs/dicionario-dados/dicionario.md).
 
 ## 9. Normalização
 
 A normalização do banco foi feita seguindo o D.E.R. definitivo apresentado na seção anterior. Os arquivos estão reunidos na pasta [`Normalizacao/`](Normalizacao/), em dois formatos:
 
-- **Documento em .md** ([normalizacao.md](Normalizacao/normalizacao.md)): explica a da 1FN, 2FN e 3FN e suas aplicações, as dependências funcionais relevantes e a justificativa de cada decomposição realizada.
-- **Documento em PDF** ([Normalizacao.pdf](Normalizacao/Normalizacao-MontArarat.pdf)): versão para leitura e entrega, com as tabelas já normalizadas.
+- **Documento em .md** ([normalizacao.md](Normalizacao/normalizacao.md)): explica a 1FN, 2FN e 3FN, suas aplicações, as dependências funcionais relevantes e a justificativa de cada decomposição realizada.
+- **Documento em PDF** ([Normalizacao-MontArarat.pdf](Normalizacao/Normalizacao-MontArarat.pdf)): versão para leitura e entrega, com as tabelas já normalizadas.
 
 ## 10. MODELAGEM
+
+Os scripts SQL do projeto estão na pasta [`sql/`](sql/). Eles incluem a criação da estrutura do banco (`DDL.sql`), a inserção de dados de exemplo (`DML.sql`), uma trigger com regra de autorização (`TRIGGERS.sql`), consultas às tabelas e views (`consultas.sql`) e exemplos de operações inválidas para testar as restrições (`massa-de-dados-errada.sql`).
+
+As consultas estão em [`sql/consultas.sql`](sql/consultas.sql). As imagens com os resultados dessas consultas estão na pasta [`imagens/CONSULTAS/`](imagens/CONSULTAS/).
