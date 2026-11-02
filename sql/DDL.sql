@@ -1,10 +1,12 @@
-CREATE DATABASE montararat;
-USE montararat;
+CREATE DATABASE montararat_banco;
+USE montararat_banco;
 
 -- CADASTROS IMPORTANTES
+
 CREATE TABLE Pessoa (
   cpf CHAR(11) PRIMARY KEY,
-  nome VARCHAR(120) NOT NULL
+  nome VARCHAR(120) NOT NULL,
+  CHECK (cpf REGEXP '^[0-9]{11}$')
 ) ENGINE=InnoDB;
 
 CREATE TABLE Cargo (
@@ -15,10 +17,11 @@ CREATE TABLE Cargo (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Funcionario (
-  matricula_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+  id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
   cpf CHAR(11) NOT NULL,
   id_cargo INT NOT NULL,
   data_admissao DATE NOT NULL,
+  status_funcionario ENUM ('ATIVO', 'INATIVO') NOT NULL DEFAULT 'ATIVO',
   FOREIGN KEY (cpf) REFERENCES Pessoa(cpf),
   FOREIGN KEY (id_cargo) REFERENCES Cargo(id_cargo)
 ) ENGINE=InnoDB;
@@ -26,9 +29,9 @@ CREATE TABLE Funcionario (
 CREATE TABLE Fornecedor (
   id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
   cnpj CHAR(14) NOT NULL UNIQUE,
-  nome VARCHAR(100) NOT NULL
+  nome VARCHAR(100) NOT NULL,
+  CHECK (cnpj REGEXP '^[0-9]{14}$')
 ) ENGINE=InnoDB;
-
 
 CREATE TABLE Endereco (
   id_endereco INT AUTO_INCREMENT PRIMARY KEY,
@@ -70,13 +73,12 @@ CREATE TABLE Email (
 
 CREATE TABLE FormaPagamento (
   id_forma_pagamento INT AUTO_INCREMENT PRIMARY KEY,
-  tipo ENUM('PIX','CARTAO DE CREDITO','CARTAO DE DEBITO','DINHEIRO')
+  tipo ENUM('PIX','CARTAO DE CREDITO','CARTAO DE DEBITO','DINHEIRO') NOT NULL 
 ) ENGINE=InnoDB;
 
 CREATE TABLE Categoria (
   id_categoria INT AUTO_INCREMENT PRIMARY KEY,
-  descricao VARCHAR(100) NOT NULL,
-  tipo ENUM('BEBIDA','LANCHE','ACOMPANHAMENTO')
+  nome ENUM('BEBIDA','LANCHE','ACOMPANHAMENTO','PORCAO','SOBREMESA') NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE Produto (
@@ -86,10 +88,15 @@ CREATE TABLE Produto (
   preco_base DECIMAL(6,2) NOT NULL,
   descricao TEXT NULL,
   montagem_especial BOOLEAN NOT NULL DEFAULT FALSE,
+  tempo_preparo_min SMALLINT UNSIGNED NULL,
+  disponivel BOOLEAN NOT NULL DEFAULT TRUE,
   FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria),
-  CONSTRAINT chk_produto_preco CHECK (preco_base >= 0)
+  CONSTRAINT chk_produto_preco CHECK (preco_base >= 0),
+  CONSTRAINT chk_produto_tempo
+  CHECK (
+    tempo_preparo_min IS NULL
+    OR tempo_preparo_min > 0)
 ) ENGINE=InnoDB;
-
 
 CREATE TABLE Combo (
   id_combo INT AUTO_INCREMENT PRIMARY KEY,
@@ -112,15 +119,15 @@ CREATE TABLE ItemCombo (
 CREATE TABLE Insumo (
   id_insumo INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
-  unidade_medida VARCHAR(20) NOT NULL,
-  quantidade_minima DECIMAL(11,3) NOT NULL DEFAULT 0,
+  unidade_medida ENUM('L','KG','UNI','ML','PCT','CX','G'),
+  quantidade_minima DECIMAL(11,2) NOT NULL DEFAULT 0,
   CONSTRAINT chk_insumo_minima CHECK (quantidade_minima >= 0)
 ) ENGINE=InnoDB;
 
 CREATE TABLE FichaTecnica (
   id_produto INT NOT NULL,
   id_insumo INT NOT NULL,
-  quantidade_necessaria DECIMAL(11,3) NOT NULL,
+  quantidade_necessaria DECIMAL(11,2) NOT NULL,
   PRIMARY KEY (id_produto, id_insumo),
   FOREIGN KEY (id_produto) REFERENCES Produto(id_produto),
   FOREIGN KEY (id_insumo) REFERENCES Insumo(id_insumo),
@@ -132,18 +139,18 @@ CREATE TABLE FichaTecnica (
 CREATE TABLE Compra (
   id_compra INT AUTO_INCREMENT PRIMARY KEY,
   id_fornecedor INT NOT NULL,
-  matricula_funcionario INT NOT NULL,
+  id_funcionario INT NOT NULL,
   data_compra DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   status_compra ENUM('PENDENTE','SOLICITADO','EM TRANSPORTE','RECEBIDA','CANCELADA') NOT NULL, -- ENUM? 
   FOREIGN KEY (id_fornecedor) REFERENCES Fornecedor(id_fornecedor),
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario)
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario)
 ) ENGINE=InnoDB;
 
 CREATE TABLE ItemCompra (
   id_item_compra INT AUTO_INCREMENT PRIMARY KEY,
   id_compra INT NOT NULL,
   id_insumo INT NOT NULL,
-  quantidade_solicitada DECIMAL(11,3) NOT NULL,
+  quantidade_solicitada DECIMAL(11,2) NOT NULL,
   preco_unitario DECIMAL(6,2) NOT NULL,
   FOREIGN KEY (id_compra) REFERENCES Compra(id_compra),
   FOREIGN KEY (id_insumo) REFERENCES Insumo(id_insumo),
@@ -156,9 +163,9 @@ CREATE TABLE Lote (
   id_insumo INT NOT NULL,
   id_item_compra INT NULL,
   numero_lote VARCHAR(80) NOT NULL,
-  data_validade DATE NULL,
+  data_validade DATE NOT NULL,
   data_recebimento DATETIME NULL,
-  quantidade_inicial DECIMAL(14,3) NULL,
+  quantidade_inicial DECIMAL(11,2) NULL,
   status_lote ENUM('DISPONIVEL','ESGOTADO','VENCIDO','DESCARTADO') NOT NULL DEFAULT 'DISPONIVEL',
   FOREIGN KEY (id_insumo) REFERENCES Insumo(id_insumo),
   FOREIGN KEY (id_item_compra) REFERENCES ItemCompra(id_item_compra),
@@ -169,23 +176,23 @@ CREATE TABLE Mesa (
   id_mesa INT AUTO_INCREMENT PRIMARY KEY,
   capacidade SMALLINT UNSIGNED NOT NULL,
   numero VARCHAR(15) NOT NULL UNIQUE,
-  status_mesa ENUM ('OCUPADO','LIVRE','LIMPREZA'),
+  status_mesa ENUM ('OCUPADO','LIVRE','EM LIMPEZA'),
   CONSTRAINT chk_mesa_capacidade CHECK (capacidade > 0)
 ) ENGINE=InnoDB;
 
-CREATE TABLE Reserva (
+CREATE TABLE Reserva ( -- DROP
   id_reserva INT AUTO_INCREMENT PRIMARY KEY,
   cpf CHAR(11) NOT NULL,
-  matricula_funcionario INT NULL,
+  id_funcionario INT NOT NULL,
   quantidade_pessoas SMALLINT UNSIGNED NOT NULL,
   data_hora_inicio DATETIME NOT NULL,
   status ENUM ('PENDENTE','CANCELADA','CONCLUIDA') NOT NULL,
   FOREIGN KEY (cpf) REFERENCES Pessoa(cpf),
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario),
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario),
   CONSTRAINT chk_reserva_pessoas CHECK (quantidade_pessoas > 0)
 ) ENGINE=InnoDB;
 
-CREATE TABLE ReservaMesa (
+CREATE TABLE ReservaMesa ( -- DROP
   id_reserva INT NOT NULL,
   id_mesa INT NOT NULL,
   PRIMARY KEY (id_reserva, id_mesa),
@@ -196,12 +203,12 @@ CREATE TABLE ReservaMesa (
 
 CREATE TABLE Atendimento (
   id_atendimento INT AUTO_INCREMENT PRIMARY KEY,
-  matricula_funcionario INT NOT NULL,
+  id_funcionario INT NOT NULL,
   id_reserva INT NULL,
   hora_chegada DATETIME NOT NULL,
   hora_saida DATETIME NULL,
   qtd_pessoas SMALLINT UNSIGNED NOT NULL,
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario),
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario),
   FOREIGN KEY (id_reserva) REFERENCES Reserva(id_reserva),
   CONSTRAINT chk_atendimento_qtd CHECK (qtd_pessoas > 0),
   CONSTRAINT chk_atendimento_horarios CHECK (hora_saida IS NULL OR hora_saida >= hora_chegada)
@@ -217,20 +224,20 @@ CREATE TABLE AtendimentoMesa (
 
 CREATE TABLE Caixa (
   id_caixa INT AUTO_INCREMENT PRIMARY KEY,
-  matricula_funcionario_abertura INT NOT NULL,
-  matricula_funcionario_fechamento INT NULL,
+  id_funcionario_abertura INT NOT NULL,
+  id_funcionario_fechamento INT NULL,
   data_abertura DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   data_fechamento DATETIME NULL,
   tipo_caixa ENUM ('LOCAL','DELIVERY') NOT NULL,
   valor_abertura DECIMAL(12,2) NOT NULL,
   valor_fechamento DECIMAL(12,2) NULL,
   status_caixa ENUM('ABERTO','FECHADO')NOT NULL DEFAULT 'ABERTO',
-  FOREIGN KEY (matricula_funcionario_abertura) REFERENCES Funcionario(matricula_funcionario),
-  FOREIGN KEY (matricula_funcionario_fechamento) REFERENCES Funcionario(matricula_funcionario),
+  FOREIGN KEY (id_funcionario_abertura) REFERENCES Funcionario(id_funcionario),
+  FOREIGN KEY (id_funcionario_fechamento) REFERENCES Funcionario(id_funcionario),
   CONSTRAINT chk_caixa_valores CHECK (valor_abertura >= 0 AND (valor_fechamento IS NULL OR valor_fechamento >= 0)),
   CONSTRAINT chk_caixa_fechamento CHECK (
 	status_caixa <> 'FECHADO' OR
-    (matricula_funcionario_fechamento IS NOT NULL AND data_fechamento IS NOT NULL AND valor_fechamento IS NOT NULL)
+    (id_funcionario_fechamento IS NOT NULL AND data_fechamento IS NOT NULL AND valor_fechamento IS NOT NULL)
  ),
 	CONSTRAINT chk_caixa_datas CHECK (data_fechamento IS NULL OR data_fechamento >= data_abertura)
 ) ENGINE=InnoDB;
@@ -239,17 +246,17 @@ CREATE TABLE Pedido (
   id_pedido INT AUTO_INCREMENT PRIMARY KEY,
   cpf CHAR(11) NOT NULL,
   id_mesa INT NULL,
-  matricula_funcionario INT NULL,
+  id_funcionario INT NULL,
   id_atendimento INT NULL,
   data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  status_pedido ENUM('PENDENTE','EM PRODUCAO','PRONTO','ENTREGUE','CANCELADO') NOT NULL,
+  status_pedido ENUM('PENDENTE','EM PRODUCAO','CONCLUIDO','ENTREGUE','CANCELADO') NOT NULL,
   modalidade ENUM('LOCAL','RETIRADA','ENTREGA') NOT NULL,
-  canal_origem ENUM('IFOOD','99FOOD') NULL,
+  canal_origem ENUM('SALAO','IFOOD','99FOOD') NULL,
   data_hora_inicio_producao DATETIME NULL,
   data_hora_fim_producao DATETIME NULL,
   FOREIGN KEY (cpf) REFERENCES Pessoa(cpf),
   FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa),
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario),
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario),
   FOREIGN KEY (id_atendimento) REFERENCES Atendimento(id_atendimento),
   CONSTRAINT chk_pedido_producao CHECK (
     data_hora_fim_producao IS NULL OR
@@ -263,6 +270,7 @@ CREATE TABLE ItemPedido (
   quantidade INT NOT NULL,
   preco_unitario DECIMAL(6,2) NOT NULL,
   observacao VARCHAR(250) NULL,
+  
   PRIMARY KEY (id_pedido, id_produto),
   FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
   FOREIGN KEY (id_produto) REFERENCES Produto(id_produto),
@@ -286,12 +294,12 @@ CREATE TABLE ItemComboPedido (
 CREATE TABLE Pagamento (
   id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
   id_pedido INT NOT NULL,
-  id_caixa INT NULL,
+  id_caixa INT NOT NULL,
   id_forma_pagamento INT NOT NULL,
   data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   status_pagamento ENUM('PENDENTE','APROVADO','RECUSADO','CANCELADO','ESTORNADO') NOT NULL default 'PENDENTE',
   valor_total DECIMAL(6,2) NOT NULL,
-  referencia_externa VARCHAR(150) NULL,
+  referencia_externa ENUM('IFOOD', '99FOOD') NULL,
   FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
   FOREIGN KEY (id_caixa) REFERENCES Caixa(id_caixa),
   FOREIGN KEY (id_forma_pagamento) REFERENCES FormaPagamento(id_forma_pagamento),
@@ -300,11 +308,11 @@ CREATE TABLE Pagamento (
 
 CREATE TABLE Entregador (
   id_entregador INT AUTO_INCREMENT PRIMARY KEY,
-  matricula_funcionario INT NULL,
+  id_funcionario INT NULL,
   tipo_vinculo ENUM('LOCAL','EXTERNO') NOT NULL,
   plataforma ENUM('IFOOD','99FOOD') NULL,
-  identificador_externo VARCHAR(120) NULL,
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario)
+  identificador_externo CHAR(4) NULL,
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Entrega (
@@ -326,18 +334,19 @@ CREATE TABLE Entrega (
 CREATE TABLE EventoEntrega ( -- gerencia data e hora e historico de mudança de status da entrega
   id_evento_entrega INT AUTO_INCREMENT PRIMARY KEY,
   id_entrega INT NOT NULL,
-  origem_atualizacao ENUM('IFOOD','99FOOD')NOT NULL,
+  origem_atualizacao ENUM('IFOOD','99FOOD','LOCAL')NOT NULL,
   data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   status_entrega ENUM('PENDENTE','AGUARDANDO_ENTREGADOR','EM_TRANSITO','ENTREGUE','NAO_ENTREGUE','CANCELADA') NOT NULL DEFAULT 'PENDENTE',
-  CONSTRAINT fk_evento_entrega FOREIGN KEY (id_entrega) REFERENCES Entrega(id_entrega),
+  FOREIGN KEY (id_entrega) REFERENCES Entrega(id_entrega),
   INDEX idx_evento_entrega_tempo (id_entrega, data_hora)
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE Avaliacao (
   id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
   id_pedido INT NOT NULL UNIQUE,
   comentario TEXT NULL,
-  data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  data DATE NOT NULL,
   nota TINYINT UNSIGNED NOT NULL,
   FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
   CONSTRAINT chk_avaliacao_nota CHECK (nota BETWEEN 1 AND 5)
@@ -346,14 +355,16 @@ CREATE TABLE Avaliacao (
 CREATE TABLE Ocorrencia (
   id_ocorrencia INT AUTO_INCREMENT PRIMARY KEY,
   id_pedido INT NOT NULL,
-  matricula_funcionario_responsavel INT NULL,
+  id_funcionario_responsavel INT NULL,
   classificacao ENUM('PRODUTO_INCORRETO','ITEM_FALTANTE','QUALIDADE_PRODUTO','ATRASO_PEDIDO','ERRO_COBRANCA','PROBLEMA_ATENDIMENTO','CANCELAMENTO','OUTROS') NOT NULL,
   descricao VARCHAR(255) NULL,
   consumo_produto ENUM('CONSUMO','SEM_CONSUMO','CONSUMO_PARCIAL') NOT NULL,
   data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   status_ocorrencia ENUM('ABERTA','EM ANALISE','RESOLVIDA','ENCERRADA','CANCELADA') NOT NULL DEFAULT 'ABERTA',
+  CONSTRAINT chk_ocorrencia_descricao
+    CHECK (classificacao <> 'OUTROS' OR (descricao IS NOT NULL AND TRIM(descricao) <> '')),
   FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
-  FOREIGN KEY (matricula_funcionario_responsavel) REFERENCES Funcionario(matricula_funcionario)
+  FOREIGN KEY (id_funcionario_responsavel) REFERENCES Funcionario(id_funcionario)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Reembolso (
@@ -371,8 +382,10 @@ CREATE TABLE Reembolso (
 CREATE TABLE Promocao (
   id_promocao INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
+  data_inicio DATE NOT NULL,
+  data_fim DATE NOT NULL,
   status_promocao ENUM('ATIVA', 'SUSPENSA', 'ENCERRADA') NOT NULL DEFAULT 'ATIVA',
-  tipo ENUM('COMBO PROMOCIONAL','ANIVRSARIANTE') NOT NULL
+  tipo ENUM('COMBO PROMOCIONAL','PERCENTUAL','FRETE_GRATIS','VALOR_FIXO') NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE PromocaoProduto (
@@ -397,40 +410,17 @@ CREATE TABLE PromocaoCombo (
   CONSTRAINT chk_pc_desconto CHECK (percentual_desconto BETWEEN 0 AND 100)
 ) ENGINE=InnoDB;
 
-CREATE TABLE ProdutoDestaque (
-  id_produto_destaque INT AUTO_INCREMENT PRIMARY KEY,
-  id_produto INT NOT NULL,
-  quantidade_vendida INT UNSIGNED NOT NULL,
-  posicao_ranking INT UNSIGNED NOT NULL,
-  data_inicio DATE NOT NULL,
-  data_fim DATE NULL,
-  FOREIGN KEY (id_produto) REFERENCES Produto(id_produto),
-  CONSTRAINT chk_pd_periodo CHECK (data_fim IS NULL OR data_fim >= data_inicio)
-) ENGINE=InnoDB;
-
-
-CREATE TABLE ComboDestaque (
-  id_combo_destaque INT AUTO_INCREMENT PRIMARY KEY,
-  id_combo INT NOT NULL,
-  quantidade_vendida INT UNSIGNED NOT NULL,
-  posicao_ranking INT UNSIGNED NOT NULL,
-  data_inicio DATE NOT NULL,
-  data_fim DATE NULL,
-  FOREIGN KEY (id_combo) REFERENCES Combo(id_combo),
-  CONSTRAINT chk_cd_periodo CHECK (data_fim IS NULL OR data_fim >= data_inicio)
-) ENGINE=InnoDB;
-
 CREATE TABLE MovimentacaoEstoque (
   id_movimentacao INT AUTO_INCREMENT PRIMARY KEY,
   id_lote INT NOT NULL,
-  matricula_funcionario INT NULL,
+  id_funcionario INT NULL,
   id_pedido INT NULL,
-  tipo_movimentacao ENUM('ENTRADA','CONSUMO','DESPERCICIO','PERDA','AJUSTE_SAIDA','AJUSTE_ENTRADA') NOT NULL,
-  quantidade DECIMAL(14,3) NOT NULL,
+  tipo_movimentacao ENUM('ENTRADA','CONSUMO','DESPERDICIO','PERDA','AJUSTE_SAIDA','AJUSTE_ENTRADA') NOT NULL,
+  quantidade DECIMAL(14,2) NOT NULL,
   data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   motivo VARCHAR(255) NULL,
   FOREIGN KEY (id_lote) REFERENCES Lote(id_lote),
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario),
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario),
   FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
   CONSTRAINT chk_mov_quantidade CHECK (quantidade > 0),
   INDEX idx_mov_lote_data (id_lote, data_hora),
@@ -441,7 +431,7 @@ CREATE TABLE MovimentacaoEstoque (
 
 CREATE TABLE Despesa (
   id_despesa INT AUTO_INCREMENT PRIMARY KEY,
-  matricula_funcionario INT NOT NULL,
+  id_funcionario INT NOT NULL,
   id_forma_pagamento INT NULL,
   id_compra INT NULL,
   descricao VARCHAR(150) NOT NULL,
@@ -449,7 +439,7 @@ CREATE TABLE Despesa (
   data_vencimento DATE NOT NULL,
   data_pagamento DATE NULL,
   status_despesa ENUM('PENDENTE','PAGA','VENCIDA','CANCELADA') NOT NULL DEFAULT 'PENDENTE',
-  FOREIGN KEY (matricula_funcionario) REFERENCES Funcionario(matricula_funcionario),
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario),
   FOREIGN KEY (id_forma_pagamento) REFERENCES FormaPagamento(id_forma_pagamento),
   FOREIGN KEY (id_compra) REFERENCES Compra(id_compra),
   CONSTRAINT chk_despesa_valor CHECK (valor >= 0)
@@ -481,7 +471,7 @@ SELECT p.id_produto, p.nome, SUM(ip.quantidade) AS quantidade_vendida
 FROM Produto p
 JOIN ItemPedido ip ON ip.id_produto = p.id_produto
 JOIN Pedido ped ON ped.id_pedido = ip.id_pedido
-WHERE ped.status_pedido = 'PRONTO'
+WHERE ped.status_pedido = 'CONCLUIDO'
 GROUP BY p.id_produto, p.nome;
 
 CREATE OR REPLACE VIEW vw_combos_mais_vendidos AS
@@ -489,7 +479,7 @@ SELECT c.id_combo, c.nome, SUM(icp.quantidade) AS quantidade_vendida
 FROM Combo c
 JOIN ItemComboPedido icp ON icp.id_combo = c.id_combo
 JOIN Pedido ped ON ped.id_pedido = icp.id_pedido
-WHERE ped.status_pedido = 'PRONTO'
+WHERE ped.status_pedido = 'CONCLUIDO'
 GROUP BY c.id_combo, c.nome;
 
 CREATE VIEW vw_fila_prioridade_pedidos AS
@@ -497,7 +487,7 @@ SELECT
     p.id_pedido,
     p.cpf,
     p.id_mesa,
-    p.matricula_funcionario,
+    p.id_funcionario,
     p.data_hora,
     p.status_pedido,
     p.modalidade,
@@ -510,3 +500,42 @@ SELECT
 FROM Pedido p
 
 WHERE p.status_pedido = 'PENDENTE';
+
+-- view para combos
+
+CREATE OR REPLACE VIEW vw_combos_mais_vendidos AS
+SELECT
+    c.id_combo,
+    c.nome AS nome_combo,
+    SUM(icp.quantidade) AS quantidade_vendida
+FROM Combo c
+INNER JOIN ItemComboPedido icp
+    ON c.id_combo = icp.id_combo
+INNER JOIN Pedido p
+    ON icp.id_pedido = p.id_pedido
+WHERE p.status_pedido = 'CONCLUIDO'
+GROUP BY
+    c.id_combo,
+    c.nome;
+
+
+-- view para lanches mais vendidos
+
+CREATE OR REPLACE VIEW vw_lanches_mais_vendidos AS
+SELECT
+    p.id_produto,
+    p.nome AS nome_lanche,
+    SUM(ip.quantidade) AS quantidade_vendida
+FROM Produto p
+INNER JOIN Categoria c
+    ON p.id_categoria = c.id_categoria
+INNER JOIN ItemPedido ip
+    ON p.id_produto = ip.id_produto
+INNER JOIN Pedido ped
+    ON ip.id_pedido = ped.id_pedido
+WHERE
+    c.nome = 'LANCHE'
+    AND ped.status_pedido = 'CONCLUIDO'
+GROUP BY
+    p.id_produto,
+    p.nome;
